@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 // const multer= require('../helpers/multer')
 const multer=require('multer')
-const { adminlogin }=require('../controller/auth')
 const { users,
         status,
         addtag,
         gettags,
         deletetag,
-        tagdetails }=require('../controller/adminController')
+        tagdetails,
+        adminlogin }=require('../controller/adminController')
 
         const FILE_TYPE_MAP = {
           'image/png':'png',

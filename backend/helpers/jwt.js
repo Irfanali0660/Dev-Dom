@@ -16,22 +16,24 @@ module.exports = {
         }
         let jwtSecret = process.env.JWT_TOKEN;
         const authHeader = req.headers.authorization;
-        console.log(req.socket.remoteAddress);
         const token = authHeader && authHeader.split(' ')[1];
-      
+        console.log(req.headers.authorization);
         if (!token) {
-            apiRes.message = 'Missing authorization header'
+          console.log("NO TOCKEN");
+          apiRes.message = 'Missing authorization header'
           return res.status(200).json(apiRes);
         }
-      
+        
         try {
+          console.log("JWT");
           const decoded = jwt.verify(token, jwtSecret);
           res.locals.jwtUSER = decoded;
-          // console.log(JSON.stringify(res.locals.jwtUSER)+"RES LOCALS");
+          console.log(JSON.stringify(res.locals.jwtUSER)+"RES LOCALS");
           next()
         } catch (err) {
-            apiRes.message = 'Invalid token'
+          apiRes.message = 'Invalid token'
           res.status(200).json(apiRes);
         }
-    }
+      }
+     
 }

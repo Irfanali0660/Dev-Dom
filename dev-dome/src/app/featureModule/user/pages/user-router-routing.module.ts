@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { SlidebarComponent } from './slidebar/slidebar.component';
 import { OtpComponent } from './otp/otp.component';
 import { NewpostComponent } from './newpost/newpost.component';
-
+import { Dataresolver } from './../resolver/resolver'
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -16,7 +16,10 @@ const routes: Routes = [
   {path:'',component:SlidebarComponent,children:[
     {path:'',component:HomeComponent}
   ]},
-  {path:"newpost",component:NewpostComponent}
+  {path:"newpost",component:NewpostComponent,
+resolve:{
+  data:Dataresolver
+}}
 ];
 
 @NgModule({

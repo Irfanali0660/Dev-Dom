@@ -39,6 +39,7 @@ export class AdminService {
     for (const key in data) {
       formData.append(key,data[key])
     }
+    console.log(formData);
     return this.http.post(`${this.localhost}/admin/addtag`,formData)
   }
   gettags() :Observable<any>{

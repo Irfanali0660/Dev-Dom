@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as authactions from './action'
+import * as Action from './action'
 import { mergeMap, map } from 'rxjs'
 import { UsersService } from "../../../coreModule/service/users.service";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -13,7 +13,7 @@ export class authEffects {
     verticalPosition: MatSnackBarVerticalPosition = 'top';
 
     Login = createEffect(() =>
-        this.actoins$.pipe(ofType(authactions.login), mergeMap((action: any) => {
+        this.actoins$.pipe(ofType(Action.login), mergeMap((action: any) => {
             // console.log(action);
             return this.userservice.loginData(action.formData).pipe(map((data) => {
                 console.log(data);
@@ -27,18 +27,17 @@ export class authEffects {
                     localStorage.setItem('token', data.token.token)
                     localStorage.setItem('tokenExp', data.token.exp)
                     this.route.navigate(['/'])
-                    return authactions.loginsuccess()
+                    return Action.loginsuccess()
 
                 } else {
-                    console.log(data.failed);
-                    return authactions.loginfailure({ error: data.failed })
+                    return Action.loginfailure({ error: data.failed })
                 }
             }
             ))
         }))
     )
     signup=createEffect(()=>
-    this.actoins$.pipe(ofType(authactions.signup),mergeMap((action)=>{
+    this.actoins$.pipe(ofType(Action.signup),mergeMap((action)=>{
         return this.userservice.SignupData(action.formData).pipe(map((data)=>{
             if (data.success) {
                 this._snackbar.open('Login successfully', 'close', {
@@ -49,19 +48,37 @@ export class authEffects {
                 localStorage.setItem('token', data.token.token)
                 localStorage.setItem('tokenExp', data.token.exp)
                 this.route.navigate(['/'])
-                return authactions.signupsuccess()
+                return Action.signupsuccess()
               } else {
-                return authactions.signupfailure({ error: data.failed })
+                return Action.signupfailure({ error: data.failed })
               }
         }))
     })))
 
     otp=createEffect(()=>
-    this.actoins$.pipe(ofType(authactions.otp),mergeMap((action)=>{
+    this.actoins$.pipe(ofType(Action.otp),mergeMap((action)=>{
     return this.userservice.otp(action.value).pipe(map(()=>{
-        return authactions.otpsuccess()
+        return Action.otpsuccess()
     }))
    })))
+
+
+   addpost=createEffect(()=>
+   this.actoins$.pipe(ofType(Action.addpost),mergeMap((action)=>{
+    return this.userservice.addpost(action.post).pipe(map(()=>{
+        return Action.addpostsuccess()
+    }))
+   })))
+
+   gettag=createEffect(()=>
+   this.actoins$.pipe(ofType(Action.gettag),mergeMap(()=>{
+    return this.userservice.gettag().pipe(map((data)=>{
+        console.log(data);
+        
+        return Action.gettagsuccess({tag:data})
+    }))
+   }))
+   )
     constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router) { }
 
 }

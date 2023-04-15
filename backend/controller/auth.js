@@ -1,6 +1,6 @@
 const userModel = require("../model/userModel");
 const jwt=require('../helpers/jwt')
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcrypt');
 
 
 
@@ -73,24 +73,8 @@ module.exports={
         }
     },
 
-    adminlogin:(req,res,next)=>{
-        try {
-          let apiRes={}
-            if(req.body.password==process.env.AD_PASSWORD && req.body.email==process.env.AD_EMAIL){
-                let token = jwt.sign({
-                    email:process.env.AD_EMAIL,
-                  })
-                  apiRes.token = token;
-                  console.log(token);
-                apiRes.success="Success"
-                res.json(apiRes)
-            }else{
-                apiRes.failed="Admin can only access this page"
-                res.json(apiRes)
-            }
-        } catch (error) {
-            next(error)
-        }
-    }
+  
+   
+
 
 }

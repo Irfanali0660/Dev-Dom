@@ -34,7 +34,7 @@ const userSchema =new mongoose.Schema({
     joinedDate:{
         type:Date,
         default:Date.now(),
-        index:true
+        index:true  
     }
 
 })

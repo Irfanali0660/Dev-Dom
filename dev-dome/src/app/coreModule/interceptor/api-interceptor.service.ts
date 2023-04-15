@@ -11,6 +11,8 @@ export class ApiInterceptorService {
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     // Modify the request here
     if (request.url.includes('/admin')) {
+      console.log("INTERCEPTOR");
+      
       if(localStorage.getItem('adtoken')){
         request = request.clone({
           setHeaders: {

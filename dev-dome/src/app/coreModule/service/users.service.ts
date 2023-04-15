@@ -4,6 +4,9 @@ import { Observable } from 'rxjs'
 import { signupinterface } from '../../featureModule/user/interface/signup';
 import { logininterface } from '../../featureModule/user/interface/login';
 
+import { SafeHtml } from '@angular/platform-browser';
+import { addpostinterface } from 'src/app/featureModule/user/interface/addpost';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +35,22 @@ export class UsersService {
  
   otp(value:Number):Observable<any>{
     return this.http.post(`${this.localhost}/users/otp`,value,this.httpOptions)
+  }
+
+  addpost(data:addpostinterface) :Observable<any>{
+    console.log(data);
+    console.log("POST+++++");
+    let formData = new FormData()
+    // formData.append('image',data.image)
+    for (const key in data) {
+      formData.append(key,data[key])
+    }
+    console.log(formData);
+    
+    return this.http.post(`${this.localhost}/users/addpost`,formData)
+  }
+  gettag():Observable<any>{
+    console.log("gettag userservice");
+    return this.http.get(`${this.localhost}/users/gettag`,this.httpOptions)
   }
 }

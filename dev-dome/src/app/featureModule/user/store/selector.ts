@@ -7,3 +7,4 @@ export const isLoadingSelector=createSelector(selectFeature,(state)=>state.isLoa
 export const loginSelector=createSelector(selectFeature,(state)=>state.isLogged)
 export const errorSelector=createSelector(selectFeature,(state)=>state.error)
 
+export const tagselector=createSelector(selectFeature,(state)=>state.tag)

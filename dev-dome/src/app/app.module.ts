@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './featureModule/user/pages/login/login.component';
 import { SignupComponent } from './featureModule/user/pages/signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './featureModule/user/pages/home/home.component';
@@ -23,7 +23,11 @@ import { DragDropDirective } from './sharedModule/directives/drag-drop.directive
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { adminEffect } from './featureModule/admin/store/effect';
 import { reducer as reducerAdmin } from './featureModule/admin/store/reducer';
+import { ApiInterceptorService } from './coreModule/interceptor/api-interceptor.service';
 
+import {MaterialModule} from './sharedModule/material/material.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,6 @@ import { reducer as reducerAdmin } from './featureModule/admin/store/reducer';
     AdminloginComponent,
     SlidebarComponent,
     DragDropDirective,
-    
   ],
   imports: [
     BrowserModule,
@@ -44,9 +47,12 @@ import { reducer as reducerAdmin } from './featureModule/admin/store/reducer';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule,
+    // MatSnackBarModule,
+    MatInputModule,
     BrowserAnimationsModule,
     NgxDropzoneModule,
+    MaterialModule,
+    MatSelectModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([authEffects,adminEffect]),
@@ -60,7 +66,9 @@ import { reducer as reducerAdmin } from './featureModule/admin/store/reducer';
      StoreModule.forFeature('authentication',reducerAuth),
      StoreModule.forFeature('adminstate',reducerAdmin)
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true }  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
