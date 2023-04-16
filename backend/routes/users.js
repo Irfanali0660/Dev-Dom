@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { signup,login } = require('../controller/auth');
-const { addpost,gettag }= require('../controller/postController')
+const { signup,login,otp,generateotp } = require('../controller/auth/auth');
+const { addpost,gettag }= require('../controller/user/postController')
+const { gettagdetails,getuser,getpostdetails }=require('../controller/user/homeContorll')
 const jwt = require('../helpers/jwt');
 const multer=require('multer')
 
@@ -30,10 +31,19 @@ const storage = multer.diskStorage({
 })
 const uploadOptions = multer({ storage:storage})
 
+
+
+
 /* GET users listing. */
 router.post('/signup',signup);
 router.post('/login',login)
-router.post('/addpost',uploadOptions.single('image'),jwt.verify,addpost)
+router.post('/addpost',uploadOptions.array('image'),jwt.verify,addpost)
+
+router.put('/otp',jwt.verify,otp)
 
 router.get('/gettag',gettag)
+router.get('/gettagdetails',gettagdetails)
+router.get('/generateotp',jwt.verify,generateotp)
+router.get('/getuser',jwt.verify,getuser)
+router.get('/getpostdetails',getpostdetails)
 module.exports = router;

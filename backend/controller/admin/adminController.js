@@ -1,5 +1,5 @@
-const tagModel = require("../model/tagModel");
-const userModel = require("../model/userModel")
+const tagModel = require("../../model/tagModel");
+const userModel = require("../../model/userModel")
 
 
 

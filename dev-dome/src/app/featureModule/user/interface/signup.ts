@@ -3,5 +3,6 @@ export interface signupinterface{
     email?:String | null,
     phonenumber?:Number | null |String,
     password?:String | null,
-    conformpassword?:String | null
+    conformpassword?:String | null,
+    verifyemail?:boolean
 }

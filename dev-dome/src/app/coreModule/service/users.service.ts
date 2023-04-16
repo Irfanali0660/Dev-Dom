@@ -32,9 +32,14 @@ export class UsersService {
     console.log(data);
     return this.http.post(`${this.localhost}/users/login`,data,this.httpOptions)
   }
- 
-  otp(value:Number):Observable<any>{
-    return this.http.post(`${this.localhost}/users/otp`,value,this.httpOptions)
+  generateotp():Observable<any>{
+    console.log("hello");
+    
+    return this.http.get(`${this.localhost}/users/generateotp`,this.httpOptions)
+  }
+  otp(data:Number):Observable<any>{
+    console.log(data,"value");
+    return this.http.put(`${this.localhost}/users/otp`,{data},this.httpOptions)
   }
 
   addpost(data:addpostinterface) :Observable<any>{
@@ -45,12 +50,22 @@ export class UsersService {
     for (const key in data) {
       formData.append(key,data[key])
     }
-    console.log(formData);
+
     
     return this.http.post(`${this.localhost}/users/addpost`,formData)
   }
   gettag():Observable<any>{
-    console.log("gettag userservice");
     return this.http.get(`${this.localhost}/users/gettag`,this.httpOptions)
+  }
+
+  gettagdetails():Observable<any>{
+    return this.http.get(`${this.localhost}/users/gettagdetails`,this.httpOptions)
+  }
+  getuser():Observable<any>{
+    return this.http.get(`${this.localhost}/users/getuser`,this.httpOptions)
+  }
+
+  getpost():Observable<any>{
+    return this.http.get(`${this.localhost}/users/getpostdetails`,this.httpOptions)
   }
 }

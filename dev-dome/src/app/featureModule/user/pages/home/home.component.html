@@ -1,1 +1,54 @@
-<p>Home Works</p>
+<div class="tagbox flex-container items-between"> 
+    <div *ngFor="let details of tagdetailsData" class="tag shadow-md m-2 p-2 rounded-md">
+        <p class="text-xl text-center  font-medium">{{details.title | uppercase}}</p>
+        <div class="flex  items-center justify-evenly" >
+            <img [src]="'http://localhost:4000/images/'+details.image" alt="Tag images" style="width: 10vh ; height: fit-content;">
+            <p class="text-justify px-2">
+                {{details.description}}</p>
+        </div>
+    </div>
+</div>
+<div class="flex justify-end px-5 m-4">
+    <button  #login class="pl-3  text-gray-900  dark:text-black font-medium">Show more<i class="fa-solid fa-arrow-right"></i>
+    </button>
+</div>
+
+<!-- 
+Install the "flowbite-typography" NPM package to apply styles and format the article content: 
+
+URL: https://flowbite.com/docs/components/typography/ 
+-->
+
+<main class=" lg:pb-24 bg-white dark:bg-gray-900">
+    <div class="flex justify-start flex-row px-4 mx-auto max-w-screen-xl" >
+        <article class="mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify" style="width: 60% !important;">
+            <header class="mb-4 lg:mb-6 not-format">
+                <address class="flex items-center mb-6 not-italic">
+                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                        <img class="mr-4 w-16 h-16 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                        <div>
+                            <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">Jese Leos</a>
+                            <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p>
+                            <p class="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time></p>
+                        </div>
+                    </div>
+                </address>
+            </header>
+            <div class="flex justify-center mb-6" > 
+                <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
+            </div>
+            <p class="content">Flowbite is an open-source library of UI components built with the utility-first
+                classes from Tailwind CSS. It also includes interactive elements such as dropdowns, modals,
+                datepickers.
+            Before going digital, you might benefit from scribbling down some ideas in a sketchbook. This way,
+                you can think things through before committing to an actual design project.
+           But then I found a It comes with the most commonly used UI components, such as buttons, navigation
+                bars, cards, form elements, and more which are conveniently built with the utility classes from
+                Tailwind CSS.</p>
+        </article>
+        <div style="width: 30% !important;">
+           
+        </div>
+    </div>
+ 
+</main>

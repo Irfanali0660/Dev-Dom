@@ -8,7 +8,7 @@ const { users,
         gettags,
         deletetag,
         tagdetails,
-        adminlogin }=require('../controller/adminController')
+        adminlogin }=require('../controller/admin/adminController')
 
         const FILE_TYPE_MAP = {
           'image/png':'png',

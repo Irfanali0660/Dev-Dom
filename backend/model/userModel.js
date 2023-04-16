@@ -31,6 +31,10 @@ const userSchema =new mongoose.Schema({
         type:String,
         default:null
     },
+    verifyemail:{
+        type:Boolean,
+        default:false
+    },
     joinedDate:{
         type:Date,
         default:Date.now(),

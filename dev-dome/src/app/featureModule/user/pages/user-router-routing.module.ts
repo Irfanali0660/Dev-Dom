@@ -7,6 +7,7 @@ import { SlidebarComponent } from './slidebar/slidebar.component';
 import { OtpComponent } from './otp/otp.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { Dataresolver } from './../resolver/resolver'
+import { UserauthguardGuard } from 'src/app/coreModule/auth-service/userauthguard.guard';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -19,7 +20,7 @@ const routes: Routes = [
   {path:"newpost",component:NewpostComponent,
 resolve:{
   data:Dataresolver
-}}
+},canActivate: [UserauthguardGuard]}
 ];
 
 @NgModule({

@@ -5,4 +5,5 @@ export interface addpostinterface {
     image?:string | null,
     tag?:Array<string>
     [key: string]: any;
+    
 }

@@ -7,4 +7,12 @@ export const isLoadingSelector=createSelector(selectFeature,(state)=>state.isLoa
 export const loginSelector=createSelector(selectFeature,(state)=>state.isLogged)
 export const errorSelector=createSelector(selectFeature,(state)=>state.error)
 
+export const signupSelector=createSelector(selectFeature,(state)=>state.signup)
+
+export const otpselector=createSelector(selectFeature,(state)=>state.error)
+
 export const tagselector=createSelector(selectFeature,(state)=>state.tag)
+
+export const tagdetailsselector=createSelector(selectFeature,(state)=>state.tagdetails)
+
+export const getpostdetails=createSelector(selectFeature,(state)=>state.postdetails)

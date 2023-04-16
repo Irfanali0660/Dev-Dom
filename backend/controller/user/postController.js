@@ -1,5 +1,5 @@
-const postModel = require("../model/postModel");
-const tagModel = require('../model/tagModel')
+const postModel = require("../../model/postModel");
+const tagModel = require('../../model/tagModel')
 
 
 module.exports={
@@ -7,9 +7,15 @@ module.exports={
         try { 
           console.log("ADDPOST");
           console.log(req.body);
+          // console.log(req.files,"files");
+          const filenames = req.files.map((file) => file.filename);
+          console.log(filenames,"newfile");
           let newpost=postModel({
             userId:res.locals.jwtUSER._id,
             post:req.body.editor,
+            image:filenames[0],
+            tag:req.body.tag
+
           })
           console.log(newpost);
           newpost.save().then(()=>{

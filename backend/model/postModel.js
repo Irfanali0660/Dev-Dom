@@ -18,7 +18,9 @@ const postSchema =new mongoose.Schema({
         type:String,
         default: moment(Date.now()).format("DD-MM-YYYY")
     },
-   
+    tag:{
+        type:String
+    },
     likes:[mongoose.Schema.Types.ObjectId]
 
 })
