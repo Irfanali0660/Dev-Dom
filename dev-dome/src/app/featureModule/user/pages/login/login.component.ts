@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';  
+import { Component, OnInit ,OnDestroy} from '@angular/core';  
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UsersService } from "src/app/coreModule/service/users.service";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -6,18 +6,22 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import * as auth from '../../store/action' 
 import { isLoadingSelector,errorSelector } from 'src/app/featureModule/user/store/selector';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { appstateinterface } from 'src/app/appSatate.interface';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit ,OnDestroy{
   isLoading$:Observable<Boolean>
   iserror$!:String | null;
-constructor(private store:Store<appstateinterface>, private service:UsersService,private _snackbar: MatSnackBar, private route: Router){
+  loggedIn: boolean | undefined;
+  user: any
+  gAuthSubsciption!:Subscription;
+constructor(private store:Store<appstateinterface>, private service:UsersService,private _snackbar: MatSnackBar,private authService: SocialAuthService){
 
  this.isLoading$=this.store.pipe(select(isLoadingSelector))
  
@@ -27,8 +31,20 @@ constructor(private store:Store<appstateinterface>, private service:UsersService
     this.iserror$=null
   }, 3000);
   })
+  this.gAuthSubsciption=this.authService.authState.subscribe((user) => {
+    this.user = user;
+    this.loggedIn = (user != null);
+    console.log(this.user)
+    this.store.dispatch(auth.sociallogin({formData:this.user.idToken}))
+  });
   }
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    if (this.gAuthSubsciption) this.gAuthSubsciption.unsubscribe();
+  }
+  ngOnInit(): void {
+    
+  }
+ 
   error!:string | boolean ;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -74,5 +90,6 @@ constructor(private store:Store<appstateinterface>, private service:UsersService
   //     }, 3000);
   //   }
   // }
+
 
 }

@@ -12,7 +12,8 @@ import { EdittagsComponent } from './edittags/edittags.component';
   declarations: [
     TagsComponent,
     AddtagsComponent,
-    EdittagsComponent
+    EdittagsComponent,
+  
   ],
   imports: [
     CommonModule,

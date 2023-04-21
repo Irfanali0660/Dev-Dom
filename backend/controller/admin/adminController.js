@@ -1,5 +1,6 @@
 const tagModel = require("../../model/tagModel");
 const userModel = require("../../model/userModel")
+const jwt = require("../../helpers/jwt");
 
 
 
@@ -11,7 +12,8 @@ module.exports={
             if(req.body.password==process.env.AD_PASSWORD && req.body.email==process.env.AD_EMAIL){
                 let token = jwt.sign({
                     email:process.env.AD_EMAIL,
-                  })
+                })
+                console.log("INSIDE admin");
                   apiRes.token = token;
                   console.log(token);
                 apiRes.success="Success"
@@ -70,6 +72,26 @@ module.exports={
                 res.json({success:"tag data added successfully"}).status(200)
             }).catch((error)=>{
                 res.json({error:error})
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    edittag:(req,res,next)=>{
+        try {
+            console.log(req.body);
+            let apiRes={}
+            let tag={
+                title:req.body.title,
+                description:req.body.description,
+            }
+            if(req.files){
+                const filenames = req.files.map((file) => file.filename);
+                tag.image=filenames[0]
+            }
+            tagModel.updateOne({_id:req.body.id},{$set:tag}).then(()=>{
+                apiRes.success="edit success"
+                res.json(apiRes)
             })
         } catch (error) {
             next(error)

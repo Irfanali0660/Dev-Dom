@@ -15,4 +15,8 @@ export const tagselector=createSelector(selectFeature,(state)=>state.tag)
 
 export const tagdetailsselector=createSelector(selectFeature,(state)=>state.tagdetails)
 
-export const getpostdetails=createSelector(selectFeature,(state)=>state.postdetails)
+export const getpostdetailsselector=createSelector(selectFeature,(state)=>state.postdetails)
+
+export const singletag=createSelector(selectFeature,(state)=>state.singletag)
+
+export const singlepostdetails=createSelector(selectFeature,(state)=>state.singlepostdetails)

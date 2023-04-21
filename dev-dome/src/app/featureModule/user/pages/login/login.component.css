@@ -60,3 +60,15 @@ label:focus{
 .mdc-snackbar__surface{
     color:aqua
 }
+
+.Googlebutton{
+    display: flex !important;
+    justify-content: center !important;
+}
+.nsm7Bb-HzV7m-LgbsSe{
+    border-color: white !important;
+    border: 1px solid #ffffff !important;
+}
+#container{
+    background-color: #93fb93 !important;
+}

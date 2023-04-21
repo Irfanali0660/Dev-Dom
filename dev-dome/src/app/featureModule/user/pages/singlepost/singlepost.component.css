@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'smart-webcomponents-angular/source/styles/smart.default.css';
+
+.DevDome{
+    font-family: 'Rancho', cursive;
+    font-size: xx-large !important;
+}
+.icons{
+    width: 30px;
+    height: 30px;
+}
+
+main{
+}
+.custom-scrollbar {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    /* height: 100% !important; */
+    margin-top:10vh !important;
+
+  }
+  
+  .custom-scrollbar .content {
+    overflow: auto;
+    height: 100% !important;
+    flex: 1;
+
+  }
+  
+  .custom-scrollbar .content::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .custom-scrollbar .content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .custom-scrollbar .content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+
+  .custom-scrollbarside {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .custom-scrollbarside .contentside {
+    overflow: auto;
+    height: 100%;
+    flex: 1;
+  }
+  
+  .custom-scrollbarside .contentside::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbarside .contentside::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .custom-scrollbarside .contentside::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+
+
+
+
+  .like-btn {
+    background-color: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    position: relative;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .like-btn:hover {
+    color: red;
+  }
+  
+  .like-btn i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .like-btn:hover i {
+    transform: scale(1.2) translateY(-50%);
+  }

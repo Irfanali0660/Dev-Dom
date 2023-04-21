@@ -8,6 +8,9 @@ import { OtpComponent } from './otp/otp.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { Dataresolver } from './../resolver/resolver'
 import { UserauthguardGuard } from 'src/app/coreModule/auth-service/userauthguard.guard';
+import { SingletagComponent } from './singletag/singletag.component';
+import { SinglepostComponent } from './singlepost/singlepost.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -15,12 +18,16 @@ const routes: Routes = [
   {path:'otp',component:OtpComponent},
   
   {path:'',component:SlidebarComponent,children:[
-    {path:'',component:HomeComponent}
+    {path:'',component:HomeComponent},
+    {path:'singletag/:id',component:SingletagComponent},
   ]},
+
+  {path:'singlepost/:id',component:SinglepostComponent},
   {path:"newpost",component:NewpostComponent,
 resolve:{
   data:Dataresolver
-},canActivate: [UserauthguardGuard]}
+},canActivate: [UserauthguardGuard]},
+{path:'forgotpass',component:ForgotpasswordComponent},
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 <div class="flex justify-end">
     <button routerLink="/admin/tags/addtag" class="flex justify-center items-center pl-5 p-2 text-gray-900 rounded-lg dark:text-black hover:bg-sky-100 text-center font-medium" style="background-color: rgb(164, 255, 255);">Add tags</button>
 </div>
-<div class="tagbox flex-container items-between">
+<div class="tagbox flex-container ">
     <div *ngFor="let details of tagdetailsData" class="tag shadow-md m-2 p-3 rounded-md">
         <p class="text-xl text-center mb-2 font-medium">{{details.title | uppercase}}</p>
         <div class="flex  items-center justify-evenly" >

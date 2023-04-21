@@ -3,15 +3,24 @@ import { logininterface } from "../interface/login";
 import { signupinterface } from "../interface/signup";
 import { SafeHtml } from '@angular/platform-browser';
 import { addpostinterface } from "../interface/addpost";
+import { googlesign } from "../interface/googlesign";
+import { taginterface } from "../../admin/interfaces/taginterface";
 
 
 export const login=createAction('[log] do login',props<{formData:logininterface,isuser:Boolean}>())
 export const loginsuccess=createAction('[log] do login success',props<({signup:signupinterface})>())
 export const loginfailure=createAction('[log] do login failure',props<{error:string}>())
 
+export const sociallogin=createAction('sociallogin',props<({formData:googlesign})>())
+export const socialloginsuccess=createAction('socialoginsuccess')
+
 export const signup=createAction('[log] do signup',props<{formData:signupinterface}>())
 export const signupsuccess=createAction('[log] do signup success',props<({data:signupinterface})>())
 export const signupfailure=createAction('[log] do signup failure',props<{error:string}>())
+
+
+export const socialsignup=createAction('socialsignup',props<({token:string})>())
+export const socialsignupsuccess=createAction('socialsignup')
 
 export const otp=createAction('[log] otp',props<({value:Number})>())
 export const otpsuccess=createAction('[log] otp success',props<({signup:signupinterface})>())
@@ -35,3 +44,12 @@ export const gettagdetailssuccess=createAction('gettagdetailssuccess',props<({ta
 export const getpostdetails=createAction('getpostdetails')
 export const getpostdetailssuccess=createAction('getpostdetails',props<({postdetails:addpostinterface})>())
 export const getpostfailed=createAction('getpostfailed')
+
+export const getsingletag=createAction('getsingletag',props<({id:string})>())
+export const getsingletagsuccess=createAction('getsingletag',props<({tag:taginterface})>())
+
+export const getsinglepost=createAction('getsinglepost',props<({postid:string})>())
+export const getsinglepostsuccess=createAction('getsinglepostsuccess',props<({singlepost:any})>())
+
+export const forgotpass=createAction('forgotpass',props<({email:string|null|undefined})>())
+export const forgotpasssuccess=createAction('forgotpasssuccess')

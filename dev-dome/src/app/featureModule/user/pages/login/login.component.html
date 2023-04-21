@@ -47,7 +47,7 @@
                   <label for="Password">Password</label>
                   <input formControlName="password" type="password" placeholder="Password" class="input1 flex px-3 py-2  border-2 border-black rounded-lg  placeholder:font-normal" fdprocessedid="r5k8u" required>
                   <button type="submit" class="block w-full flex-none px-2 py-2  border-2 rounded-lg font-medium border-black bg-black text-white  mt-5 py-2 rounded-2xl hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Login</button>
-                  <button class="flex items-center justify-center flex-none px-3 py-2 border-2 rounded-lg font-medium border-black relative hover:-translate-y-1 transition-all duration-500 bg-white" fdprocessedid="j201gf">
+                  <!-- <button class="flex items-center justify-center flex-none px-3 py-2 border-2 rounded-lg font-medium border-black relative hover:-translate-y-1 transition-all duration-500 bg-white" fdprocessedid="j201gf">
                     <span class="absolute left-4">
                       <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path fill="#EA4335 " d="M5.26620003,9.76452941 C6.19878754,6.93863203 8.85444915,4.90909091 12,4.90909091 C13.6909091,4.90909091 15.2181818,5.50909091 16.4181818,6.49090909 L19.9090909,3 C17.7818182,1.14545455 15.0545455,0 12,0 C7.27006974,0 3.1977497,2.69829785 1.23999023,6.65002441 L5.26620003,9.76452941 Z"></path>
@@ -57,9 +57,10 @@
                     </svg>
                     </span>
                     <span>Sign in with Google</span>
-                  </button>
-                  <a href="" class="account text-center">Forget Password</a>
-                  <p class="account1 text-center">Don't have an account? <a routerLink="/signup" class="text-red-600 pr-3"> Create New account</a></p>
+                  </button> -->
+                  <appGoogleSigninButton class="Googlebutton" [selectable]="true" buttonText="Signin with Google" buttonTheme="outline" class="flex justify-center text-center border-2 rounded-lg font-bold border-black  hover:-translate-y-1 transition-all duration-500 bg-white"></appGoogleSigninButton>
+                  <a routerLink="/forgotpass" class="account text-center">Forgot Password</a>
+                  <p class="account1 text-center">Don't have an account? <a routerLink="/signup" class="text-red-600 pr-3 "> Create New account</a></p>
                 </div>
               </form>
               <div class="flex justify-center flex-col m-auto mb-16 text-center text-lg ">

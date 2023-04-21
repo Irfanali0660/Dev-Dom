@@ -1,0 +1,15 @@
+
+<div class="tagbox flex-container items-between mx-10"> 
+    <div  class="tag shadow-md m-2 p-2 rounded-md mx-10">
+        <p class="text-xl text-center  font-medium">{{tagdetailsData.title | uppercase}}</p>
+        <div class="flex  items-center justify-evenly" >
+            <img [src]="'http://localhost:4000/images/'+tagdetailsData.image" alt="Tag images" style="width: 10vh ; height: fit-content;">
+            <p class="text-justify px-2">
+                {{tagdetailsData.description}}</p>
+        </div>
+    </div>
+</div>
+<!-- <div class="flex justify-end px-5 m-4">
+    <button  #login class="pl-3  text-gray-900  dark:text-black font-medium">Show more<i class="fa-solid fa-arrow-right"></i>
+    </button>
+</div> -->

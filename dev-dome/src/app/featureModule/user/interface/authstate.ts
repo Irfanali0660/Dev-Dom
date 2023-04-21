@@ -8,5 +8,7 @@ export interface authstate{
     tag:[] 
     tagdetails:string[]
     signup:signupinterface
-    postdetails: addpostinterface[];
+    postdetails:any;
+    singletag:{}
+    singlepostdetails:[]
 }

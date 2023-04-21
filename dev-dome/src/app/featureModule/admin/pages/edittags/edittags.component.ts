@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import * as tag from '../../store/action'
 import { singletagdetails } from '../../store/selector';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { taginterface } from '../../interfaces/taginterface';
 
 
@@ -17,15 +17,19 @@ export class EdittagsComponent implements OnInit {
   tag!:taginterface | null;
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      // this.id=params['id']
       this.gettagdetails(params['id'])
     });
- 
+    
+      
+    
   }
 
-  constructor(private store:Store<appstateinterface>,private route: ActivatedRoute){
+  constructor(private store:Store<appstateinterface>,private route: ActivatedRoute ,private router:Router){
     this.store.pipe(select(singletagdetails)).subscribe((data)=>{
       console.log(data?.image);
       this.tag=data
+      console.log(this.tag?._id);
     })
   }
    
@@ -50,20 +54,21 @@ export class EdittagsComponent implements OnInit {
   tags=new FormGroup({
     'title':new FormControl('',Validators.required),
     'description':new FormControl('',Validators.required),
+    'id':new FormControl('')
   })
 
   gettagdetails(tagid:string){
     this.store.dispatch(tag.gettagDetails({id:tagid}))
-}
+  }
 
   edittag(){
    if (this.tags.value) {
-    
+
       console.log("hello");
       
       console.log(this.tags.value);
       
-      // this.store.dispatch(tag.addtag({TagData:this.tags.value,image:this.files}))
+      this.store.dispatch(tag.edittag({TagData:this.tags.value,image:this.files}))
   
    }else{
     this.message="Enter the values"

@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,6 +28,10 @@ import { ApiInterceptorService } from './coreModule/interceptor/api-interceptor.
 import {MaterialModule} from './sharedModule/material/material.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonDirective } from './sharedModule/directives/google-signin-button.directive';
+import { environment } from 'src/environments/environment.development';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { MatSelectModule } from '@angular/material/select';
     AdminloginComponent,
     SlidebarComponent,
     DragDropDirective,
+    GoogleSigninButtonDirective,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,26 @@ import { MatSelectModule } from '@angular/material/select';
      StoreModule.forFeature('adminstate',reducerAdmin)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true }  
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.socialAuth.googleKey
+            )
+          },
+        
+        ],
+        onError: (err: any) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+
   ],
   bootstrap: [AppComponent]
 })

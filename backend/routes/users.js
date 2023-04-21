@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { signup,login,otp,generateotp } = require('../controller/auth/auth');
-const { addpost,gettag }= require('../controller/user/postController')
-const { gettagdetails,getuser,getpostdetails }=require('../controller/user/homeContorll')
+const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass } = require('../controller/auth/auth');
+const { addpost,gettag,singlepost }= require('../controller/user/postController')
+const { gettagdetails,getuser,getpostdetails,getsingletag }=require('../controller/user/homeContorll')
 const jwt = require('../helpers/jwt');
 const multer=require('multer')
 
@@ -37,7 +37,12 @@ const uploadOptions = multer({ storage:storage})
 /* GET users listing. */
 router.post('/signup',signup);
 router.post('/login',login)
+router.get('/sociallogin/:id',sociallogin)
 router.post('/addpost',uploadOptions.array('image'),jwt.verify,addpost)
+router.post('/forgotpass',forgotpass)
+
+router.get('/socialsignup/:id',socialsignup)
+router.get('/getsingletag/:id',getsingletag)
 
 router.put('/otp',jwt.verify,otp)
 
@@ -46,4 +51,5 @@ router.get('/gettagdetails',gettagdetails)
 router.get('/generateotp',jwt.verify,generateotp)
 router.get('/getuser',jwt.verify,getuser)
 router.get('/getpostdetails',getpostdetails)
+router.get('/singlepost/:id',singlepost)
 module.exports = router;

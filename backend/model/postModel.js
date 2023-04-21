@@ -5,6 +5,7 @@ const postSchema =new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
+        ref: "userData",
     },
     post:{
         type:String,
@@ -18,9 +19,10 @@ const postSchema =new mongoose.Schema({
         type:String,
         default: moment(Date.now()).format("DD-MM-YYYY")
     },
-    tag:{
-        type:String
-    },
+    tag:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "tagData",
+    }],
     likes:[mongoose.Schema.Types.ObjectId]
 
 })

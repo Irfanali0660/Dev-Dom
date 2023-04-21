@@ -42,6 +42,19 @@ export class AdminService {
     console.log(formData);
     return this.http.post(`${this.localhost}/admin/addtag`,formData)
   }
+  edittag(data:any,file:any):Observable<any>{
+    console.log(file);
+    console.log("Fileeeee");
+    
+    // const body:any[]=[data,file]
+    let formData = new FormData()
+    formData.append('image',file[0])
+    for (const key in data) {
+      formData.append(key,data[key])
+    }
+    console.log(formData);
+    return this.http.post(`${this.localhost}/admin/edittag`,formData)
+  }
   gettags() :Observable<any>{
     return this.http.get(`${this.localhost}/admin/gettags`,this.httpOptions)
   }

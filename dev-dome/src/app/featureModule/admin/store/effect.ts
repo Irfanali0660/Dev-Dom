@@ -37,6 +37,19 @@ this.action.pipe(ofType(adminAction.addtag),mergeMap((action:any)=>{
     }))
 })))
 
+edittag=createEffect(()=>
+this.action.pipe(ofType(adminAction.edittag),mergeMap((action)=>{
+   return this.adminservice.edittag(action.TagData,action.image).pipe(map((data)=>{
+    if(data.success){
+        this.route.navigate(['/admin/tags'])
+        return adminAction.edittagsuccess()
+    }else{
+        return adminAction.editfailure({error:data.falied})
+    }
+   })) 
+}))
+)
+
 gettag=createEffect(()=>
 this.action.pipe(ofType(adminAction.gettag),mergeMap(()=>{
 return this.adminservice.gettags().pipe(map((data)=>{
@@ -65,6 +78,8 @@ this.action.pipe(ofType(adminAction.gettagDetails),mergeMap((action)=>{
     }))
 }))
 )
+
+
 constructor(private action:Actions,private adminservice:AdminService,private _snackbar: MatSnackBar,private route:Router,private store:Store<appstateinterface>){}
 
 }

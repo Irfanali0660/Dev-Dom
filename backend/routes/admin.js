@@ -8,7 +8,8 @@ const { users,
         gettags,
         deletetag,
         tagdetails,
-        adminlogin }=require('../controller/admin/adminController')
+        adminlogin,
+        edittag }=require('../controller/admin/adminController')
 
         const FILE_TYPE_MAP = {
           'image/png':'png',
@@ -39,6 +40,8 @@ const { users,
 
 router.post('/adminlogin',adminlogin);
 router.post('/addtag',uploadOptions.array('image'),addtag)
+router.post('/edittag',uploadOptions.array('image'),edittag)
+
 
 router.get('/users',users)
 router.get('/gettags',gettags)

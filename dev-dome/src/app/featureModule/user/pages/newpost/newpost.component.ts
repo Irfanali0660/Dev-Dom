@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation,ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation,ElementRef  } from '@angular/core';
 import { EditorComponent } from 'smart-webcomponents-angular/editor';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
@@ -28,7 +28,7 @@ export class NewpostComponent implements AfterViewInit, OnInit {
   editorContent!: SafeHtml;
   postData!:string
   content!:string
-  encodedString!:any
+  encodedString!:string | ArrayBuffer | null
   @ViewChild('editor', { read:   EditorComponent }) editor!: EditorComponent;
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | undefined;
 
@@ -55,6 +55,7 @@ export class NewpostComponent implements AfterViewInit, OnInit {
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.alltags.slice())),
     );
+   console.log(this.encodedString);
    
   }
   init(): void {
@@ -125,7 +126,7 @@ for (let i = 0; i < elements.length; i++) {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    const occurrences = this.tags.filter((el) => el === event.option.viewValue).length;
+    let occurrences = this.tags.filter((el) => el === event.option.viewValue).length;
     console.log(occurrences);
    if(occurrences==0){
     if(this.tags.length < 4){
@@ -140,33 +141,31 @@ for (let i = 0; i < elements.length; i++) {
     }
 
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    let filterValue = value.toLowerCase();
 
     return this.alltags.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
+  removeimage(){
+    this.encodedString=null
+  }
+  addimage(){
 
-  addimage(event:any){
-   this.addimage=event.target.files[0];
-    
-      // get the input file element
-      console.log(this.addimage);
-      
- 
 // select the image file input element
-const input = document.getElementById('cover-image-input') as HTMLInputElement | null;
+let input = document.getElementById('cover-image-input') as HTMLInputElement | null;
 
 // check if the input element was found
 if (input) {
   // check if a file was selected
   if (input.files && input.files[0]) {
     // create a new FileReader object
-    const reader = new FileReader();
+    let  reader = new FileReader();
 
     // set up an event listener to run when the FileReader finishes loading the file
     reader.onload = () => {
       // convert the loaded file to a Base64 encoded string
       this.encodedString = reader.result ;
-
+      console.log(typeof reader.result);
+      
       // use the Base64 encoded string as needed (e.g. send it to a server, display it in an <img> tag)
     };
 
@@ -183,5 +182,7 @@ if (input) {
 
     
   }
+
+
 
 }

@@ -28,10 +28,23 @@ export class UsersService {
     return this.http.post(`${this.localhost}/users/signup`,data,this.httpOptions)
   }
 
+  socialsignup(data:string) :Observable<any>{
+    console.log(data+"socialsignup");
+    return this.http.get(`${this.localhost}/users/socialsignup/${data}`,this.httpOptions)
+  }
+
   loginData(data:logininterface) :Observable<any>{
     console.log(data);
     return this.http.post(`${this.localhost}/users/login`,data,this.httpOptions)
   }
+
+  sociallogin(data:any) :Observable<any>{
+    console.log(data);
+    console.log("googlee");
+    
+    return this.http.get(`${this.localhost}/users/sociallogin/${data}`,this.httpOptions)
+  }
+
   generateotp():Observable<any>{
     console.log("hello");
     
@@ -67,5 +80,16 @@ export class UsersService {
 
   getpost():Observable<any>{
     return this.http.get(`${this.localhost}/users/getpostdetails`,this.httpOptions)
+  }
+
+  getsingletag(id:string):Observable<any>{
+    return this.http.get(`${this.localhost}/users/getsingletag/${id}`,this.httpOptions)
+  }
+  getsinglepost(id:string):Observable<any>{
+    return this.http.get(`${this.localhost}/users/singlepost/${id}`,this.httpOptions)
+  }
+  forgotpass(email:string | undefined | null):Observable<any>{
+    console.log(email,'userservice');
+    return this.http.post(`${this.localhost}/users/forgotpass`,{email},this.httpOptions)
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as Action from './action'
-import { mergeMap, map, of, take } from 'rxjs'
+import { mergeMap, map, of, take, exhaustMap } from 'rxjs'
 import { UsersService } from "../../../coreModule/service/users.service";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from "@angular/router";
@@ -36,6 +36,30 @@ export class authEffects {
             ))
         }))
     )
+
+        socialogin=createEffect(()=>
+        this.actoins$.pipe(ofType(Action.sociallogin),mergeMap((action)=>{
+            return this.userservice.sociallogin(action.formData).pipe(map((data)=>{
+                if (data.success) {
+                    this._snackbar.open('Login successfully', 'close', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: 4000,
+                        panelClass: ['my-snackbar']
+                    })
+                    console.log()
+                    localStorage.setItem('token', data.token.token)
+                    localStorage.setItem('tokenExp', data.token.exp)
+                    this.route.navigate(['/'])
+                    return Action.loginsuccess({signup:data.data})
+
+                } else {
+                    return Action.loginfailure({ error: data.failed })
+                }
+            }))
+        }))
+        )
+
     signup=createEffect(()=>
     this.actoins$.pipe(ofType(Action.signup),mergeMap((action)=>{
         return this.userservice.SignupData(action.formData).pipe(map((data)=>{
@@ -55,6 +79,17 @@ export class authEffects {
               }
         }))
     })))
+
+    socialsignup=createEffect(()=>
+    this.actoins$.pipe(ofType(Action.socialsignup),mergeMap((action)=>{
+        return this.userservice.socialsignup(action.token).pipe(map((data)=>{
+            localStorage.setItem('token', data.token.token)
+            localStorage.setItem('tokenExp', data.token.exp)
+            this.route.navigate(['/'])
+            return Action.socialsignupsuccess()
+        }))
+    }))
+    )
 
     otp=createEffect(()=>
     this.actoins$.pipe(ofType(Action.otp),mergeMap((action)=>{
@@ -125,14 +160,58 @@ export class authEffects {
    }))
    )
 
+ 
+
    getpost=createEffect(()=>
-   this.actoins$.pipe(ofType(Action.getpostdetails),mergeMap(()=>{
+   this.actoins$.pipe(ofType(Action.getpostdetails),exhaustMap(()=>{
     return this.userservice.getpost().pipe(map((data)=>{
-        
+        console.log(data);
         return Action.getpostdetailssuccess({postdetails:data})
     }))
    }))
    )
+   getsingletag = createEffect(() =>
+   this.actoins$.pipe(
+     ofType(Action.getsingletag),
+     exhaustMap((action) => {
+       return this.userservice.getsingletag(action.id).pipe(
+         map((data) => {
+               
+           console.log(data);
+           return Action.getsingletagsuccess({ tag: data });
+         })
+       );
+     })
+   )
+ );
+ getsinglepost=createEffect(()=>
+ this.actoins$.pipe(ofType(Action.getsinglepost),
+    exhaustMap((action)=>{
+    return this.userservice.getsinglepost(action.postid).pipe(
+        map((data)=>{
+            return Action.getsinglepostsuccess({singlepost:data})
+        })
+    )
+ })
+ )
+ )
+ 
+forgotpass=createEffect(()=>
+this.actoins$.pipe(ofType(Action.forgotpass),
+    mergeMap((action)=>{
+        return this.userservice.forgotpass(action.email).pipe(
+            map((data)=>{
+                this._snackbar.open(data.success, 'close', {
+                    horizontalPosition:'center' ,
+                    verticalPosition:'top' ,
+                    panelClass: ['my-snackbar']
+                })
+                return Action.forgotpasssuccess()
+            })
+        )
+    })
+  )
+)
     constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router) { }
 
 }

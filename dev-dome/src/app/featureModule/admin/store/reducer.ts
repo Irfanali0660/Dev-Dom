@@ -23,5 +23,10 @@ export const reducer=createReducer(initialState,
 
     on(adminAction.gettagDetails,(state)=>({...state,isLoading:true,error:null})),
     on(adminAction.gettagdetailssuccess,(state,action)=>({...state,isLoading:false,error:null,singletag:action.tagdetails})),
+
+    on(adminAction.edittag,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.edittagsuccess,(state,action)=>({...state,isLoading:false,error:null})),
+    on(adminAction.editfailure,(state,action)=>({...state,isLoading:false,error:action.error})),
+    
     )
     

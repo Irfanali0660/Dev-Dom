@@ -14,3 +14,7 @@ export const deletesuccess=createAction('delete tag is successfully')
 
 export const gettagDetails=createAction('gettagDetails',props<{id:string}>())
 export const gettagdetailssuccess=createAction('gettagdetailssuccess',props<{tagdetails:any}>())
+
+export const edittag=createAction('edittag',props<({TagData:any,image:any})>())
+export const edittagsuccess=createAction('edit added successfully')
+export const editfailure=createAction('edit added failure',props<{error:string}>())
