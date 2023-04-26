@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass } = require('../controller/auth/auth');
-const { addpost,gettag,singlepost }= require('../controller/user/postController')
+const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword } = require('../controller/auth/auth');
+const { addpost,gettag,singlepost,comments,addlike }= require('../controller/user/postController')
 const { gettagdetails,getuser,getpostdetails,getsingletag }=require('../controller/user/homeContorll')
 const jwt = require('../helpers/jwt');
 const multer=require('multer')
@@ -40,11 +40,14 @@ router.post('/login',login)
 router.get('/sociallogin/:id',sociallogin)
 router.post('/addpost',uploadOptions.array('image'),jwt.verify,addpost)
 router.post('/forgotpass',forgotpass)
+router.post('/comments',comments)
 
 router.get('/socialsignup/:id',socialsignup)
 router.get('/getsingletag/:id',getsingletag)
+router.post('/resetpassword',resetpassword)
 
 router.put('/otp',jwt.verify,otp)
+router.put('/addlike',jwt.verify,addlike)
 
 router.get('/gettag',gettag)
 router.get('/gettagdetails',gettagdetails)

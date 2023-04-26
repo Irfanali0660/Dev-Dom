@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UsersService } from 'src/app/coreModule/service/users.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { signupinterface } from 'src/app/featureModule/user/interface/signup';
 import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import * as auth from '../../store/action' 

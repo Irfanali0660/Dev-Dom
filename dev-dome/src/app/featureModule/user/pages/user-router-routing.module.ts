@@ -11,6 +11,7 @@ import { UserauthguardGuard } from 'src/app/coreModule/auth-service/userauthguar
 import { SingletagComponent } from './singletag/singletag.component';
 import { SinglepostComponent } from './singlepost/singlepost.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -28,6 +29,7 @@ resolve:{
   data:Dataresolver
 },canActivate: [UserauthguardGuard]},
 {path:'forgotpass',component:ForgotpasswordComponent},
+{path:'resetpass/:id',component:ResetpassComponent},  
 ];
 
 @NgModule({

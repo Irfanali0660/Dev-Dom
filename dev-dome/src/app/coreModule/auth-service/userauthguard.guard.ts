@@ -17,5 +17,4 @@ export class UserauthguardGuard implements CanActivate {
       }
       return isAuthenticated;
   }
-  
 }

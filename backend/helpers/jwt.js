@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const socket=require('socket.io')
 module.exports = {
     sign:(uData)=>{
         console.log("SIGN INSIDE");
@@ -34,6 +34,21 @@ module.exports = {
           apiRes.message = 'Invalid token'
           res.status(200).json(apiRes);
         }
-      }
+      },
+        verifySocketUserToken:(socket, next)=>{
+          let apiRes={}
+          const jwtSecret = process.env.JWT_TOKEN;
+          const token = socket.handshake.auth.token;
+          console.log(token,'tocken');
+          try {
+            const decoded = jwt.verify(token, jwtSecret);
+            socket.jwtUSER = decoded;
+            apiRes.authorization = true;
+            return next();
+          } catch (err) {
+            console.log(err);
+            return socket.emit('error',apiRes.message) 
+          }
+        }
      
 }

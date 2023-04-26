@@ -5,6 +5,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { addpostinterface } from "../interface/addpost";
 import { googlesign } from "../interface/googlesign";
 import { taginterface } from "../../admin/interfaces/taginterface";
+import { resetpassinterface } from "../interface/resetpass";
 
 
 export const login=createAction('[log] do login',props<{formData:logininterface,isuser:Boolean}>())
@@ -53,3 +54,12 @@ export const getsinglepostsuccess=createAction('getsinglepostsuccess',props<({si
 
 export const forgotpass=createAction('forgotpass',props<({email:string|null|undefined})>())
 export const forgotpasssuccess=createAction('forgotpasssuccess')
+
+export const resetpass=createAction('resetpass',props<({formData:resetpassinterface})>())
+export const resetpasssuccess=createAction('resetpasssuccess')
+
+export const comments=createAction('comments',props<({id:string})>())
+export const commentssuccess=createAction('commentsuccess',props<({data:Array<string>})>())
+
+export const addlike=createAction('addlike',props<({id:string})>())
+export const addlikesuccess=createAction('addlikesuccess')

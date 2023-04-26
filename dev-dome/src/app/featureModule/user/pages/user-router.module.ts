@@ -15,7 +15,15 @@ import { TagsComponent } from './tags/tags.component';
 import { SinglepostComponent } from './singlepost/singlepost.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment.development';
 
+const config: SocketIoConfig = {
+	url: environment.socketUrl, // socket server url;
+	options: {
+		transports: ['websocket']
+	}
+}
 
 @NgModule({
   schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
@@ -37,7 +45,8 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
     EditorModule,
     MaterialModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    SocketIoModule.forRoot(config),
   ],
   providers:[Dataresolver]
 })

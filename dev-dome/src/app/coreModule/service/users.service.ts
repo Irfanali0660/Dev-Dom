@@ -6,6 +6,7 @@ import { logininterface } from '../../featureModule/user/interface/login';
 
 import { SafeHtml } from '@angular/platform-browser';
 import { addpostinterface } from 'src/app/featureModule/user/interface/addpost';
+import { resetpassinterface } from 'src/app/featureModule/user/interface/resetpass';
 
 
 @Injectable({
@@ -91,5 +92,14 @@ export class UsersService {
   forgotpass(email:string | undefined | null):Observable<any>{
     console.log(email,'userservice');
     return this.http.post(`${this.localhost}/users/forgotpass`,{email},this.httpOptions)
+  }
+  restpass(formData:resetpassinterface):Observable<any>{
+    return this.http.post(`${this.localhost}/users/resetpassword`,formData,this.httpOptions)
+  }
+  comments(id:string):Observable<any>{
+    return this.http.post(`${this.localhost}/users/comments`,{id},this.httpOptions)
+  }
+  addlike(id:string):Observable<any>{
+    return this.http.put(`${this.localhost}/users/addlike`,{id},this.httpOptions)
   }
 }

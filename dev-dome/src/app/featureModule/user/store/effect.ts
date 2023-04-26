@@ -5,6 +5,8 @@ import { mergeMap, map, of, take, exhaustMap } from 'rxjs'
 import { UsersService } from "../../../coreModule/service/users.service";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from "@angular/router";
+import { appstateinterface } from "src/app/appSatate.interface";
+import { Store } from "@ngrx/store";
 
 @Injectable()
 export class authEffects {
@@ -64,15 +66,18 @@ export class authEffects {
     this.actoins$.pipe(ofType(Action.signup),mergeMap((action)=>{
         return this.userservice.SignupData(action.formData).pipe(map((data)=>{
             if (data.success) {
-                console.log(data);
-                this._snackbar.open('Login successfully', 'close', {
-                  horizontalPosition: this.horizontalPosition,
-                  verticalPosition: this.verticalPosition,
-                  duration: 6000,
-                })
+                // console.log(data);
+                // this._snackbar.open('Login successfully', 'close', {
+                //   horizontalPosition: this.horizontalPosition,
+                //   verticalPosition: this.verticalPosition,
+                //   duration: 6000,
+                // })
                 localStorage.setItem('token', data.token.token)
                 localStorage.setItem('tokenExp', data.token.exp)
                 this.route.navigate(['/'])
+                // this.store.dispatch(Action.generateotp())
+                // console.log("ssignup");
+                
                 return Action.signupsuccess({data:data.data})
               } else {
                 return Action.signupfailure({ error: data.failed })
@@ -212,7 +217,56 @@ this.actoins$.pipe(ofType(Action.forgotpass),
     })
   )
 )
-    constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router) { }
+
+resetpass=createEffect(()=>
+this.actoins$.pipe(ofType(Action.resetpass),
+    mergeMap((action)=>{
+        return this.userservice.restpass(action.formData).pipe(
+            map((data)=>{
+                console.log(data,'RESPONCE');
+                if(data.success){
+                    this._snackbar.open(data.success, 'close', {
+                        horizontalPosition:'center' ,
+                        verticalPosition:'top',
+                        duration:3000,
+                        panelClass: ['my-snackbar']
+                    })
+                    setTimeout(() => {
+                        this.route.navigate(['/login'])
+                    }, 4000);
+                    return Action.resetpasssuccess()
+                }else{
+                    return Action.loginfailure({error:data.failed})
+                }
+            })
+        )
+    })
+)
+)
+comments=createEffect(()=>
+this.actoins$.pipe(ofType(Action.comments),
+
+mergeMap((action)=>{
+    return this.userservice.comments(action.id).pipe(
+        map((data)=>{
+            return Action.commentssuccess({data:data})
+        })
+    )
+})
+)
+)
+addlike=createEffect(()=>
+this.actoins$.pipe(ofType(Action.addlike),
+    mergeMap((action)=>{
+        return this.userservice.addlike(action.id).pipe(
+            map(()=>{
+                return Action.addlikesuccess()
+            })
+        )
+    })
+)
+)
+    constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router,private store:Store<appstateinterface>) { }
 
 }
 

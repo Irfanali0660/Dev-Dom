@@ -11,4 +11,5 @@ export interface authstate{
     postdetails:any;
     singletag:{}
     singlepostdetails:[]
+    comments:Array<string>
 }

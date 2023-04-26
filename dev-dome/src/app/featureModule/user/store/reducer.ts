@@ -11,7 +11,8 @@ export const initialState:authstate={
     signup:{},
     postdetails:[],
     singletag:{},
-    singlepostdetails:[]
+    singlepostdetails:[],
+    comments:[]
 }
 
 export const reducer=createReducer(initialState,
@@ -55,4 +56,12 @@ export const reducer=createReducer(initialState,
 
     on(action.forgotpass,(state)=>({...state,isLoading:true,error:null})),
     on(action.forgotpasssuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(action.resetpass,(state)=>({...state,isLoading:true,error:null})),
+    on(action.resetpasssuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(action.comments,(state)=>({...state,isLoading:true,error:null})),
+    on(action.commentssuccess,(state,action)=>({...state,isLoading:false,error:null,comments:action.data})),
+
+    on(action.addlike,(state)=>({...state,isLoading:true,error:null})),
     )

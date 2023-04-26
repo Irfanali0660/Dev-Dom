@@ -20,3 +20,5 @@ export const getpostdetailsselector=createSelector(selectFeature,(state)=>state.
 export const singletag=createSelector(selectFeature,(state)=>state.singletag)
 
 export const singlepostdetails=createSelector(selectFeature,(state)=>state.singlepostdetails)
+
+export const comments=createSelector(selectFeature,(state)=>state.comments)

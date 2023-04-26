@@ -6,8 +6,9 @@ var logger = require('morgan');
 var cors=require('cors')
 let mongoose=require('mongoose')
 var env=require('dotenv')
-
 env.config();
+const socketio = require('socket.io');
+const chatSocket = require('./controller/socket/socket');
 
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
@@ -43,6 +44,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 
+function initSocketIo(server){
+  const io_liveChats = socketio(server,{
+    cors:corsOptions,
+    path: '/singlepost'
+  });
+  const ios = io_liveChats
+  chatSocket.chatMessages(ios)
+}
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -59,4 +69,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports ={app,initSocketIo};

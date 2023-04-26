@@ -26,7 +26,7 @@ module.exports={
     },
     getpostdetails:(req,res,next)=>{
         try {
-            postModel.find().populate('userId').populate('tag').sort({date:-    1}).then((data)=>{
+            postModel.find().populate('userId').populate('tag').sort({date:-1}).then((data)=>{
                 console.log(data);
                 res.json(data)
             })

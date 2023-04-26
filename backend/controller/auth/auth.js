@@ -268,10 +268,11 @@ module.exports = {
     }
   },
 
-  forgotpass:(req,res,next)=>{
+  forgotpass:async(req,res,next)=>{
     try {
       console.log(req.body);
       let apiRes={}
+     let user=await userModel.findOne({email:req.body.email})
       var mailOptions = {
         from: process.env.Email,
         to: req.body.email,
@@ -279,7 +280,7 @@ module.exports = {
         html:
           `<p>hello ${req.body.email}</p>` +
           '<br><p>Someone has requested a link to change your password. You can do this through the link below.</p>'+
-          "<a href='http://localhost:4200/login'>Change my password</a>"+
+          `<a href='http://localhost:4200/resetpass/${user._id}'>Change my password</a>`+
           "<br><p>If you didn't request this, please ignore this email <br>Your password won't change until you access the link above and create a new one.</p>",// html body
       };
       transporter.sendMail(mailOptions, (error, info) => {
@@ -290,6 +291,30 @@ module.exports = {
         console.log("REPLAY");
         res.json(apiRes);
       });
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  },
+  resetpassword:async(req,res,next)=>{
+    try {
+      console.log(req.body);
+      let apiRes={}
+      let user=await userModel.findOne({_id:req.body.id})
+      console.log(user);
+      if(user){
+        req.body.password = await bcrypt.hash(req.body.password, 10);
+        console.log(req.body.password);
+        userModel.updateOne({_id:req.body.id},{$set:{password:req.body.password}}).then(()=>{
+          apiRes.success="Password updated"
+          res.json(apiRes)
+        })
+      }else{
+        apiRes.failed='Id is invalid'
+        res.json(apiRes)
+      }
+     
+
     } catch (error) {
       next(error)
     }
