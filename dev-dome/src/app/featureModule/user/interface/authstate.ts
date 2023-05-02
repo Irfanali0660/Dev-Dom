@@ -1,4 +1,6 @@
+import { addlistinterface } from "./addlist";
 import { addpostinterface } from "./addpost";
+import { listinterface } from "./list";
 import { signupinterface } from "./signup";
 
 export interface authstate{
@@ -12,4 +14,7 @@ export interface authstate{
     singletag:{}
     singlepostdetails:[]
     comments:Array<string>
+    listcategory:listinterface[]
+    list:addlistinterface[]
+    readlist:any
 }

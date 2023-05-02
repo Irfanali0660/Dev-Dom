@@ -7,7 +7,9 @@ export const initialState:authstate={
     isLoading: false,
     error: null,
     details:[],
-    singletag:null
+    singletag:null,
+    adlist:[],
+    reportpostData:[]
 }
 
 export const reducer=createReducer(initialState,
@@ -28,5 +30,19 @@ export const reducer=createReducer(initialState,
     on(adminAction.edittagsuccess,(state,action)=>({...state,isLoading:false,error:null})),
     on(adminAction.editfailure,(state,action)=>({...state,isLoading:false,error:action.error})),
     
+    on(adminAction.addlist,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.addlistsuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(adminAction.adgetlist,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.adgetlistsuccess,(state,action)=>({...state,isLoading:false,error:null,adlist:action.adlist})),
+
+    on(adminAction.liststatus,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.liststatussuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(adminAction.getreportedpost,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.getreportedpostsuccess,(state,action)=>({...state,isLoading:false,error:null,reportpostData:action.reportpost})),
+
+    on(adminAction.deletepost,(state)=>({...state,isLoading:true,error:null})),
+    on(adminAction.deletepostsuccess,(state)=>({...state,isLoading:false,error:null})),
     )
     

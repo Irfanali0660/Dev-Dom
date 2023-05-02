@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import * as action from '../../store/action'
-import { comments, singlepostdetails } from '../../store/selector';
+import { comments, signupSelector, singlepostdetails } from '../../store/selector';
 import { SocketService } from '../../../../coreModule/service/socket.service';  
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { signupinterface } from '../../interface/signup';
 
 @Component({
   selector: 'app-singlepost',
@@ -19,34 +20,62 @@ menutoggle=false
 postdetailsData:any;
 commentData!:any
 chats?:Observable<any[] | undefined>;
+user?:signupinterface
+likes?:boolean
 @ViewChild('content') content!: ElementRef;
   message_input: string='';
   id!:string
   constructor(private store:Store<appstateinterface>,private route: ActivatedRoute,private renderer: Renderer2, private el: ElementRef,private socketService: SocketService ){
     this.store.pipe(select(singlepostdetails)).subscribe((data)=>{
       this.postdetailsData=data
-      console.log(data,'new signle'); 
-     })
+      console.log(this.postdetailsData,'singlepost');
+      if(localStorage.getItem('token')){
+        if(this.postdetailsData){
+          console.log(this.postdetailsData);
+          if(this.postdetailsData.likes?.length>0 && this.postdetailsData.likes?.includes(this.user?._id) ){
+            console.log('true');
+            this.likes=true
+          }else{
+            console.log('false+++++++++++++++++++++++++++++++==');
+            this.likes=false
+          }
+      }
+    }
+    })
+    this.userData()
     this.route.params.subscribe(params => {
       this.id=params['id']
       this.singlepost(params['id'])
       this.socketService.connect({id:params['id']},{token: localStorage.getItem('token')??'noAcToken'})
       this.comments(params['id'])
     });
-
+    this.store.pipe(select(signupSelector)).subscribe((user)=>{
+      this.user=user
+  })
     this.store.pipe(select(comments)).subscribe((data)=>{
       this.commentData=data
-      console.log(this.commentData,"comment"); 
+
      })
+
   }
   
   ngAfterViewInit(){
-    
+  //   if(localStorage.getItem('token')){
+  //     if(this.postdetailsData){
+  //       console.log(this.postdetailsData);
+  //       if(this.postdetailsData.likes.includes(this.user?._id) && this.postdetailsData.likes.length>0){
+  //         console.log('true');
+  //         this.likes=true
+  //       }else{
+  //         console.log('false+++++++++++++++++++++++++++++++==');
+  //         this.likes=false
+  //       }
+  //   }
+  // }
   }
   ngOnInit(): void {
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
-    // const myDiv = this.el.nativeElement.querySelector('#myDiv');
-    // this.renderer.setStyle(myDiv, 'overflow', 'scroll');
+
     this.socketService.on('new-message',(data:any)=>{
       console.log(data,'backend');
       this.commentData=data
@@ -76,15 +105,26 @@ send_message(f: NgForm):any{
   comments(id:string){
     this.store.dispatch(action.comments({id:id}))
   }
-  getDateRelative(date:string): string {
+
+  getDateRelative(date:Date): string {
     return moment(date).fromNow();
   }
-
+  toggleLike() {
+    console.log(this.likes);
+    this.likes = !this.likes;
+    this.like();
+  }
   like(){
-    // console.log(this.postdetailsData.likes,'dataaa');
-    this.store.dispatch(action.addlike({id:this.id}))
+    this.store.dispatch(action.addlike({id:this.id,value:this.likes}))
     this.singlepost(this.id)
-    
   }
 
+  userData(){
+    console.log("USERNEW");
+    this.store.dispatch(action.getuser())
+  }
+  readlist(id:string){
+    console.log(id);
+    this.store.dispatch(action.addreadlist({id:id}))
+  }
 }

@@ -1,0 +1,17 @@
+<article  *ngFor="let read of readlist" class="flex p-4 m:p-6 pb-0 m:pb-2 pr-2 m:pr-6 cursor-pointer" routerLink="/singlepost/{{read.post[0]._id}}">
+    
+    <div class="flex items-center" >
+        <a class="crayons-avatar crayons-avatar--l" 
+        datatestid="item-user"><img
+            [src]="read.auth[0].image" style="width: 50px; height: 50px;"
+            alt="" class="crayons-avatar__image"></a>
+    </div>
+    <div class="flex-1 pl-2 m:pl-4"><a  class="flex crayons-link">
+            <p class="content fs-base lh-tight m:fs-l  break-word" [innerHTML]="read.post[0].post"></p>
+        </a>
+        <p class="fs-s"><span class="color-base-60">{{read.post[0].date}}</span><span datatestid="item-tags"><span class="color-base-30"> • </span>
+                </span>
+            </p>
+    </div>
+    <div class="m:self-center flex items-center"><button type="button" class="c-btn spec__archive-button" (click)="remove(read._id)">Remove</button></div>
+</article>

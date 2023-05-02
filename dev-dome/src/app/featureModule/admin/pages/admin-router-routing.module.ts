@@ -7,6 +7,9 @@ import { AdminAuthGuard } from '../../../coreModule/auth-service/admin-auth.guar
 import { TagsComponent } from './tags/tags.component';
 import { AddtagsComponent } from './addtags/addtags.component';
 import { EdittagsComponent } from './edittags/edittags.component';
+import { ListCategoryComponent } from './list-category/list-category.component';
+import { AddListCategoryComponent } from './add-list-category/add-list-category.component';
+import { ReportpostComponent } from './reportpost/reportpost.component';
 
 const routes: Routes = [
   {path:'',component:SlidebarComponent,children:[
@@ -14,7 +17,11 @@ const routes: Routes = [
     {path:'users',component:UsersComponent},
     {path:'tags',component:TagsComponent},
     {path:'tags/addtag',component:AddtagsComponent},  
-    {path:'tags/edittag/:id',component:EdittagsComponent}  
+    {path:'tags/edittag/:id',component:EdittagsComponent}  ,
+    {path:'listCategory',component:ListCategoryComponent}  ,
+    {path:'add-listCategory',component:AddListCategoryComponent},
+    {path:'reportedpost',component:ReportpostComponent}  
+
    
   ],canActivate: [AdminAuthGuard]}
 ];

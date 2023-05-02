@@ -13,7 +13,6 @@
                     </svg>
                 </button>
                 <a href="" class="flex ml-2 md:mr-24">
-                    <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" /> -->
                     <span
                         class="DevDome self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-black px-5">DevDom</span>
                 </a>
@@ -221,11 +220,11 @@
     </div>
 </aside>
 
-<main class="main w-full h-full  bg-white dark:bg-gray-900 flex flex-row  justify-end">
-    <div class="reaction-drawer__outer hoverdown mt-24 pl-3">
-        <button (click)="like()" id="reaction-drawer-trigger" aria-label="reaction-drawer-trigger" aria-pressed="false"
+<main class="main  w-full h-full  bg-white dark:bg-gray-900 flex flex-row justify-end">
+    <div class="reaction-drawer__outer hoverdown pl-3 like">
+        <!-- <button (click)="like()" id="reaction-drawer-trigger" aria-label="reaction-drawer-trigger" aria-pressed="false"
             class="hoverdown-trigger crayons-reaction pseudo-reaction crayons-tooltip__activator relative user-activated user-animated"
-            fdprocessedid="9v0f12">
+            fdprocessedid="9v0f12"> -->
             <!-- <span
                 class="crayons-reaction__icon crayons-reaction__icon--borderless crayons-reaction--like crayons-reaction__icon--inactive"
                 style="width: 40px; height: 40px">
@@ -244,7 +243,7 @@
                 </svg>
 
             </span> -->
-            <span
+            <!-- <span
                 class="crayons-reaction__icon crayons-reaction__icon--borderless crayons-reaction__icon--active"
                 style="width: 40px; height: 40px">
                 <img aria_hidden="true" height="35" width="35"  data-te-toggle="tooltip"
@@ -252,23 +251,78 @@
                     src="https://dev.to/assets/heart-plus-active-9ea3b22f2bc311281db911d416166c5f430636e76b15cd5df6b3b841d830eefa.svg">
             </span>
             <span class="crayons-reaction__count" id="reaction_total_count">{{postdetailsData.likes.length}}</span>
-        </button>
-    </div>
-    <div class="custom-scrollbar" #content style="width: 65% !important;">
+        </button> -->
+       
+              
+            
+                <input type="checkbox" id="checkbox" (click)="toggleLike()" [checked]="likes"/>
+                <label for="checkbox">
+                  <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
+                      <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" fill="#AAB8C2"/>
+                      <circle id="main-circ" fill="#E2264D" opacity="0" cx="29.5" cy="29.5" r="1.5"/>
+            
+                      <g id="grp7" opacity="0" transform="translate(7 6)">
+                        <circle id="oval1" fill="#9CD8C3" cx="2" cy="6" r="2"/>
+                        <circle id="oval2" fill="#8CE8C3" cx="5" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp6" opacity="0" transform="translate(0 28)">
+                        <circle id="oval1" fill="#CC8EF5" cx="2" cy="7" r="2"/>
+                        <circle id="oval2" fill="#91D2FA" cx="3" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp3" opacity="0" transform="translate(52 28)">
+                        <circle id="oval2" fill="#9CD8C3" cx="2" cy="7" r="2"/>
+                        <circle id="oval1" fill="#8CE8C3" cx="4" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp2" opacity="0" transform="translate(44 6)">
+                        <circle id="oval2" fill="#CC8EF5" cx="5" cy="6" r="2"/>
+                        <circle id="oval1" fill="#CC8EF5" cx="2" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp5" opacity="0" transform="translate(14 50)">
+                        <circle id="oval1" fill="#91D2FA" cx="6" cy="5" r="2"/>
+                        <circle id="oval2" fill="#91D2FA" cx="2" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp4" opacity="0" transform="translate(35 50)">
+                        <circle id="oval1" fill="#F48EA7" cx="6" cy="5" r="2"/>
+                        <circle id="oval2" fill="#F48EA7" cx="2" cy="2" r="2"/>
+                      </g>
+            
+                      <g id="grp1" opacity="0" transform="translate(24)">
+                        <circle id="oval1" fill="#9FC7FA" cx="2.5" cy="3" r="2"/>
+                        <circle id="oval2" fill="#9FC7FA" cx="7.5" cy="2" r="2"/>
+                      </g>
+                    </g>
+                  </svg>
+                </label>
+              <p class="crayons-reaction__count text-center font-bold mb-4" id="reaction_total_count">{{postdetailsData?.likes?.length}}</p>
+
+              <svg (click)="readlist(postdetailsData._id)" width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.43200000000000005"></g><g id="SVGRepo_iconCarrier"> <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="#3e3e47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>           
+              <!-- <svg width=" 45px" height="45px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.0309 3.30271C13.0299 2.8991 10.9701 2.8991 8.96913 3.30271C6.66186 3.76809 5 5.82231 5 8.20894V18.6292C5 20.4579 6.9567 21.596 8.51221 20.6721L11.3451 18.9895C11.7496 18.7492 12.2504 18.7492 12.6549 18.9895L15.4878 20.6721C17.0433 21.596 19 20.4579 19 18.6292V8.20894C19 5.82231 17.3381 3.76809 15.0309 3.30271Z" fill="#2a2a2d"></path> </g></svg> -->
+
+            </div>
+              <div  class="custom-scrollbar" #content style="width: 65% !important;">
         <div class="content">
             <div class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl w-full">
                 <article
                 class="shadow-md p-4 mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
                 <header class="mb-4 lg:mb-6 not-format ">
                         <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img class="mr-4 w-12 h-12 rounded-full" [src]="postdetailsData.userId.image"
+                            <div  class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
+                                <img *ngIf="postdetailsData?.userId?.image else image"  class="mr-4 w-12 h-12 rounded-full" [src]="postdetailsData?.userId?.image"
                                     alt="Jese Leos">
+                                        <ng-template #image>
+                                        <img class="mr-4 w-12 h-12 rounded-full" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" alt="">
+                                       </ng-template>
                                 <div>
                                     <a href="#" rel="author"
-                                        class="text-xl font-bold text-gray-900 ">{{postdetailsData.userId.userName}}</a>
+                                        class="text-xl font-bold text-gray-900 ">{{postdetailsData?.userId?.userName}}</a>
                                     <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
-                                        educator & CEO Flowbite</p>
+                                        educator</p>
                                     <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
                                             pubdate></time>{{postdetailsData.date}}</p>
                                 </div>
@@ -279,121 +333,28 @@
                         <span>{{postdetailsData.tag | json}}</span>
                     </p> -->
                     <p>
-                        <span class='text-black' *ngFor="let tag of postdetailsData.tag ">
-                            <p class="text-black">#{{tag.title}}</p>
+                        <span class='text-black' *ngFor="let tag of postdetailsData?.tag ">
+                            #{{tag?.title}}
                             &nbsp;</span>
                     </p>
-                    <div class="flex justify-center mb-6">
-                        <img [src]="'http://localhost:4000/images/'+postdetailsData.image" alt="">
+                    <div class="flex  mb-6">
+                        <img [src]="'http://localhost:4000/images/'+postdetailsData?.image" alt="">
                     </div>
                     <p class="contentr" [innerHTML]="postdetailsData.post"></p>
                 </article>
             </div>
-            <!-- <div class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3">
-                <article
-                    class="shadow-md p-4 mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
-                    <header class="mb-4 lg:mb-6 not-format ">
-                        <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img class="mr-4 w-12 h-12 rounded-full" alt="Jese Leos">
-                                <div>
-                                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 "></a>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
-                                        educator & CEO Flowbite</p>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
-                                            pubdate></time></p>
-                                </div>
-                            </div>
-                        </address>
-                    </header>
-                    <div class="flex justify-center mb-6">
-                        <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
-                    </div>
-                    <p class="contentr"></p>
-                </article>
-
-            </div>
-            <div class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3">
-                <article
-                    class="shadow-md p-4 mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
-                    <header class="mb-4 lg:mb-6 not-format ">
-                        <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img class="mr-4 w-12 h-12 rounded-full" alt="Jese Leos">
-                                <div>
-                                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 "></a>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
-                                        educator & CEO Flowbite</p>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
-                                            pubdate></time></p>
-                                </div>
-                            </div>
-                        </address>
-                    </header>
-                    <div class="flex justify-center mb-6">
-                        <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
-                    </div>
-                    <p class="contentr"></p>
-                </article>
-
-            </div>
-            <div class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3">
-                <article
-                    class="shadow-md p-4 mx-auto w-full format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
-                    <header class="mb-4 lg:mb-6 not-format ">
-                        <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img class="mr-4 w-12 h-12 rounded-full" alt="Jese Leos">
-                                <div>
-                                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 "></a>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
-                                        educator & CEO Flowbite</p>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
-                                            pubdate></time></p>
-                                </div>
-                            </div>
-                        </address>
-                    </header>
-                    <div class="flex justify-center mb-6">
-                        <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
-                    </div>
-                    <p class="contentr"></p>
-                </article>
-
-            </div>
-            <div class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3">
-                <article
-                    class="shadow-md p-4 mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
-                    <header class="mb-4 lg:mb-6 not-format ">
-                        <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img class="mr-4 w-12 h-12 rounded-full" alt="Jese Leos">
-                                <div>
-                                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 "></a>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
-                                        educator & CEO Flowbite</p>
-                                    <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
-                                            pubdate></time></p>
-                                </div>
-                            </div>
-                        </address>
-                    </header>
-                    <div class="flex justify-center mb-6">
-                        <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
-                    </div>
-                    <p class="contentr"></p>
-                </article>
-            </div> -->
+            
+            
         </div>
     </div>
-
+    
 
     <div class="custom-scrollbar" style="width: 30% !important;">
         <div class="content">
             <section class="bg-white  py-8 lg:py-16">
                 <div class="max-w-2xl mx-auto px-4">
                     <div class="flex justify-between items-center mb-6">
-                      <h2 class="text-lg lg:text-2xl font-bold text-gray-900">Discussion ({{commentData.comment.length}})</h2>
+                      <h2 class="text-lg lg:text-2xl font-bold text-gray-900">Discussion ({{commentData?.comment?.length}})</h2>
                   </div>
                   <form class="mb-6" #f="ngForm" (ngSubmit)="send_message(f)">
                       <div class="py-2 px-4 mb-4 text-gray-900 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -408,15 +369,14 @@
                       </button>
                   </form>
                   
-                  <article  *ngFor="let comment of commentData.comment" class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                  <article *ngFor="let comment of commentData?.comment" class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
                       <footer class="flex justify-between items-center mb-2">
                           <div class="flex items-center">
                               <p class="inline-flex items-center mr-3 text-sm text-gray-900"><img
                                       class="mr-2 w-6 h-6 rounded-full"
-                                      [src]="comment.userId.image"
-                                      alt="Michael Gough">{{comment.userId.userName}}</p>
-                              <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                                      title="February 8th, 2022">{{getDateRelative(comment.date)}}</time></p>
+                                      [src]="comment?.userId?.image"
+                                      alt="Michael Gough">{{comment?.userId?.userName}}</p>
+                              <p class="text-sm text-gray-600 dark:text-gray-400">{{getDateRelative(comment?.date)}}</p>
                           </div>
                           <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
                               class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -449,7 +409,7 @@
                               </ul>
                           </div>
                       </footer>
-                      <p class="text-black dark:text-gray-400">{{comment.message}}</p>
+                      <p class="text-black dark:text-gray-400">{{comment?.message}}</p>
                       <div class="flex items-center mt-4 space-x-4">
                           <button type="button"
                               class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
@@ -609,6 +569,7 @@
                   </article> -->
                 </div>
               </section>
+              
             <!-- <div
                 class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex items-center justify-between mb-4">
@@ -944,5 +905,5 @@
             </div> -->
         </div>
     </div>
-
 </main>
+

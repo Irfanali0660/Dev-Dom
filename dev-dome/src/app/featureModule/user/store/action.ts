@@ -1,11 +1,13 @@
 import { createAction,props } from "@ngrx/store";
 import { logininterface } from "../interface/login";
 import { signupinterface } from "../interface/signup";
-import { SafeHtml } from '@angular/platform-browser';
 import { addpostinterface } from "../interface/addpost";
 import { googlesign } from "../interface/googlesign";
 import { taginterface } from "../../admin/interfaces/taginterface";
 import { resetpassinterface } from "../interface/resetpass";
+import { listinterface } from "../interface/list";
+import { addlistinterface } from "../interface/addlist";
+import { reportinterface } from "../interface/report";
 
 
 export const login=createAction('[log] do login',props<{formData:logininterface,isuser:Boolean}>())
@@ -27,8 +29,8 @@ export const otp=createAction('[log] otp',props<({value:Number})>())
 export const otpsuccess=createAction('[log] otp success',props<({signup:signupinterface})>())
 export const otpfailed=createAction('otpfailed',props<({error:string})>())
 
-export const getuser=createAction('getuser')
-export const getusersuccess=createAction('getusersuccess',props<({signup:signupinterface})>())
+export const getuser=createAction('getusers')
+export const getusersuccess=createAction('getuserssuccess',props<({signup:signupinterface})>())
 
 export const generateotp=createAction('generateotp')
 export const generateotpsuccess=createAction('generateotpsuccess')
@@ -61,5 +63,31 @@ export const resetpasssuccess=createAction('resetpasssuccess')
 export const comments=createAction('comments',props<({id:string})>())
 export const commentssuccess=createAction('commentsuccess',props<({data:Array<string>})>())
 
-export const addlike=createAction('addlike',props<({id:string})>())
+export const addlike=createAction('addlike',props<({id:string,value:boolean | undefined})>())
 export const addlikesuccess=createAction('addlikesuccess')
+
+export const getlistcategory=createAction('getlistcategory')
+export const getlistcategorysuccess=createAction('getlistcategorysuccess',props<({listcategory:listinterface[]})>())
+;
+export const addnewlist=createAction('addnewlist',props<({formdata:Partial<addlistinterface>,tag:Array<string>})>())
+export const addnewlistsucces=createAction('addnewlistsuccess')
+
+export const getlist=createAction('getlist')
+export const getlistsuccess=createAction('getlistsuccess',props<({list:addlistinterface[]})>())
+
+export const tagpost=createAction('tagpost',props<({id:string})>())
+export const tagpostsuccess=createAction('tagpostsuccess',props<({post:any})>())
+
+export const report=createAction('report',props<({id:string,formData:reportinterface})>())
+export const reportsucces=createAction('reportsuccess')
+
+export const error=createAction('error')
+
+export const gettags=createAction('gettags')
+export const gettagssuccess=createAction('gettagssuccess',props<({tag:any})>())
+
+export const addreadlist=createAction('addreadlist',props<({id:string})>())
+export const addreadlistsuccess=createAction('addreadlistsuccess')
+
+export const getreadlist=createAction('getreadlist')
+export const getreadlistsuccess=createAction('getreadlistsuccess',props<({readlist:any})>())

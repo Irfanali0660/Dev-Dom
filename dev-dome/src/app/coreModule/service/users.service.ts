@@ -7,6 +7,8 @@ import { logininterface } from '../../featureModule/user/interface/login';
 import { SafeHtml } from '@angular/platform-browser';
 import { addpostinterface } from 'src/app/featureModule/user/interface/addpost';
 import { resetpassinterface } from 'src/app/featureModule/user/interface/resetpass';
+import { addlistinterface } from 'src/app/featureModule/user/interface/addlist';
+import { reportinterface } from 'src/app/featureModule/user/interface/report';
 
 
 @Injectable({
@@ -99,7 +101,31 @@ export class UsersService {
   comments(id:string):Observable<any>{
     return this.http.post(`${this.localhost}/users/comments`,{id},this.httpOptions)
   }
-  addlike(id:string):Observable<any>{
-    return this.http.put(`${this.localhost}/users/addlike`,{id},this.httpOptions)
+  addlike(id:string,value:boolean | undefined):Observable<any>{
+    return this.http.put(`${this.localhost}/users/addlike`,{id,value},this.httpOptions)
+  }
+  getlistcategory():Observable<any>{
+    return this.http.get(`${this.localhost}/users/getlistcate`,this.httpOptions)
+  }
+  addnewlist(formData:addlistinterface,tags:Array<string>):Observable<any>{
+    return this.http.post(`${this.localhost}/users/addnewlist`,{formData,tags},this.httpOptions)
+  }
+  getlist():Observable<any>{
+    return this.http.get(`${this.localhost}/users/getlist`,this.httpOptions)
+  }
+  gettagpost(id:string):Observable<any>{
+    return this.http.get(`${this.localhost}/users/gettagpost?id=${id}`,this.httpOptions)
+  }
+  report(id:string,formData:reportinterface):Observable<any>{
+    return this.http.post(`${this.localhost}/users/report`,{id,formData},this.httpOptions)
+  }
+  gettags():Observable<any>{
+    return this.http.get(`${this.localhost}/users/gettags`,this.httpOptions)
+  }
+  addreadlist(id:string):Observable<any>{
+    return this.http.post(`${this.localhost}/users/addreadlist`,{id},this.httpOptions)
+  }
+  getreadlist():Observable<any>{
+    return this.http.get(`${this.localhost}/users/getreadlist`,this.httpOptions)
   }
 }

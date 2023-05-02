@@ -71,13 +71,12 @@ for (let i = 0; i < elements.length; i++) {
   const element = elements[i] as HTMLElement;
   this.editorContent=this.sanitizer.bypassSecurityTrustHtml(element.innerHTML);
   this.content=element.innerHTML
-  console.log(this.editorContent);
-  
+  console.log(this.editorContent,"Editor");
 }
   }
   addpost(){
   
-    this.store.dispatch(post.addpost({post:{editor:this.content,image:this.addimage,tag:this.tags}}))
+    this.store.dispatch(post.addpost({post:{editor:this.content,image:this.image,tag:this.tags}}))
   }
   gettag(){
     this.store.dispatch(post.gettag())
@@ -91,7 +90,7 @@ for (let i = 0; i < elements.length; i++) {
   filteredTag: Observable<string[]>;
   tags: string[] = [];
   alltags: string[] = []
-
+  image!:any
 
 
 
@@ -149,6 +148,7 @@ for (let i = 0; i < elements.length; i++) {
     this.encodedString=null
   }
   addimage(){
+    
 
 // select the image file input element
 let input = document.getElementById('cover-image-input') as HTMLInputElement | null;
@@ -171,7 +171,8 @@ if (input) {
 
     // read the image file as a data URL
     reader.readAsDataURL(input.files[0]);
-
+ this.image=input.files[0]
+    
 
   } else {
     console.error('No file selected.');

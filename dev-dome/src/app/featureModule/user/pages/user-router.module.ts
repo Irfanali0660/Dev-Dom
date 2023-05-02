@@ -17,6 +17,11 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpassComponent } from './resetpass/resetpass.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment.development';
+import { ListingComponent } from './listing/listing.component';
+import { NewListComponent } from './new-list/new-list.component';
+import { TagInputModule } from 'ngx-chips';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReadinglistComponent } from './readinglist/readinglist.component';
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -36,7 +41,9 @@ const config: SocketIoConfig = {
     SinglepostComponent,
     ForgotpasswordComponent,
     ResetpassComponent,
-   
+    ListingComponent,
+    NewListComponent,
+    ReadinglistComponent,
   ],
   imports: [
     FormsModule,
@@ -46,7 +53,9 @@ const config: SocketIoConfig = {
     MaterialModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    TagInputModule,
     SocketIoModule.forRoot(config),
+    FontAwesomeModule
   ],
   providers:[Dataresolver]
 })

@@ -7,12 +7,20 @@ import { AddtagsComponent } from './addtags/addtags.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { EdittagsComponent } from './edittags/edittags.component';
+import { AddListCategoryComponent } from './add-list-category/add-list-category.component';
+import { ListCategoryComponent } from './list-category/list-category.component';
+import { ReportpostComponent } from './reportpost/reportpost.component';
+
+
 
 @NgModule({
   declarations: [
     TagsComponent,
     AddtagsComponent,
     EdittagsComponent,
+    AddListCategoryComponent,
+    ListCategoryComponent,
+    ReportpostComponent,
   
   ],
   imports: [
@@ -20,6 +28,8 @@ import { EdittagsComponent } from './edittags/edittags.component';
     AdminRouterRoutingModule,
     NgxDropzoneModule,
     ReactiveFormsModule,
-  ]
+   
+  ],
+  bootstrap: []
 })
 export class AdminRouterModule { }

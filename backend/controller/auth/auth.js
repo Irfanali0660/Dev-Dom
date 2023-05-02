@@ -19,6 +19,9 @@ otp = otp * 1000000;
 otp = parseInt(otp);
 console.log(otp);
 module.exports = {
+
+  //user signup
+
   signup: async (req, res, next) => {
     try {
       console.log(req.body);
@@ -72,9 +75,13 @@ module.exports = {
       next(error);
     }
   },
+
+  // generate otp and send to user
+
   generateotp: async (req, res, next) => {
     try {
       console.log("GENERATE");
+      console.log(otp);
       console.log(res.locals.jwtUSER._id);
       let apiRes = {};
       // let newuser=mongoose.Types.ObjectId('res.locals.jwtUSER._id')
@@ -104,6 +111,9 @@ module.exports = {
       next(error);
     }
   },
+
+  // otp verification
+
   otp: (req, res, next) => {
     try {
       let apiRes = {};
@@ -134,6 +144,8 @@ module.exports = {
       next(error);
     }
   },
+
+  //user login check
 
   login: async (req, res, next) => {
     try {
@@ -167,6 +179,8 @@ module.exports = {
       next(error);
     }
   },
+
+// google social login
 
   sociallogin: async (req, res, next) => {
     try {
@@ -212,6 +226,8 @@ module.exports = {
       next(error);
     }
   },
+
+  //google social signup
 
   socialsignup: async (req, res, next) => {
     try {
@@ -268,6 +284,8 @@ module.exports = {
     }
   },
 
+  // forgot password and link send to user mail
+
   forgotpass:async(req,res,next)=>{
     try {
       console.log(req.body);
@@ -296,6 +314,9 @@ module.exports = {
       next(error)
     }
   },
+
+  // resetpassword
+
   resetpassword:async(req,res,next)=>{
     try {
       console.log(req.body);

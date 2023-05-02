@@ -1,3 +1,5 @@
+import { listinterface } from "../../user/interface/list";
+
 export interface authstate{
     isLogged:Boolean;
     isLoading:Boolean,
@@ -6,4 +8,6 @@ export interface authstate{
     singletag:{
         image:string | null
     }|null
+    adlist:any
+    reportpostData:any
 }

@@ -22,3 +22,10 @@ export const singletag=createSelector(selectFeature,(state)=>state.singletag)
 export const singlepostdetails=createSelector(selectFeature,(state)=>state.singlepostdetails)
 
 export const comments=createSelector(selectFeature,(state)=>state.comments)
+
+export const getlistcategory=createSelector(selectFeature,(state)=>state.listcategory)
+
+export const getlist=createSelector(selectFeature,(state)=>state.list)
+
+export const getreadlist=createSelector(selectFeature,(state)=>state.readlist)
+

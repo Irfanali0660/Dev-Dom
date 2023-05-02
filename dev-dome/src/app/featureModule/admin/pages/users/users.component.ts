@@ -7,6 +7,7 @@ import { AdminService } from 'src/app/coreModule/service/admin.service';
 })
 export class UsersComponent implements OnInit{
   user!:any
+  name: string = ''
   constructor(private service : AdminService){}
   ngOnInit(): void {
     this.users()

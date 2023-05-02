@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword } = require('../controller/auth/auth');
-const { addpost,gettag,singlepost,comments,addlike }= require('../controller/user/postController')
-const { gettagdetails,getuser,getpostdetails,getsingletag }=require('../controller/user/homeContorll')
+const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist }= require('../controller/user/postController')
+const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
+const {getlistcate,addnewlist,getlist}=require('../controller/user/listController')
+const { gettagpost,gettags }=require('../controller/user/tagcontroller')
 const jwt = require('../helpers/jwt');
 const multer=require('multer')
 
@@ -41,6 +43,9 @@ router.get('/sociallogin/:id',sociallogin)
 router.post('/addpost',uploadOptions.array('image'),jwt.verify,addpost)
 router.post('/forgotpass',forgotpass)
 router.post('/comments',comments)
+router.post('/addnewlist',jwt.verify,addnewlist)
+router.post('/report',jwt.verify,report)
+router.post('/addreadlist',jwt.verify,addreadlist)
 
 router.get('/socialsignup/:id',socialsignup)
 router.get('/getsingletag/:id',getsingletag)
@@ -55,4 +60,10 @@ router.get('/generateotp',jwt.verify,generateotp)
 router.get('/getuser',jwt.verify,getuser)
 router.get('/getpostdetails',getpostdetails)
 router.get('/singlepost/:id',singlepost)
+router.get('/getlistcate',getlistcate)
+router.get('/getlist',getlist)
+router.get('/gettagpost',gettagpost)
+router.get('/gettags',gettags)
+router.get('/getreadlist',jwt.verify,getreadlist)
+
 module.exports = router;

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { taginterface } from 'src/app/featureModule/admin/interfaces/taginterface';
 import { deletetag } from 'src/app/featureModule/admin/store/action';
+import { listinterface } from 'src/app/featureModule/user/interface/list';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,21 @@ export class AdminService {
   gettagDetails(id:string) :Observable<any>{
     console.log(id+"gettagdetails");
     return this.http.get(`${this.localhost}/admin/tagdetails/${id}`,this.httpOptions)
+  }
+  addlist(list:listinterface) :Observable<any>{
+    console.log(list,"admin service");  
+    return this.http.post(`${this.localhost}/admin/addlist`,list,this.httpOptions)
+  }
+  adgetlist():Observable<any>{
+    return this.http.get(`${this.localhost}/admin/adgetlist`,this.httpOptions)
+  }
+  liststatus(listid:string |undefined ):Observable<any>{
+    return this.http.post(`${this.localhost}/admin/liststatus`,{listid},this.httpOptions)
+  }
+  getreportpost():Observable<any>{
+    return this.http.get(`${this.localhost}/admin/getreportedpost`,this.httpOptions)
+  }
+  deletepost(id:string):Observable<any>{
+    return this.http.delete(`${this.localhost}/admin/deletepost/${id}`,this.httpOptions)
   }
 }

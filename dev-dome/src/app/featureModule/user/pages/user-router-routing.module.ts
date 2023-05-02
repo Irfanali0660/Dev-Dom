@@ -12,6 +12,11 @@ import { SingletagComponent } from './singletag/singletag.component';
 import { SinglepostComponent } from './singlepost/singlepost.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
+import { ListingComponent } from './listing/listing.component';
+import { NewListComponent } from './new-list/new-list.component';
+import { ListResolver } from '../resolver/list.resolver';
+import { TagsComponent } from './tags/tags.component';
+import { ReadinglistComponent } from './readinglist/readinglist.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -21,6 +26,8 @@ const routes: Routes = [
   {path:'',component:SlidebarComponent,children:[
     {path:'',component:HomeComponent},
     {path:'singletag/:id',component:SingletagComponent},
+    {path:'tags',component:TagsComponent},
+    {path:'readinglist',component:ReadinglistComponent},
   ]},
 
   {path:'singlepost/:id',component:SinglepostComponent},
@@ -30,6 +37,11 @@ resolve:{
 },canActivate: [UserauthguardGuard]},
 {path:'forgotpass',component:ForgotpasswordComponent},
 {path:'resetpass/:id',component:ResetpassComponent},  
+{path:'listing',component:ListingComponent},
+{path:'new-list',component:NewListComponent,resolve:{
+  data:ListResolver
+},canActivate: [UserauthguardGuard]},
+
 ];
 
 @NgModule({

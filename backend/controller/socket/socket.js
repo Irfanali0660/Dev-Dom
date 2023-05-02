@@ -3,6 +3,9 @@ const commentModel = require("../../model/commentModel");
 jwt = require("../../helpers/jwt");
 
 module.exports = {
+
+  // comment using socket io
+
   async chatMessages(io_liveChats) {
     const io = io_liveChats;
     io.use(jwt.verifySocketUserToken);
@@ -21,6 +24,7 @@ module.exports = {
               {
                 userId: socket.jwtUSER._id,
                 message: message,
+                date:Date.now()
               },
             ],
           });
@@ -38,6 +42,7 @@ module.exports = {
           let newComment = {
             userId: socket.jwtUSER._id,
             message: message,
+            date:Date.now()
           };
           console.log("else");
           commentModel

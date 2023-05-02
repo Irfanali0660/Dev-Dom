@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 import { appstateinterface } from "src/app/appSatate.interface";
 import * as tag from '../store/action'
-
+import Swal from 'sweetalert2'
 
 @Injectable()
 export class adminEffect{
@@ -79,7 +79,65 @@ this.action.pipe(ofType(adminAction.gettagDetails),mergeMap((action)=>{
 }))
 )
 
+addlist=createEffect(()=>
+this.action.pipe(ofType(adminAction.addlist),mergeMap((action)=>{
+    return this.adminservice.addlist(action.listCategory).pipe(map((data)=>{
+        this._snackbar.open(data.success, 'close', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 4000,
+            panelClass: ['my-snackbar']
+        })
+        this.route.navigate(['/admin/listCategory'])
+        return adminAction.addlistsuccess()
+    }))
+}))
+)
 
+adgetlist=createEffect(()=>
+this.action.pipe(ofType(adminAction.adgetlist),mergeMap(()=>{
+    return this.adminservice.adgetlist().pipe(map((data)=>{
+        console.log(data,'admineffect');
+        
+        return adminAction.adgetlistsuccess({adlist:data})
+    }))
+}))
+)
+
+liststatus=createEffect(()=>
+this.action.pipe(ofType(adminAction.liststatus),mergeMap((action)=>{
+    return this.adminservice.liststatus(action.listid).pipe(map(()=>{
+        
+        return adminAction.liststatussuccess()
+
+    }))
+}))
+)
+adminreportpost=createEffect(()=>
+this.action.pipe(ofType(adminAction.getreportedpost),mergeMap(()=>{
+    return this.adminservice.getreportpost().pipe(map((data)=>{
+        console.log("getreppoooo");
+        return adminAction.getreportedpostsuccess({reportpost:data})
+    }))
+}))
+)
+
+deletepost=createEffect(()=>
+this.action.pipe(ofType(adminAction.deletepost),mergeMap((action)=>{
+    return this.adminservice.deletepost(action.id).pipe(map(()=>{
+        Swal.fire({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            icon: 'success',
+            timerProgressBar:false,
+            timer: 5000,
+            title: 'deleted successfully'
+          })
+        return adminAction.deletepostsuccess()
+    }))
+}))
+)
 constructor(private action:Actions,private adminservice:AdminService,private _snackbar: MatSnackBar,private route:Router,private store:Store<appstateinterface>){}
 
 }

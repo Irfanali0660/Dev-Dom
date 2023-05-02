@@ -9,8 +9,10 @@ const { users,
         deletetag,
         tagdetails,
         adminlogin,
-        edittag }=require('../controller/admin/adminController')
-
+        edittag,
+        }=require('../controller/admin/adminController')
+const {liststatus,addlist,adgetlist}=require('../controller/admin/listController')
+const {getreportedpost,deletepost}=require('../controller/admin/reportController')
         const FILE_TYPE_MAP = {
           'image/png':'png',
           'image/jpeg':'jpeg',
@@ -41,16 +43,19 @@ const { users,
 router.post('/adminlogin',adminlogin);
 router.post('/addtag',uploadOptions.array('image'),addtag)
 router.post('/edittag',uploadOptions.array('image'),edittag)
-
+router.post('/addlist',addlist)
+router.post('/liststatus',liststatus)
 
 router.get('/users',users)
 router.get('/gettags',gettags)
 router.get('/tagdetails/:id',tagdetails)
+router.get('/adgetlist',adgetlist)
+router.get('/getreportedpost',getreportedpost)
 
 router.put('/status/:id',status)
 
 router.delete('/deletetag/:id',deletetag)
-
+router.delete('/deletepost/:id',deletepost)
 
 
 

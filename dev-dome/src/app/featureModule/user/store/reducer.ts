@@ -12,7 +12,10 @@ export const initialState:authstate={
     postdetails:[],
     singletag:{},
     singlepostdetails:[],
-    comments:[]
+    comments:[],
+    listcategory:[],
+    list:[],
+    readlist:[]
 }
 
 export const reducer=createReducer(initialState,
@@ -64,4 +67,30 @@ export const reducer=createReducer(initialState,
     on(action.commentssuccess,(state,action)=>({...state,isLoading:false,error:null,comments:action.data})),
 
     on(action.addlike,(state)=>({...state,isLoading:true,error:null})),
+    on(action.addlikesuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(action.getlistcategory,(state)=>({...state,isLoading:true,error:null})),
+    on(action.getlistcategorysuccess,(state,action)=>({...state,isLoading:false,error:null,listcategory:action.listcategory})),
+
+    on(action.addnewlist,(state)=>({...state,isLoading:true,error:null})),
+    on(action.addnewlistsucces,(state)=>({...state,isLoading:false,error:null})),
+
+    on(action.getlist,(state)=>({...state,isLoading:true,error:null})),
+    on(action.getlistsuccess,(state,action)=>({...state,isLoading:false,error:null,list:action.list})),
+
+    on(action.tagpost,(state)=>({...state,isLoading:true,error:null})),
+    on(action.tagpostsuccess,(state,action)=>({...state,isLoading:false,error:null,postdetails:action.post})),
+
+    on(action.report,(state)=>({...state,isLoading:true,error:null})),
+    on(action.reportsucces,(state,action)=>({...state,isLoading:false,error:null})),
+
+    on(action.gettags,(state)=>({...state,isLoading:true,error:null})),
+    on(action.gettagssuccess,(state,action)=>({...state,isLoading:false,error:null,tag:action.tag})),
+
+    on(action.addreadlist,(state)=>({...state,isLoading:true,error:null})),
+    on(action.addreadlistsuccess,(state)=>({...state,isLoading:false,error:null})),
+
+    on(action.getreadlist,(state)=>({...state,isLoading:true,error:null})),
+    on(action.getreadlistsuccess,(state,action)=>({...state,isLoading:false,error:null,readlist:action.readlist})),
+
     )

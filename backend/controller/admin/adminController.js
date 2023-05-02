@@ -1,10 +1,13 @@
 const tagModel = require("../../model/tagModel");
 const userModel = require("../../model/userModel")
 const jwt = require("../../helpers/jwt");
+const listModel = require("../../model/listcategoryModel");
 
 
 
 module.exports={
+
+    // admin login
 
     adminlogin:(req,res,next)=>{
         try {
@@ -26,6 +29,10 @@ module.exports={
             next(error)
         }
     },
+
+
+    // get all users
+
     users:(req,res,next)=>{
         try {
             console.log("HELLOOO");
@@ -37,6 +44,9 @@ module.exports={
             next(error)
         }
     },
+
+    // user block or unblock
+
     status:async(req,res,next)=>{
         try {
             console.log("STSTUSS");
@@ -57,7 +67,10 @@ module.exports={
         } catch (error) {
             next(error)
         }
-    },
+    },  
+
+    // add new tag
+
     addtag:(req,res,next)=>{
         try {
             console.log(req.body);
@@ -77,6 +90,9 @@ module.exports={
             next(error)
         }
     },
+
+    // edit tag
+
     edittag:(req,res,next)=>{
         try {
             console.log(req.body);
@@ -97,6 +113,9 @@ module.exports={
             next(error)
         }
     },
+
+    // get all tagb
+
     gettags:(req,res,next)=>{
         try {
             tagModel.find().then((data)=>{
@@ -107,6 +126,9 @@ module.exports={
             next(error)
         }
     },
+
+    // delete tag
+
     deletetag:(req,res,next)=>{
         try {
             tagModel.deleteOne({_id:req.params.id}).then(()=>{
@@ -118,6 +140,9 @@ module.exports={
             next(error)
         }
     },
+
+    //get single tag details
+
     tagdetails:(req,res,next)=>{
         try {
             console.log("tagdetails");
@@ -128,6 +153,7 @@ module.exports={
         } catch (error) {
             next(error)
         }
-    }
+    },
+    
 
 }

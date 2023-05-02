@@ -9,3 +9,7 @@ export const errorSelector=createSelector(selectFeature,(state)=>state.error)
 
 export const tagdetails=createSelector(selectFeature,(state)=>state.details)
 export const singletagdetails=createSelector(selectFeature,(state)=>state.singletag)
+
+export const adlistselector=createSelector(selectFeature,(state)=>state.adlist)
+
+export const reportData=createSelector(selectFeature,(state)=>state.reportpostData)

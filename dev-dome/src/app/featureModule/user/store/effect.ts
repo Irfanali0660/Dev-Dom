@@ -7,6 +7,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from "@angular/router";
 import { appstateinterface } from "src/app/appSatate.interface";
 import { Store } from "@ngrx/store";
+import Swal from 'sweetalert2'
 
 @Injectable()
 export class authEffects {
@@ -74,8 +75,8 @@ export class authEffects {
                 // })
                 localStorage.setItem('token', data.token.token)
                 localStorage.setItem('tokenExp', data.token.exp)
-                this.route.navigate(['/'])
-                // this.store.dispatch(Action.generateotp())
+                this.route.navigate(['/otp'])
+                this.store.dispatch(Action.generateotp())
                 // console.log("ssignup");
                 
                 return Action.signupsuccess({data:data.data})
@@ -157,9 +158,11 @@ export class authEffects {
    }))
    )
 
-   getuser=createEffect(()=>
-   this.actoins$.pipe(ofType(Action.generateotp),mergeMap(()=>{
+   getusers=createEffect(()=>
+   this.actoins$.pipe(ofType(Action.getuser),exhaustMap(()=>{
     return this.userservice.getuser().pipe(map((data)=>{
+        console.log(data,"userData+++++++++++++++++++++++===");
+        
         return Action.getusersuccess({signup:data})
     }))
    }))
@@ -170,7 +173,7 @@ export class authEffects {
    getpost=createEffect(()=>
    this.actoins$.pipe(ofType(Action.getpostdetails),exhaustMap(()=>{
     return this.userservice.getpost().pipe(map((data)=>{
-        console.log(data);
+        // console.log(data+"POSTDATA");
         return Action.getpostdetailssuccess({postdetails:data})
     }))
    }))
@@ -258,7 +261,7 @@ mergeMap((action)=>{
 addlike=createEffect(()=>
 this.actoins$.pipe(ofType(Action.addlike),
     mergeMap((action)=>{
-        return this.userservice.addlike(action.id).pipe(
+        return this.userservice.addlike(action.id,action.value).pipe(
             map(()=>{
                 return Action.addlikesuccess()
             })
@@ -266,7 +269,125 @@ this.actoins$.pipe(ofType(Action.addlike),
     })
 )
 )
-    constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router,private store:Store<appstateinterface>) { }
+getliscategory=createEffect(()=>
+this.actoins$.pipe(ofType(Action.getlistcategory),mergeMap(()=>{
+    return this.userservice.getlistcategory().pipe(
+        map((data)=>{
+            return Action.getlistcategorysuccess({listcategory:data})
+        })
+    )
+}))
+)
 
+addnewlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.addnewlist),mergeMap((action)=>{
+    return this.userservice.addnewlist(action.formdata,action.tag).pipe(
+        map(()=>{
+            this._snackbar.open('List added successfully', 'close', {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 4000,
+                panelClass: ['my-snackbar']
+            })
+            this.route.navigate(['/listing'])
+            return Action.addnewlistsucces()
+        })
+    )
+}))
+)
+getlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.getlist),exhaustMap(()=>{
+    return this.userservice.getlist().pipe(
+        map((data)=>{
+            console.log(data,"effect");
+            return Action.getlistsuccess({list:data})
+        })
+    )
+}))
+)
+
+tagpost=createEffect(()=>
+this.actoins$.pipe(ofType(Action.tagpost),mergeMap((action)=>{
+    return this.userservice.gettagpost(action.id).pipe(
+        map((data)=>{
+            return Action.tagpostsuccess({post:data})
+        })
+    )
+}))
+)
+
+report=createEffect(()=>
+this.actoins$.pipe(ofType(Action.report),mergeMap((action)=>{
+    return this.userservice.report(action.id,action.formData).pipe(
+        map((data)=>{
+           if(data=='success'){
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                icon: 'success',
+                timerProgressBar:false,
+                timer: 5000,
+                title: 'Report added successfully'
+              })
+            return Action.reportsucces()
+           }else{
+            return Action.error()
+           }
+        })
+    )
+}))
+)
+
+gettags=createEffect(()=>
+this.actoins$.pipe(ofType(Action.gettags),mergeMap(()=>{
+    return this.userservice.gettags().pipe(map((data)=>{
+        return Action.gettagssuccess({tag:data})
+    }))
+}))
+)
+
+addreadlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.addreadlist),mergeMap((action)=>{
+    return this.userservice.addreadlist(action.id).pipe(map((data)=>{
+        if(data=='success'){
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                icon: 'success',
+                timerProgressBar:false,
+                timer: 5000,
+                title: 'This post added to reading list'
+              })
+              return Action.addreadlistsuccess()
+           }else if(data=='alreadyadded'){
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                icon: 'warning',
+                timerProgressBar:false,
+                timer: 5000,
+                title: 'This post already added to reading list'
+              })
+            return Action.addreadlistsuccess()
+           }
+           else{
+            return Action.error()
+           }
+        
+    }))
+}))
+)
+
+getreadlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.getreadlist),mergeMap(()=>{
+    return this.userservice.getreadlist().pipe(map((data)=>{
+        return Action.getreadlistsuccess({readlist:data})
+    }))
+}))
+)
+    constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router,private store:Store<appstateinterface>) { }
 }
 

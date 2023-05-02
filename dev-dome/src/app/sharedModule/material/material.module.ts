@@ -7,13 +7,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 
 
+
 const material=[
   MatSnackBarModule,
   MatChipsModule,
   MatSelectModule,
   MatSelectModule,
   MatAutocompleteModule,
-  MatIconModule
+  MatIconModule,
 ]
 
 @NgModule({
