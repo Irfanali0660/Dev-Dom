@@ -34,3 +34,5 @@ export const getreportedpostsuccess=createAction("admingetreportedpostsuccess",p
 
 export const deletepost=createAction('deletepost',props<({id:string})>())
 export const deletepostsuccess=createAction('deletepostsuccess')
+
+export const error=createAction('error')

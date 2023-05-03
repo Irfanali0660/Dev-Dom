@@ -312,7 +312,7 @@
                 class="shadow-md p-4 mx-auto w-full  format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400">
                 <header class="mb-4 lg:mb-6 not-format ">
                         <address class="flex items-center mb-6 not-italic ">
-                            <div  class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
+                            <div  class="inline-flex items-center mr-3 text-sm text-gray-900  ">
                                 <img *ngIf="postdetailsData?.userId?.image else image"  class="mr-4 w-12 h-12 rounded-full" [src]="postdetailsData?.userId?.image"
                                     alt="Jese Leos">
                                         <ng-template #image>
@@ -427,22 +427,22 @@
                             <button type="submit"  class="absolute right-2 h-7 w-16 rounded-md text-xs font-semibold text-white transition-all duration-200 ease-in-out group-focus-within:bg-blue-400 group-focus-within:hover:bg-blue-600  bg-cyan-200">Send</button>
                           </div>
                     </form>
-                    <div class="border border-gray-200 p-6 rounded-lg">
+                    <div *ngFor="let replay of comment.replay" class="border border-gray-200 p-6 rounded-lg">
                         <footer class="flex justify-between items-center mb-2">
                             <div class="flex items-center">
-                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Jese Leos">Jese Leos</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate="" datetime="2022-02-12" title="February 12th, 2022">Feb. 12, 2022</time></p>
+                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 "><img class="mr-2 w-6 h-6 rounded-full" [src]="replay?.replayuserId?.image" >{{replay?.replayuserId.userName}}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">{{getDateRelative(replay?.date)}}</p>
                             </div>
                             
                         </footer>
-                        <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+                        <p class="text-gray-500 dark:text-gray-400">{{replay.message}}</p>
                     </div>
                   </div>
                 </div>
                   <!-- <article class="p-6 mb-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                       <footer class="flex justify-between items-center mb-2">
                           <div class="flex items-center">
-                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 "><img
                                       class="mr-2 w-6 h-6 rounded-full"
                                       src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                                       alt="Bonnie Green">Bonnie Green</p>
@@ -492,7 +492,7 @@
                   <!-- <article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                       <footer class="flex justify-between items-center mb-2">
                           <div class="flex items-center">
-                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 "><img
                                       class="mr-2 w-6 h-6 rounded-full"
                                       src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
                                       alt="Helene Engels">Helene Engels</p>
@@ -544,7 +544,7 @@
             <!-- <div
                 class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex items-center justify-between mb-4">
-                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
+                    <h5 class="text-xl font-bold leading-none text-gray-900 ">Latest Customers</h5>
                     <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         View all
                     </a>
@@ -558,7 +558,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -566,7 +566,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -578,7 +578,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -586,7 +586,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -598,7 +598,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -606,7 +606,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -618,7 +618,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -626,7 +626,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -638,7 +638,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -646,7 +646,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -658,7 +658,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -666,7 +666,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -678,7 +678,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -686,7 +686,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -698,7 +698,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -706,7 +706,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -718,7 +718,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -726,7 +726,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -738,7 +738,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -746,7 +746,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -758,7 +758,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -766,7 +766,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -778,7 +778,7 @@
                                         alt="Neil image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Neil Sims
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -786,7 +786,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $320
                                 </div>
                             </div>
@@ -798,7 +798,7 @@
                                         alt="Bonnie image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Bonnie Green
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -806,7 +806,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $3467
                                 </div>
                             </div>
@@ -818,7 +818,7 @@
                                         alt="Michael image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Michael Gough
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -826,7 +826,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $67
                                 </div>
                             </div>
@@ -838,7 +838,7 @@
                                         alt="Lana image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Lana Byrd
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -846,7 +846,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $367
                                 </div>
                             </div>
@@ -858,7 +858,7 @@
                                         alt="Thomas image">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <p class="text-sm font-medium text-gray-900 truncate ">
                                         Thomes Lean
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -866,7 +866,7 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 ">
                                     $2367
                                 </div>
                             </div>

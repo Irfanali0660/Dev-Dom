@@ -8,7 +8,6 @@ module.exports = {
 
   async chatMessages(replay) {
     const io = replay;
-    console.log(replay,'replayxxx');
     io.use(jwt.verifySocketUserToken);
     io.on("connection", (socket) => {
         console.log(socket);

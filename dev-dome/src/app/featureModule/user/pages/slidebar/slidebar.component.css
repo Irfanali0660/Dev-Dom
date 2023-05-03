@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'smart-webcomponents-angular/source/styles/smart.default.css';
 
 .DevDome{
     font-family: 'Rancho', cursive;

@@ -16,6 +16,10 @@ const readlistSchema =new mongoose.Schema({
         required:true,
         ref: "userData",
     },
+    date:{
+        type:Date,
+        default:Date.now(),
+    }
 })
 
 module.exports = readlistModel = mongoose.model('readlistData',readlistSchema);

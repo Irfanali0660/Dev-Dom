@@ -87,6 +87,11 @@ replay_input:string=''
       this.commentData=data
       console.log(data); 
     })
+    this.replaysocket.on('new-replay',(data:any)=>{
+      console.log(data,'replaybackend');
+      this.commentData=data
+      console.log(data); 
+    })
     window.scrollTo(0, 0);
   }
   ngOnDestroy() {

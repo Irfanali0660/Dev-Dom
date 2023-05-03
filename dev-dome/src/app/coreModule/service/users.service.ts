@@ -128,4 +128,9 @@ export class UsersService {
   getreadlist():Observable<any>{
     return this.http.get(`${this.localhost}/users/getreadlist`,this.httpOptions)
   }
+  removereadlist(id:string):Observable<any>{    
+    console.log(id,'userserrvice');
+    
+    return this.http.delete(`${this.localhost}/users/removereadlist/${id}`,this.httpOptions)
+  }
 }

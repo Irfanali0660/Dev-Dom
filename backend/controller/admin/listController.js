@@ -1,19 +1,23 @@
 const listModel = require("../../model/listcategoryModel");
+const {handleDuplicate}=require('../../Error/dbError')
 
 module.exports={
 
 
     // add new list
 
-    addlist:(req,res,next)=>{
+    addlist:async(req,res,next)=>{
         try {
-            console.log("ADDLIST");
+            let check=listModel.findOne({listcategory:req.body.listcategory})
             console.log(req.body);
             let list=new listModel({listcategory:req.body.listcategory,description:req.body.description})
-            list.save().then(()=>{
+            list.save().then((newdata)=>{
+                console.log(newdata);
                 res.json({success:"added succesfully"})
-            }).catch((error)=>{
-                console.log(error)
+            }).catch((err)=>{
+                if (err.code === 11000) {
+                 res.json({failed:'duplicate'})
+                }
             })
         } catch (error) {
             console.log(error)

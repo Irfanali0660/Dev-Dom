@@ -137,6 +137,14 @@ module.exports={
       } catch (error) {
         next(error)
       }
+    },
+    removereadlist:(req,res,next)=>{
+      try { 
+        readinglistModel.deleteOne({_id:req.params.id}).then(()=>{
+          res.json()
+        })
+      } catch (error) {
+        next(error)
+      }
     }
-
 }

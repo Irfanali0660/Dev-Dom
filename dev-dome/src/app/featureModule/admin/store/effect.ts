@@ -31,6 +31,15 @@ this.action.pipe(ofType(adminAction.addtag),mergeMap((action:any)=>{
             this.route.navigate(['/admin/tags'])
             return adminAction.addtagsuccess()
         }else{
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                icon: 'error',
+                timerProgressBar:false,
+                timer: 5000,
+                title: 'This name already exist'
+              })
             return adminAction.addtagfailure({error:data.error})
         }   
         
@@ -82,6 +91,7 @@ this.action.pipe(ofType(adminAction.gettagDetails),mergeMap((action)=>{
 addlist=createEffect(()=>
 this.action.pipe(ofType(adminAction.addlist),mergeMap((action)=>{
     return this.adminservice.addlist(action.listCategory).pipe(map((data)=>{
+      if(data.success=='added succesfully'){
         this._snackbar.open(data.success, 'close', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
@@ -90,6 +100,18 @@ this.action.pipe(ofType(adminAction.addlist),mergeMap((action)=>{
         })
         this.route.navigate(['/admin/listCategory'])
         return adminAction.addlistsuccess()
+      }else{
+        Swal.fire({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            icon: 'error',
+            timerProgressBar:false,
+            timer: 5000,
+            title: 'This name already added to list'
+          })
+            return adminAction.error()
+        }
     }))
 }))
 )

@@ -84,7 +84,9 @@ module.exports={
             tag.save().then(()=>{
                 res.json({success:"tag data added successfully"}).status(200)
             }).catch((error)=>{
-                res.json({error:error})
+                if (error.code === 11000) {
+                 res.json({error:'duplicate'})
+                }
             })
         } catch (error) {
             next(error)

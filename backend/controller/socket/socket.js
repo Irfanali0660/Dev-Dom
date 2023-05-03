@@ -26,6 +26,7 @@ module.exports = {
               let message = await commentModel
                 .find({ postId: socket?.handshake?.query?.id })
                 .populate("userId")
+                .populate("replay.replayuserId")
                 .sort({ "date": -1 });
               io.emit("new-message", message);
               console.log("success");

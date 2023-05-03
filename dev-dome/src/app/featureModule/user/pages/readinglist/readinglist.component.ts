@@ -4,6 +4,8 @@ import { appstateinterface } from 'src/app/appSatate.interface';
 import * as action from '../../store/action' 
 import { getreadlist } from '../../store/selector';
 import moment from 'moment';
+import { UsersService } from "src/app/coreModule/service/users.service";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-readinglist',
@@ -12,7 +14,7 @@ import moment from 'moment';
 })
 export class ReadinglistComponent {
   readlist: any;
-  constructor(private store:Store<appstateinterface>){
+  constructor(private store:Store<appstateinterface>,private userservice:UsersService){
     this.getreadlist()
     this.store.pipe(select(getreadlist)).subscribe((readlist)=>{
       this.readlist=readlist
@@ -29,7 +31,17 @@ export class ReadinglistComponent {
     return moment(date).format('MMM DD YYYY');
   }
   remove(id:string){
-    console.log(id);
-    // this.store.dispatch()
+  this.userservice.removereadlist(id).subscribe(()=>{
+    Swal.fire({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      icon: 'success',
+      timerProgressBar:false,
+      timer: 5000,
+      title: 'removed successfully'
+    })
+    this.getreadlist()
+  })
   }
 }

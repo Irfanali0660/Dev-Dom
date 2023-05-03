@@ -22,6 +22,7 @@ import { NewListComponent } from './new-list/new-list.component';
 import { TagInputModule } from 'ngx-chips';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReadinglistComponent } from './readinglist/readinglist.component';
+import { ListPipe } from '../pipes/list.pipe';
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -44,6 +45,7 @@ const config: SocketIoConfig = {
     ListingComponent,
     NewListComponent,
     ReadinglistComponent,
+    ListPipe,
   ],
   imports: [
     FormsModule,

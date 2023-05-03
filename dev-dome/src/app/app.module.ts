@@ -50,6 +50,7 @@ import { UserPipe } from './featureModule/admin/pipes/user.pipe';
     DragDropDirective,
     GoogleSigninButtonDirective,
     UserPipe,
+    
   ],
   imports: [
     BrowserModule,

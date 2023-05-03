@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword } = require('../controller/auth/auth');
-const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist }= require('../controller/user/postController')
+const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,removereadlist }= require('../controller/user/postController')
 const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
 const {getlistcate,addnewlist,getlist}=require('../controller/user/listController')
 const { gettagpost,gettags }=require('../controller/user/tagcontroller')
@@ -65,5 +65,7 @@ router.get('/getlist',getlist)
 router.get('/gettagpost',gettagpost)
 router.get('/gettags',gettags)
 router.get('/getreadlist',jwt.verify,getreadlist)
+
+router.delete('/removereadlist/:id',removereadlist)
 
 module.exports = router;

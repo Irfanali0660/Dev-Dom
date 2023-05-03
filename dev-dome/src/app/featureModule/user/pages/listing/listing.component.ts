@@ -14,9 +14,10 @@ import { listinterface } from '../../interface/list';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent {
-  list?: addlistinterface[]
+  list!: addlistinterface[]
   listcategory?:listinterface[]
   menutoggle=false
+  listSearch:string=''
   constructor(private store:Store<appstateinterface>,){
     this.getlist()
     this.store.pipe(select(getlist)).subscribe((list)=>{

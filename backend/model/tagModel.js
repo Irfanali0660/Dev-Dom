@@ -5,7 +5,8 @@ const tagSchema =new mongoose.Schema({
     title:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
+        uppercase: true
     },
     description:{
         type:String,

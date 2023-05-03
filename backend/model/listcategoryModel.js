@@ -3,7 +3,8 @@ const listcategorySchema =new mongoose.Schema({
   
     listcategory:{
         type:String,
-        required:true
+        required:true,
+        unique: true
     },
     description:{
         type:String,

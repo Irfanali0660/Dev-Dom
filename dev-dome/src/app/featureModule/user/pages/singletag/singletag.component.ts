@@ -29,7 +29,6 @@ export class SingletagComponent implements OnInit{
     this.store.pipe(select(getpostdetailsselector)).subscribe((data)=>{
       this.tagpostData=data
       console.log(this.tagpostData);
-      
      })
    }
   ngOnInit(): void {

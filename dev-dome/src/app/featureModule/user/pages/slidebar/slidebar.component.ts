@@ -13,6 +13,7 @@ import * as auth from '../../store/action'
 })
 export class SlidebarComponent {
   signup!:signupinterface
+  notification=false
 constructor(private store:Store<appstateinterface>,private userservice: UsersService){}
   ngOnInit(): void {
     this.apilogincheck()
@@ -41,5 +42,9 @@ constructor(private store:Store<appstateinterface>,private userservice: UsersSer
   getuser(){
     this.store.dispatch(auth.getuser())
   }
-
+notfi(){
+  this.notification=!this.notification
+  console.log(this.notification);
+  
+}
 }

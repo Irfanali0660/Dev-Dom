@@ -28,6 +28,7 @@ import { ReportpostComponent } from './reportpost/reportpost.component';
     AdminRouterRoutingModule,
     NgxDropzoneModule,
     ReactiveFormsModule,
+    FormsModule
    
   ],
   bootstrap: []
