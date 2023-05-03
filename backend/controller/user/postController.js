@@ -71,8 +71,8 @@ module.exports={
 
     comments:(req,res,next)=>{
       try {
-        commentModel.findOne({postId:req.body.id}).sort({'comment.date':-1}).populate('comment.userId').then((data)=>{
-          // console.log(data,'comments');
+        commentModel.find({postId:req.body.id}).sort({'date':-1}).populate('userId').populate('replay.replayuserId').then((data)=>{
+          console.log(data,'comments');
           // data.comment.filter((a)=>{return })
           res.json(data)
         })

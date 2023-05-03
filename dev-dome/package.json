@@ -25,6 +25,7 @@
     "@ngrx/effects": "^15.4.0",
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
+    "@tailwindcss/forms": "^0.5.3",
     "moment": "^2.29.4",
     "ngx-chips": "^3.0.0",
     "ngx-dropzone": "^3.1.0",

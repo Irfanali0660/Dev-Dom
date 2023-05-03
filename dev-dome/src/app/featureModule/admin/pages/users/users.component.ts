@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,NgIterable,OnInit } from '@angular/core';
 import { AdminService } from 'src/app/coreModule/service/admin.service';
 @Component({
   selector: 'app-users',
@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit{
   users(){
     this.service.userData().subscribe((data:any)=>{
       console.log(data); 
-      this.user=data;      
+      this.user=data 
     })
   }
   block(id:string){

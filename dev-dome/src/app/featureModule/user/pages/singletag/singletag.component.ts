@@ -23,8 +23,8 @@ export class SingletagComponent implements OnInit{
       console.log(data); 
      })
      this.route.params.subscribe(params => {
+       this.tagpost(params['id'])
       this.singletag(params['id'])
-      this.tagpost(params['id'])
     });
     this.store.pipe(select(getpostdetailsselector)).subscribe((data)=>{
       this.tagpostData=data

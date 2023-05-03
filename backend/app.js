@@ -8,7 +8,8 @@ let mongoose=require('mongoose')
 var env=require('dotenv')
 env.config();
 const socketio = require('socket.io');
-const chatSocket = require('./controller/socket/socket');
+const commentSocket = require('./controller/socket/socket');
+const replaySocekt = require('./controller/socket/replaysocket');
 
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
@@ -45,13 +46,28 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 
 function initSocketIo(server){
-  const io_liveChats = socketio(server,{
+  const io_commentChats = socketio(server,{
     cors:corsOptions,
     path: '/singlepost'
   });
-  const ios = io_liveChats
-  chatSocket.chatMessages(ios)
+  const ios = io_commentChats
+  commentSocket.chatMessages(ios)
+
+  const io_commentReplay = socketio(server,{
+    cors:corsOptions,
+    path: '/replaycomment'
+  });
+  const replay = io_commentReplay
+  replaySocekt.chatMessages(replay)
 }
+// function initSocketIo(server){
+//   const io_liveChats = socketio(server,{
+//     cors:corsOptions,
+//     path: '/replaycomment'
+//   });
+//   const ios = io_liveChats
+//   replaySocekt.chatMessages(ios)
+// }
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -14,54 +14,22 @@ module.exports = {
       socket.on("message", async (message) => {
         console.log(message, "message");
         console.log(socket?.handshake?.query?.id);
-        let comment = await commentModel.findOne({
-          postId: socket?.handshake?.query?.id,
-        });
-        if (!comment) {
           const newComment = new commentModel({
             postId: socket?.handshake?.query?.id,
-            comment: [
-              {
-                userId: socket.jwtUSER._id,
-                message: message,
-                date:Date.now()
-              },
-            ],
+            userId: socket.jwtUSER._id,
+            comment: message,
+            date:Date.now()
           });
           (await newComment.save())
-            .populate("comment.userId")
+            .populate("userId")
             .then(async (data) => {
               let message = await commentModel
-                .findOne({ postId: socket?.handshake?.query?.id })
-                .populate("comment.userId")
-                .sort({ "comment.date": -1 });
+                .find({ postId: socket?.handshake?.query?.id })
+                .populate("userId")
+                .sort({ "date": -1 });
               io.emit("new-message", message);
               console.log("success");
             });
-        } else {
-          let newComment = {
-            userId: socket.jwtUSER._id,
-            message: message,
-            date:Date.now()
-          };
-          console.log("else");
-          commentModel
-            .updateOne(
-              { postId: socket?.handshake?.query?.id },
-              { $push: { comment: newComment } }
-            )
-            .then(async (data) => {
-              let message = await commentModel
-                .findOne({ postId: socket?.handshake?.query?.id })
-                .populate("comment.userId")
-                .sort({ "comment.date": -1 });
-              console.log(message);
-              io.emit("new-message", message);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
       });
     });
   },

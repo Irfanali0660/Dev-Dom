@@ -8,17 +8,25 @@ const commentSchema =new mongoose.Schema({
         required:true,
         ref: "postData",
     },
-    comment:[{
-        userId:{
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: "userData",
+    },
+    comment:{
+        type:String,
+        required:true
+    },
+    replay:[{
+        message:{type:String},
+        date:{type:Date},
+        replayuserId:{
             type:mongoose.Schema.Types.ObjectId,
             required:true,
             ref: "userData",
         },
-        message:{type:String},
-        date:{
-            type:Date,
-        },
     }],
+    date:{type:Date},
    
 
 })
