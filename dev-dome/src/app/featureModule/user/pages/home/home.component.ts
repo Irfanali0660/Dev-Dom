@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit{
   menutoggle=false
   id!:string
   model= false;
+  popoveruser=false
   ngOnInit(): void {
     this.tags()
     this.post()
@@ -77,5 +78,9 @@ export class HomeComponent implements OnInit{
     this.model=!this.model
    }
   }
-  
+  popover(id:string){
+    this.popoveruser=!this.popoveruser
+    console.log(id);
+    this.id=id
+  }
 }

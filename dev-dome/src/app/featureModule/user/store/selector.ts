@@ -29,3 +29,5 @@ export const getlist=createSelector(selectFeature,(state)=>state.list)
 
 export const getreadlist=createSelector(selectFeature,(state)=>state.readlist)
 
+export const editlist=createSelector(selectFeature,(state)=>state.editlist)
+

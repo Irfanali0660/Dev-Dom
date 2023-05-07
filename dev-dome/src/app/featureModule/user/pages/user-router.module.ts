@@ -23,6 +23,12 @@ import { TagInputModule } from 'ngx-chips';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReadinglistComponent } from './readinglist/readinglist.component';
 import { ListPipe } from '../pipes/list.pipe';
+import { UserDashbordComponent } from './user-dashbord/user-dashbord.component';
+import { UserpostComponent } from './userpost/userpost.component';
+import { UserlistComponent } from './userlist/userlist.component';
+import { EditlistComponent } from './editlist/editlist.component';
+import { ChatComponent } from './chat/chat.component';
+import { SinglechatComponent } from './singlechat/singlechat.component';
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -46,6 +52,12 @@ const config: SocketIoConfig = {
     NewListComponent,
     ReadinglistComponent,
     ListPipe,
+    UserDashbordComponent,
+    UserpostComponent,
+    UserlistComponent,
+    EditlistComponent,
+    ChatComponent,
+    SinglechatComponent,
   ],
   imports: [
     FormsModule,

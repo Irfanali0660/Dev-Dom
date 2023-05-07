@@ -39,7 +39,21 @@ const userSchema =new mongoose.Schema({
         type:Date,
         default:Date.now(),
         index:true  
+    },
+    gender:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    birthday:{
+        type:Date
+    },
+    work:{
+        type:String
     }
+
+
 
 })
 

@@ -31,7 +31,6 @@ export class authEffects {
                     localStorage.setItem('tokenExp', data.token.exp)
                     this.route.navigate(['/'])
                     return Action.loginsuccess({signup:data.user})
-
                 } else {
                     return Action.loginfailure({ error: data.failed })
                 }
@@ -55,7 +54,6 @@ export class authEffects {
                     localStorage.setItem('tokenExp', data.token.exp)
                     this.route.navigate(['/'])
                     return Action.loginsuccess({signup:data.data})
-
                 } else {
                     return Action.loginfailure({ error: data.failed })
                 }
@@ -162,7 +160,6 @@ export class authEffects {
    this.actoins$.pipe(ofType(Action.getuser),exhaustMap(()=>{
     return this.userservice.getuser().pipe(map((data)=>{
         console.log(data,"userData+++++++++++++++++++++++===");
-        
         return Action.getusersuccess({signup:data})
     }))
    }))
@@ -184,8 +181,6 @@ export class authEffects {
      exhaustMap((action) => {
        return this.userservice.getsingletag(action.id).pipe(
          map((data) => {
-               
-           console.log(data);
            return Action.getsingletagsuccess({ tag: data });
          })
        );
@@ -385,6 +380,55 @@ getreadlist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.getreadlist),mergeMap(()=>{
     return this.userservice.getreadlist().pipe(map((data)=>{
         return Action.getreadlistsuccess({readlist:data})
+    }))
+}))
+)
+
+updateBio=createEffect(()=>
+this.actoins$.pipe(ofType(Action.updateBio),mergeMap((data)=>{
+    return this.userservice.updateBio(data.form).pipe(map((data)=>{
+        console.log(data);
+if(data.success=='updated suucesfully'){
+    console.log('inside if');
+    Swal.fire({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        icon: 'success',
+        timerProgressBar:false,
+        timer: 5000,
+        title: 'User bio updated successfully'
+      })
+    return Action.updateBiosuccess()
+}else{
+    return Action.error()
+}
+    }))
+}))
+)
+
+userlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.userlist),mergeMap(()=>{
+    return this.userservice.userlist().pipe(map((data)=>{
+        console.log(data,'effect');
+        return Action.getlistsuccess({list:data})
+    }))
+}))
+)
+
+editlist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.editlist),mergeMap((action)=>{
+    return this.userservice.editList(action.id).pipe(map((data)=>{
+        console.log(data,'effect');
+        return Action.editlistsuccess({list:data})
+    }))
+}))
+)
+
+getuserslist=createEffect(()=>
+this.actoins$.pipe(ofType(Action.getusers),mergeMap(()=>{
+    return this.userservice.getusers().pipe(map((users)=>{
+        return Action.getuserslistsuccess({users:users})
     }))
 }))
 )

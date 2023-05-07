@@ -15,7 +15,8 @@ export const initialState:authstate={
     comments:[],
     listcategory:[],
     list:[],
-    readlist:[]
+    readlist:[],
+    editlist:null
 }
 
 export const reducer=createReducer(initialState,
@@ -93,4 +94,14 @@ export const reducer=createReducer(initialState,
     on(action.getreadlist,(state)=>({...state,isLoading:true,error:null})),
     on(action.getreadlistsuccess,(state,action)=>({...state,isLoading:false,error:null,readlist:action.readlist})),
 
+    on(action.updateBio,(state)=>({...state,isLoading:true,error:null})),
+    on(action.updateBiosuccess,(state,action)=>({...state,isLoading:false,error:null})),
+
+    on(action.userlist,(state)=>({...state,isLoading:true,error:null})),
+
+    on(action.editlist,(state)=>({...state,isLoading:true,error:null})),
+    on(action.editlistsuccess,(state,action)=>({...state,isLoading:false,error:null,editlist:action.list})),
+
+    on(action.getusers,(state)=>({...state,isLoading:true,error:null})),
+    on(action.getuserslistsuccess,(state,action)=>({...state,isLoading:false,error:null,users:action.users})),
     )

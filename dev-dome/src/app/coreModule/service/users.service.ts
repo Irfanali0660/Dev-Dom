@@ -9,6 +9,7 @@ import { addpostinterface } from 'src/app/featureModule/user/interface/addpost';
 import { resetpassinterface } from 'src/app/featureModule/user/interface/resetpass';
 import { addlistinterface } from 'src/app/featureModule/user/interface/addlist';
 import { reportinterface } from 'src/app/featureModule/user/interface/report';
+import { userinterface } from 'src/app/featureModule/user/interface/user';
 
 
 @Injectable({
@@ -128,9 +129,30 @@ export class UsersService {
   getreadlist():Observable<any>{
     return this.http.get(`${this.localhost}/users/getreadlist`,this.httpOptions)
   }
-  removereadlist(id:string):Observable<any>{    
-    console.log(id,'userserrvice');
-    
+  removereadlist(id:string):Observable<any>{      
     return this.http.delete(`${this.localhost}/users/removereadlist/${id}`,this.httpOptions)
+  }
+  updateBio(form:userinterface):Observable<any>{      
+    return this.http.put(`${this.localhost}/users/updatebio`,{form},this.httpOptions)
+  }
+
+  userlist():Observable<any>{      
+    return this.http.get(`${this.localhost}/users/userlist`,this.httpOptions)
+  }
+
+  deletelist(id:string| null | undefined):Observable<any>{      
+    return this.http.delete(`${this.localhost}/users/deletelist/${id}`,this.httpOptions)
+  }
+
+  editList(id:string | null | undefined):Observable<any>{     
+    return this.http.get(`${this.localhost}/users/editlist/${id}`,this.httpOptions)
+  }
+
+  updateList(list:addlistinterface):Observable<any>{     
+    return this.http.put(`${this.localhost}/users/updateList`,list,this.httpOptions)
+  }
+
+  getusers():Observable<any>{     
+    return this.http.put(`${this.localhost}/users/getusers`,this.httpOptions)
   }
 }

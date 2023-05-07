@@ -12,7 +12,8 @@ const { users,
         edittag,
         }=require('../controller/admin/adminController')
 const {liststatus,addlist,adgetlist}=require('../controller/admin/listController')
-const {getreportedpost,deletepost}=require('../controller/admin/reportController')
+const {getreportedpost,deletepost}=require('../controller/admin/reportController');
+const jwt = require('../helpers/jwt');
         const FILE_TYPE_MAP = {
           'image/png':'png',
           'image/jpeg':'jpeg',
@@ -41,21 +42,21 @@ const {getreportedpost,deletepost}=require('../controller/admin/reportController
 
 
 router.post('/adminlogin',adminlogin);
-router.post('/addtag',uploadOptions.array('image'),addtag)
-router.post('/edittag',uploadOptions.array('image'),edittag)
-router.post('/addlist',addlist)
-router.post('/liststatus',liststatus)
+router.post('/addtag',jwt.verify,uploadOptions.array('image'),addtag)
+router.post('/edittag',jwt.verify,uploadOptions.array('image'),edittag)
+router.post('/addlist',jwt.verify,addlist)
+router.post('/liststatus',jwt.verify,liststatus)
 
-router.get('/users',users)
-router.get('/gettags',gettags)
-router.get('/tagdetails/:id',tagdetails)
-router.get('/adgetlist',adgetlist)
-router.get('/getreportedpost',getreportedpost)
+router.get('/users',jwt.verify,users)
+router.get('/gettags',jwt.verify,gettags)
+router.get('/tagdetails/:id',jwt.verify,tagdetails)
+router.get('/adgetlist',jwt.verify,adgetlist)
+router.get('/getreportedpost',jwt.verify,getreportedpost)
 
-router.put('/status/:id',status)
+router.put('/status/:id',jwt.verify,status)
 
-router.delete('/deletetag/:id',deletetag)
-router.delete('/deletepost/:id',deletepost)
+router.delete('/deletetag/:id',jwt.verify,deletetag)
+router.delete('/deletepost/:id',jwt.verify,deletepost)
 
 
 

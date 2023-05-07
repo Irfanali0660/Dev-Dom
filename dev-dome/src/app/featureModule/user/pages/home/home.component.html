@@ -12,18 +12,21 @@
     <button class="pl-3  text-gray-900  dark:text-black font-medium">Show more<i class="fa-solid fa-arrow-right"></i>
     </button>
 </div>
+
+
+
+
 <main class=" lg:pb-24 bg-white dark:bg-gray-900">
-    <div *ngFor="let post of postdetails" class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3" >
-        
+    <div *ngFor="let post of postdetails" class=" flex justify-start flex-row px-4 mx-auto max-w-screen-xl mt-3" >  
         <article  class="shadow-md p-4 mx-auto w-full cursor-pointer format format-sm sm:format-base lg:format-lg format-blue dark:format-invert text-justify border border-gray-400" style="width: 60% !important;">
             <div class="flex justify-between">
                 <div>
-                    <header class="mb-4 lg:mb-6 not-format ">
+                    <header class="mb-2 lg:mb-4 not-format ">
                         <address class="flex items-center mb-6 not-italic ">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ">
-                                <img *ngIf="post.userId.image else image" class="mr-4 w-12 h-12 rounded-full" [src]="post.userId.image" alt="image">
+                            <div class="inline-flex items-center mr-3 text-sm text-gray-900  ">
+                                <img *ngIf="post.userId.image else image" (click)="popover(post._id)" class="mr-4 w-12 h-12 rounded-full" [src]="post.userId.image" alt="image">
                                 <ng-template #image>
-                                    <img class="mr-4 w-12 h-12 rounded-full" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" alt="">
+                                    <img (click)="popover(post._id)" class="mr-4 w-12 h-12 rounded-full" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" alt="">
                                 </ng-template>
                                 <div>
                                     <a href="#" rel="author" class="text-xl font-bold text-gray-900 ">{{post.userId.userName}}</a>
@@ -34,11 +37,11 @@
                         </address>
                     </header>
                 </div>
+                
                 <div>
                     <button (click)="dropclick(post._id)"  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 " type="button"> 
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                       </button>
-                      
                       <!-- Dropdown menu -->
                       <div  class="absolute bg-white border border-gray-200" *ngIf="menutoggle && post._id==id" >
                           <ul class="py-2 text-sm text-gray-700 " >
@@ -58,7 +61,41 @@
                       </div>
                 </div>
             </div>
+            <div *ngIf="popoveruser && post._id==id" class="absolute z-10 bg-white rounded border border-gray-200 w-64 text-sm text-gray-500 transition-opacity duration-300 ">
+              <div class="p-3" >
+                  <div class="flex items-center justify-between mb-2">
+                      <a href="#">
+                          <img class="w-10 h-10 rounded-full" [src]="post.userId.image">
+                      </a>
+                      <div>
+                          <button  type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 focus:outline-none ">Connect</button>
+                      </div>
+                  </div>
+                  <p class="text-base font-semibold leading-none text-gray-900 ">
+                     {{post.userId.userName}}
+                  </p>
+                  <p class="mb-3 text-sm font-normal">
+                      <a href="#" class="hover:underline"> {{post.userId.email}}</a>
+                  </p>
+                  <p class="mb-4 text-sm">Open-source contributor. Building <a href="#" class="text-blue-600 "></a>.</p>
+                  <ul class="flex text-sm">
+                      <li class="mr-2">
+                          <a href="#" class="hover:underline">
+                              <span class="font-semibold text-gray-900 ">799</span>
+                              <span>Following</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="hover:underline">
+                              <span class="font-semibold text-gray-900 ">3,758</span>
+                              <span>Followers</span>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
             <div routerLink="/singlepost/{{post._id}}">
+              
                 <div  class="flex justify-center mb-6" > 
                     <img  [src]="'http://localhost:4000/images/'+post.image" alt="">
                 </div>
@@ -72,9 +109,9 @@
         </article>
         <div style="width: 30% !important;"> 
         </div>
-        
     </div>
 </main>
+
 
 <div *ngIf="model" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">'
     <form (submit)="reportsubmit()"  [formGroup]="report">'

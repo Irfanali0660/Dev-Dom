@@ -33,6 +33,8 @@ import { GoogleSigninButtonDirective } from './sharedModule/directives/google-si
 import { environment } from 'src/environments/environment.development';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserPipe } from './featureModule/admin/pipes/user.pipe';
+import { ErrorComponent } from './featureModule/error/404/error/error.component';
+import { BackenderrorComponent } from './featureModule/error/500/backenderror/backenderror.component';
 
 
 
@@ -50,6 +52,8 @@ import { UserPipe } from './featureModule/admin/pipes/user.pipe';
     DragDropDirective,
     GoogleSigninButtonDirective,
     UserPipe,
+    ErrorComponent,
+    BackenderrorComponent,
     
   ],
   imports: [

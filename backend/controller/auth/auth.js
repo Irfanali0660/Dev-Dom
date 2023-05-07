@@ -202,7 +202,6 @@ module.exports = {
         email: payload.email,
         name: payload.name,
         picture: payload.picture,
-
         // If request specified a G Suite domain:
         // const domain = payload['hd'];
       };

@@ -1,6 +1,7 @@
 import { signupinterface } from "./signup"
 
 export interface addlistinterface {
+    _id?:string | null
     title?:String | null 
     details?:String| null
     category?:String| null

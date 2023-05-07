@@ -17,6 +17,12 @@ import { NewListComponent } from './new-list/new-list.component';
 import { ListResolver } from '../resolver/list.resolver';
 import { TagsComponent } from './tags/tags.component';
 import { ReadinglistComponent } from './readinglist/readinglist.component';
+import { UserDashbordComponent } from './user-dashbord/user-dashbord.component';
+import { UserpostComponent } from './userpost/userpost.component';
+import { UserlistComponent } from './userlist/userlist.component';
+import { EditlistComponent } from './editlist/editlist.component';
+import { ChatComponent } from './chat/chat.component';
+import { SinglechatComponent } from './singlechat/singlechat.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -28,13 +34,23 @@ const routes: Routes = [
     {path:'singletag/:id',component:SingletagComponent},
     {path:'tags',component:TagsComponent},
     {path:'readinglist',component:ReadinglistComponent},
-  ]},
+    {path:'dashboard',component:UserDashbordComponent,canActivate: [UserauthguardGuard]},
+    {path:'userpost',component:UserpostComponent,canActivate: [UserauthguardGuard]},
+    {path:'userlist',component:UserlistComponent,canActivate: [UserauthguardGuard]},  
+    {path:'editlist/:id',component:EditlistComponent,resolve:{
+      data:ListResolver},canActivate: [UserauthguardGuard]},
+    ]},
+    {path:'chat',component:ChatComponent,children:[
+      {path:'singlechat',component:SinglechatComponent},
+    ],canActivate: [UserauthguardGuard]},  
+
 
   {path:'singlepost/:id',component:SinglepostComponent},
   {path:"newpost",component:NewpostComponent,
 resolve:{
   data:Dataresolver
 },canActivate: [UserauthguardGuard]},
+
 {path:'forgotpass',component:ForgotpasswordComponent},
 {path:'resetpass/:id',component:ResetpassComponent},  
 {path:'listing',component:ListingComponent},

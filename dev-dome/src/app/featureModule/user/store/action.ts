@@ -8,6 +8,7 @@ import { resetpassinterface } from "../interface/resetpass";
 import { listinterface } from "../interface/list";
 import { addlistinterface } from "../interface/addlist";
 import { reportinterface } from "../interface/report";
+import { userinterface } from "../interface/user";
 
 
 export const login=createAction('[log] do login',props<{formData:logininterface,isuser:Boolean}>())
@@ -91,3 +92,14 @@ export const addreadlistsuccess=createAction('addreadlistsuccess')
 
 export const getreadlist=createAction('getreadlist')
 export const getreadlistsuccess=createAction('getreadlistsuccess',props<({readlist:any})>())
+
+export const updateBio=createAction('updateBio',props<({form:userinterface})>())
+export const updateBiosuccess=createAction('updateBiosuccess')
+
+export const userlist=createAction('userlist')
+
+export const editlist=createAction('editlist',props<({id:string | null | undefined})>())
+export const editlistsuccess=createAction('editlistsuccess',props<({list:addlistinterface[]})>())
+
+export const getusers=createAction('getusers')
+export const getuserslistsuccess=createAction('getuserslistsuccess',props<({users:signupinterface[]})>())

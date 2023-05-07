@@ -5,8 +5,10 @@ const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,remov
 const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
 const {getlistcate,addnewlist,getlist}=require('../controller/user/listController')
 const { gettagpost,gettags }=require('../controller/user/tagcontroller')
+const { updatebio,userlist,deletelist,editlist,updateList}=require('../controller/user/dashboardControl')
 const jwt = require('../helpers/jwt');
-const multer=require('multer')
+const multer=require('multer');
+const { verify } = require('jsonwebtoken');
 
 
 const FILE_TYPE_MAP = {
@@ -49,6 +51,7 @@ router.post('/addreadlist',jwt.verify,addreadlist)
 
 router.get('/socialsignup/:id',socialsignup)
 router.get('/getsingletag/:id',getsingletag)
+
 router.post('/resetpassword',resetpassword)
 
 router.put('/otp',jwt.verify,otp)
@@ -65,7 +68,12 @@ router.get('/getlist',getlist)
 router.get('/gettagpost',gettagpost)
 router.get('/gettags',gettags)
 router.get('/getreadlist',jwt.verify,getreadlist)
+router.get('/userlist',jwt.verify,userlist)
+router.get('/editlist/:id',jwt.verify,editlist)
+
+router.put('/updatebio',jwt.verify,updatebio)
+router.put('/updateList',jwt.verify,updateList)
 
 router.delete('/removereadlist/:id',removereadlist)
-
+router.delete('/deletelist/:id',deletelist)
 module.exports = router;

@@ -5,6 +5,8 @@ import { appstateinterface } from 'src/app/appSatate.interface';
 import { signupSelector } from '../../store/selector';
 import { UsersService } from 'src/app/coreModule/service/users.service';
 import * as auth from '../../store/action' 
+import { userinterface } from '../../interface/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slidebar',
@@ -12,20 +14,22 @@ import * as auth from '../../store/action'
   styleUrls: ['./slidebar.component.css']
 })
 export class SlidebarComponent {
-  signup!:signupinterface
+  userData!:userinterface
   notification=false
-constructor(private store:Store<appstateinterface>,private userservice: UsersService){}
+  menu= false;
+constructor(private store:Store<appstateinterface>,private userservice: UsersService,private route: Router){}
   ngOnInit(): void {
     this.apilogincheck()
     this.store.pipe(select(signupSelector)).subscribe((data)=>{
-      this.signup=data
+      this.userData=data
       console.log(data,'dataa');
-      })
+    })
   }
   user!:string | boolean
   logout(){
     localStorage.clear()
     this.apilogincheck()
+    this.route.navigate(['/'])
   }
 
   apilogincheck(){
@@ -45,6 +49,10 @@ constructor(private store:Store<appstateinterface>,private userservice: UsersSer
 notfi(){
   this.notification=!this.notification
   console.log(this.notification);
-  
+}
+
+menuclick(){
+  this.menu=!this.menu
+  console.log(this.menu);
 }
 }

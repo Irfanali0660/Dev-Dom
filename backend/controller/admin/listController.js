@@ -1,5 +1,4 @@
 const listModel = require("../../model/listcategoryModel");
-const {handleDuplicate}=require('../../Error/dbError')
 
 module.exports={
 
