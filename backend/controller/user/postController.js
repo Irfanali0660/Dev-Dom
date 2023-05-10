@@ -146,5 +146,15 @@ module.exports={
       } catch (error) {
         next(error)
       }
+    },
+    deletecomment:(req,res,next)=>{
+      try {
+        console.log(req.params.id);
+        commentModel.deleteOne({_id:req.params.id}).then(()=>{
+          res.json()
+        })
+      } catch (error) {
+        next(error)
+      }
     }
 }

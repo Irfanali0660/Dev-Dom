@@ -1,4 +1,5 @@
 const listModel = require("../../model/listModel");
+const postModel = require("../../model/postModel");
 const userModel = require("../../model/userModel");
 
 module.exports={
@@ -64,6 +65,25 @@ module.exports={
                 date:Date.now()
             }}).then(()=>{
                 res.json({success:"success"})
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    getuserpost:(req,res,next)=>{
+       try {
+        postModel.find({userId:res.locals.jwtUSER._id}).populate('userId').populate('tag').sort({date:-1}).then((post)=>{
+            res.json(post)
+        })
+       } catch (error) {
+        next(error)
+       }
+    },
+    deletepost:(req,res,next)=>{
+        try {
+            postModel.deleteOne({_id:req.params.id}).then(()=>{
+                res.json()
             })
         } catch (error) {
             next(error)

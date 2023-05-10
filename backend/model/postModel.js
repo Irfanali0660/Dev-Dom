@@ -16,8 +16,8 @@ const postSchema =new mongoose.Schema({
         default:null
     },
     date:{
-        type:String,
-        default: moment(Date.now()).format("DD-MM-YYYY")
+        type:Date,
+        default:Date.now()
     },
     tag:[{
         type:mongoose.Schema.Types.ObjectId,

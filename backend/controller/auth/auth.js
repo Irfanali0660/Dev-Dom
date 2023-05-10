@@ -338,6 +338,15 @@ module.exports = {
     } catch (error) {
       next(error)
     }
+  },
+  blockStatus:(req,res,next)=>{
+    try {
+      userModel.findOne({_id:res.locals.jwtUSER._id}).then((user)=>{
+        res.json(user.status)
+      })
+    } catch (error) {
+      next(error)
+    }
   }
 
 };

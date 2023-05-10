@@ -10,6 +10,7 @@ env.config();
 const socketio = require('socket.io');
 const commentSocket = require('./controller/socket/socket');
 const replaySocekt = require('./controller/socket/replaysocket');
+const chatScoket=require('./controller/socket/chatScoket')
 
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
@@ -59,6 +60,13 @@ function initSocketIo(server){
   });
   const replay = io_commentReplay
   replaySocekt.chatMessages(replay)
+
+  const io_chat = socketio(server,{
+    cors:corsOptions,
+    path: '/chat'
+  });
+  const chat  = io_chat
+  chatScoket.chatMessages(chat)
 }
 
 // catch 404 and forward to error handler

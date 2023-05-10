@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword } = require('../controller/auth/auth');
-const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,removereadlist }= require('../controller/user/postController')
+const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword,blockStatus } = require('../controller/auth/auth');
+const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,removereadlist,deletecomment }= require('../controller/user/postController')
 const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
 const {getlistcate,addnewlist,getlist}=require('../controller/user/listController')
 const { gettagpost,gettags }=require('../controller/user/tagcontroller')
-const { updatebio,userlist,deletelist,editlist,updateList}=require('../controller/user/dashboardControl')
+const { updatebio,userlist,deletelist,editlist,updateList,getuserpost,deletepost}=require('../controller/user/dashboardControl')
+const { getusers,chatroom ,chatmessage}=require('../controller/user/chatController')
 const jwt = require('../helpers/jwt');
 const multer=require('multer');
 const { verify } = require('jsonwebtoken');
@@ -70,10 +71,17 @@ router.get('/gettags',gettags)
 router.get('/getreadlist',jwt.verify,getreadlist)
 router.get('/userlist',jwt.verify,userlist)
 router.get('/editlist/:id',jwt.verify,editlist)
+router.get('/getusers',jwt.verify,getusers)
+router.get('/chatroom/:id',jwt.verify,chatroom)
+router.get('/chatmessage/:id',jwt.verify,chatmessage)
+router.get('/getuserpost',jwt.verify,getuserpost)
+router.get('/blockStatus',jwt.verify,blockStatus)
 
 router.put('/updatebio',jwt.verify,updatebio)
 router.put('/updateList',jwt.verify,updateList)
 
 router.delete('/removereadlist/:id',removereadlist)
 router.delete('/deletelist/:id',deletelist)
+router.delete('/deletepost/:id',deletepost)
+router.delete('/deletecomment/:id',deletecomment)
 module.exports = router;

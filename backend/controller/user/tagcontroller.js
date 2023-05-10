@@ -10,11 +10,17 @@ module.exports={
         try {
             console.log(req.query.id,'++++++++++++++++++=');
             const id=new mongoose.Types.ObjectId(req.query.id)
-            postModel.aggregate([{ $match: { tag: { $in: [id] } } },{$lookup:{from:'userdatas',localField:'userId',foreignField:'_id',as:'userId'}}]).then((data)=>{
-                console.log(data,'tagpost');
+            // postModel.aggregate([{ $match: { tag: { $in: [id] } } },{$lookup:{from:'userdatas',localField:'userId',foreignField:'_id',as:'userId'}}]).then((data)=>{
+            //     console.log(data,'tagpost');
+            //     res.json(data)
+            // }).catch((error)=>{
+            //     console.log(error);
+            // })
+            postModel.find({tag:{$in:[id]}}).populate('userId').then((data)=>{
+                console.log(data);
                 res.json(data)
             }).catch((error)=>{
-                console.log(error);
+                res.json(error)
             })
         } catch (error) {
             console.log(error);
