@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class UserPipe implements PipeTransform {
 
   transform(
-    value: any[], 
+    value:any[], 
     arg:string,
     query: string): any[] {
-    const regEx = new RegExp(query, 'i');
+    const regEx = new RegExp(query,'i');
     if(query==''){
       return value
     }else if(arg=='name'){    

@@ -21,7 +21,6 @@ import { ReportpostComponent } from './reportpost/reportpost.component';
     AddListCategoryComponent,
     ListCategoryComponent,
     ReportpostComponent,
-  
   ],
   imports: [
     CommonModule,
@@ -29,7 +28,6 @@ import { ReportpostComponent } from './reportpost/reportpost.component';
     NgxDropzoneModule,
     ReactiveFormsModule,
     FormsModule
-   
   ],
   bootstrap: []
 })

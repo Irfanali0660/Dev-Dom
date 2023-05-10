@@ -29,6 +29,9 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { EditlistComponent } from './editlist/editlist.component';
 import { ChatComponent } from './chat/chat.component';
 import { SinglechatComponent } from './singlechat/singlechat.component';
+import { DefaultchatbgComponent } from './defaultchatbg/defaultchatbg.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { UserPipe } from '../../admin/pipes/user.pipe';
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -58,6 +61,8 @@ const config: SocketIoConfig = {
     EditlistComponent,
     ChatComponent,
     SinglechatComponent,
+    DefaultchatbgComponent,
+    UserPipe
   ],
   imports: [
     FormsModule,
@@ -69,7 +74,8 @@ const config: SocketIoConfig = {
     SocialLoginModule,
     TagInputModule,
     SocketIoModule.forRoot(config),
-    FontAwesomeModule
+    FontAwesomeModule,
+    PickerModule
   ],
   providers:[Dataresolver]
 })

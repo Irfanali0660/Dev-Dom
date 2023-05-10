@@ -20,7 +20,6 @@ export class SingletagComponent implements OnInit{
   constructor(private store:Store<appstateinterface>,private route: ActivatedRoute){
     this.store.pipe(select(singletag)).subscribe((data)=>{
       this.tagdetailsData=data
-      console.log(data); 
      })
      this.route.params.subscribe(params => {
        this.tagpost(params['id'])
@@ -28,7 +27,8 @@ export class SingletagComponent implements OnInit{
     });
     this.store.pipe(select(getpostdetailsselector)).subscribe((data)=>{
       this.tagpostData=data
-      console.log(this.tagpostData);
+      console.log(this.tagpostData,'tagData');
+      
      })
    }
   ngOnInit(): void {

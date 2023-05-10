@@ -5,5 +5,6 @@ export interface signupinterface{
     phonenumber?:Number | null |String,
     password?:String | null,
     conformpassword?:String | null,
-    verifyemail?:boolean | null
+    verifyemail?:boolean | null,
+    status?:boolean
 }

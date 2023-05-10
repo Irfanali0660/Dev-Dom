@@ -6,6 +6,7 @@ import { appstateinterface } from 'src/app/appSatate.interface';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -82,5 +83,8 @@ export class HomeComponent implements OnInit{
     this.popoveruser=!this.popoveruser
     console.log(id);
     this.id=id
+  }
+  getDate(date:string | null | undefined ): string {
+    return moment(date).fromNow();
   }
 }

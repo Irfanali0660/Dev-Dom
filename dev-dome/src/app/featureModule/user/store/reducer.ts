@@ -16,7 +16,9 @@ export const initialState:authstate={
     listcategory:[],
     list:[],
     readlist:[],
-    editlist:null
+    editlist:null,
+    users:[],
+    chat:null
 }
 
 export const reducer=createReducer(initialState,
@@ -104,4 +106,10 @@ export const reducer=createReducer(initialState,
 
     on(action.getusers,(state)=>({...state,isLoading:true,error:null})),
     on(action.getuserslistsuccess,(state,action)=>({...state,isLoading:false,error:null,users:action.users})),
+
+    on(action.chatmessege,(state)=>({...state,isLoading:true,error:null})),
+    on(action.chatmessegesuccess,(state,action)=>({...state,isLoading:false,error:null,chat:action.chat})),
+   
+    on(action.getuserpost,(state)=>({...state,isLoading:true,error:null})),
+    on(action.getuserpostsuccess,(state,action)=>({...state,isLoading:false,error:null,postdetails:action.postdetails})),
     )

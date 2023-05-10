@@ -17,9 +17,7 @@ export class authEffects {
 
     Login = createEffect(() =>
         this.actoins$.pipe(ofType(Action.login), mergeMap((action: any) => {
-            // console.log(action);
             return this.userservice.loginData(action.formData).pipe(map((data) => {
-                console.log(data);
                 if (data.success) {
                     this._snackbar.open('Login successfully', 'close', {
                         horizontalPosition: this.horizontalPosition,
@@ -49,7 +47,6 @@ export class authEffects {
                         duration: 4000,
                         panelClass: ['my-snackbar']
                     })
-                    console.log()
                     localStorage.setItem('token', data.token.token)
                     localStorage.setItem('tokenExp', data.token.exp)
                     this.route.navigate(['/'])
@@ -65,7 +62,6 @@ export class authEffects {
     this.actoins$.pipe(ofType(Action.signup),mergeMap((action)=>{
         return this.userservice.SignupData(action.formData).pipe(map((data)=>{
             if (data.success) {
-                // console.log(data);
                 // this._snackbar.open('Login successfully', 'close', {
                 //   horizontalPosition: this.horizontalPosition,
                 //   verticalPosition: this.verticalPosition,
@@ -75,7 +71,6 @@ export class authEffects {
                 localStorage.setItem('tokenExp', data.token.exp)
                 this.route.navigate(['/otp'])
                 this.store.dispatch(Action.generateotp())
-                // console.log("ssignup");
                 
                 return Action.signupsuccess({data:data.data})
               } else {
@@ -99,7 +94,6 @@ export class authEffects {
     this.actoins$.pipe(ofType(Action.otp),mergeMap((action)=>{
     return this.userservice.otp(action.value).pipe(map((data)=>{
         if(data.success){
-            console.log("BACKKKK");
             
             //   this._snackbar.open('Login successfully', 'close', {
             //       horizontalPosition: this.horizontalPosition,
@@ -148,8 +142,6 @@ export class authEffects {
    generateotp=createEffect(()=>
    this.actoins$.pipe(ofType(Action.generateotp),mergeMap(()=>{
     return this.userservice.generateotp().pipe(map(()=>{
-        console.log('BACK');
-        
         this.route.navigate(['/otp'])
         return Action.generateotpsuccess()
     }))
@@ -159,7 +151,6 @@ export class authEffects {
    getusers=createEffect(()=>
    this.actoins$.pipe(ofType(Action.getuser),exhaustMap(()=>{
     return this.userservice.getuser().pipe(map((data)=>{
-        console.log(data,"userData+++++++++++++++++++++++===");
         return Action.getusersuccess({signup:data})
     }))
    }))
@@ -170,7 +161,6 @@ export class authEffects {
    getpost=createEffect(()=>
    this.actoins$.pipe(ofType(Action.getpostdetails),exhaustMap(()=>{
     return this.userservice.getpost().pipe(map((data)=>{
-        // console.log(data+"POSTDATA");
         return Action.getpostdetailssuccess({postdetails:data})
     }))
    }))
@@ -221,7 +211,6 @@ this.actoins$.pipe(ofType(Action.resetpass),
     mergeMap((action)=>{
         return this.userservice.restpass(action.formData).pipe(
             map((data)=>{
-                console.log(data,'RESPONCE');
                 if(data.success){
                     this._snackbar.open(data.success, 'close', {
                         horizontalPosition:'center' ,
@@ -294,7 +283,6 @@ getlist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.getlist),exhaustMap(()=>{
     return this.userservice.getlist().pipe(
         map((data)=>{
-            console.log(data,"effect");
             return Action.getlistsuccess({list:data})
         })
     )
@@ -387,9 +375,7 @@ this.actoins$.pipe(ofType(Action.getreadlist),mergeMap(()=>{
 updateBio=createEffect(()=>
 this.actoins$.pipe(ofType(Action.updateBio),mergeMap((data)=>{
     return this.userservice.updateBio(data.form).pipe(map((data)=>{
-        console.log(data);
 if(data.success=='updated suucesfully'){
-    console.log('inside if');
     Swal.fire({
         toast: true,
         position: 'top',
@@ -410,7 +396,6 @@ if(data.success=='updated suucesfully'){
 userlist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.userlist),mergeMap(()=>{
     return this.userservice.userlist().pipe(map((data)=>{
-        console.log(data,'effect');
         return Action.getlistsuccess({list:data})
     }))
 }))
@@ -419,7 +404,6 @@ this.actoins$.pipe(ofType(Action.userlist),mergeMap(()=>{
 editlist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.editlist),mergeMap((action)=>{
     return this.userservice.editList(action.id).pipe(map((data)=>{
-        console.log(data,'effect');
         return Action.editlistsuccess({list:data})
     }))
 }))
@@ -429,6 +413,23 @@ getuserslist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.getusers),mergeMap(()=>{
     return this.userservice.getusers().pipe(map((users)=>{
         return Action.getuserslistsuccess({users:users})
+    }))
+}))
+)
+
+chatmessage=createEffect(()=>
+this.actoins$.pipe(ofType(Action.chatmessege),mergeMap((action)=>{
+    return this.userservice.chatmessage(action.id).pipe(map((chat)=>{
+        return Action.chatmessegesuccess({chat:chat})
+    }))
+}))
+)
+
+
+getuserpost=createEffect(()=>
+this.actoins$.pipe(ofType(Action.getuserpost),mergeMap(()=>{
+    return this.userservice.getuserpost().pipe(map((post)=>{
+        return Action.getuserpostsuccess({postdetails:post})
     }))
 }))
 )

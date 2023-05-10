@@ -28,4 +28,11 @@ export class UsercheckService {
       return false;
     }
   }
+    blockuser(){
+    if(this.signup.status==false){
+      return true
+    }else{
+      return false
+    }
+  }
 }

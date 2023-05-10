@@ -28,40 +28,32 @@ export class UsersService {
   localhost='http://localhost:4000'
 
   SignupData(data:signupinterface) :Observable<any>{
-    console.log(data+"data");
     return this.http.post(`${this.localhost}/users/signup`,data,this.httpOptions)
   }
 
   socialsignup(data:string) :Observable<any>{
-    console.log(data+"socialsignup");
     return this.http.get(`${this.localhost}/users/socialsignup/${data}`,this.httpOptions)
   }
 
   loginData(data:logininterface) :Observable<any>{
-    console.log(data);
     return this.http.post(`${this.localhost}/users/login`,data,this.httpOptions)
   }
 
   sociallogin(data:any) :Observable<any>{
-    console.log(data);
-    console.log("googlee");
+
     
     return this.http.get(`${this.localhost}/users/sociallogin/${data}`,this.httpOptions)
   }
 
   generateotp():Observable<any>{
-    console.log("hello");
-    
     return this.http.get(`${this.localhost}/users/generateotp`,this.httpOptions)
   }
   otp(data:Number):Observable<any>{
-    console.log(data,"value");
     return this.http.put(`${this.localhost}/users/otp`,{data},this.httpOptions)
   }
 
   addpost(data:addpostinterface) :Observable<any>{
-    console.log(data);
-    console.log("POST+++++");
+
     let formData = new FormData()
     // formData.append('image',data.image)
     for (const key in data) {
@@ -93,7 +85,6 @@ export class UsersService {
     return this.http.get(`${this.localhost}/users/singlepost/${id}`,this.httpOptions)
   }
   forgotpass(email:string | undefined | null):Observable<any>{
-    console.log(email,'userservice');
     return this.http.post(`${this.localhost}/users/forgotpass`,{email},this.httpOptions)
   }
   restpass(formData:resetpassinterface):Observable<any>{
@@ -153,6 +144,28 @@ export class UsersService {
   }
 
   getusers():Observable<any>{     
-    return this.http.put(`${this.localhost}/users/getusers`,this.httpOptions)
+    return this.http.get(`${this.localhost}/users/getusers`,this.httpOptions)
+  }
+  chatroom(id:String | undefined):Observable<any>{     
+    return this.http.get(`${this.localhost}/users/chatroom/${id}`,this.httpOptions)
+  }
+
+  chatmessage(id:string | null | undefined):Observable<any>{     
+    return this.http.get(`${this.localhost}/users/chatmessage/${id}`,this.httpOptions)
+  }
+
+  getuserpost():Observable<any>{     
+    return this.http.get(`${this.localhost}/users/getuserpost`,this.httpOptions)
+  }
+
+  deletepost(id:string| null | undefined):Observable<any>{      
+    return this.http.delete(`${this.localhost}/users/deletepost/${id}`,this.httpOptions)
+  }
+
+  deletecomment(id:string| null | undefined):Observable<any>{          
+    return this.http.delete(`${this.localhost}/users/deletecomment/${id}`,this.httpOptions)
+  }
+  blockStatus():Observable<any>{     
+    return this.http.get(`${this.localhost}/users/blockStatus`,this.httpOptions)
   }
 }

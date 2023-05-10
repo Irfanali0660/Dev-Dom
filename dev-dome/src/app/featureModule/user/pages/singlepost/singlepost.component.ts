@@ -1,5 +1,5 @@
 import { Component,ElementRef,OnDestroy,OnInit,Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import * as action from '../../store/action'
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { signupinterface } from '../../interface/signup';
 import { ReplaysocketService } from 'src/app/coreModule/service/replaysocket.service';
+import { UsersService } from 'src/app/coreModule/service/users.service';
 
 @Component({
   selector: 'app-singlepost',
@@ -19,7 +20,7 @@ import { ReplaysocketService } from 'src/app/coreModule/service/replaysocket.ser
 export class SinglepostComponent implements OnInit,OnDestroy{
 menutoggle=false
 postdetailsData:any;
-commentData!:any
+commentData!:any[]
 chats?:Observable<any[] | undefined>;
 user?:signupinterface
 likes?:boolean
@@ -29,7 +30,7 @@ replay_input:string=''
   id!:string
   commentid!: string;
   commenttoggle=false;
-  constructor(private store:Store<appstateinterface>,private route: ActivatedRoute,private renderer: Renderer2, private el: ElementRef,private socketService: SocketService ,public replaysocket:ReplaysocketService){
+  constructor(private store:Store<appstateinterface>,private route: ActivatedRoute,private renderer: Renderer2, private el: ElementRef,private socketService: SocketService ,public replaysocket:ReplaysocketService,private service:UsersService,private router: Router){
     this.store.pipe(select(singlepostdetails)).subscribe((data)=>{
       this.postdetailsData=data
       console.log(this.postdetailsData,'singlepost');
@@ -60,8 +61,7 @@ replay_input:string=''
     this.store.pipe(select(comments)).subscribe((data)=>{
       this.commentData=data
       console.log(data,'comment');
-      
-     })
+    })
 
   }
   
@@ -164,5 +164,13 @@ send_message(f: NgForm):any{
     this.replaysocket.emit('replay',{message:this.replay_input,commentId:id})
     
     this.replay_input =''
+  }
+
+  deletecomment(id:string){
+    console.log(id);
+    
+    this.service.deletecomment(id).subscribe(()=>{
+      this.comments(this.id)
+    })
   }
 }

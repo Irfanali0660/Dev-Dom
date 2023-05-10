@@ -24,7 +24,7 @@ export const signupfailure=createAction('[log] do signup failure',props<{error:s
 
 
 export const socialsignup=createAction('socialsignup',props<({token:string})>())
-export const socialsignupsuccess=createAction('socialsignup')
+export const socialsignupsuccess=createAction('socialsignupsuccess')
 
 export const otp=createAction('[log] otp',props<({value:Number})>())
 export const otpsuccess=createAction('[log] otp success',props<({signup:signupinterface})>())
@@ -103,3 +103,9 @@ export const editlistsuccess=createAction('editlistsuccess',props<({list:addlist
 
 export const getusers=createAction('getusers')
 export const getuserslistsuccess=createAction('getuserslistsuccess',props<({users:signupinterface[]})>())
+
+export const chatmessege=createAction('chatmessege',props<({id:string | null | undefined})>())
+export const chatmessegesuccess=createAction('chatmessegesuccess',props<({chat:any})>())
+
+export const getuserpost=createAction('getuserpost')
+export const getuserpostsuccess=createAction('getuserpostsuccess',props<({postdetails:addpostinterface})>())

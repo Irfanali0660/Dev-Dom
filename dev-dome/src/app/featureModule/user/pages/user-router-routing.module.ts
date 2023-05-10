@@ -23,6 +23,8 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { EditlistComponent } from './editlist/editlist.component';
 import { ChatComponent } from './chat/chat.component';
 import { SinglechatComponent } from './singlechat/singlechat.component';
+import { DefaultchatbgComponent } from './defaultchatbg/defaultchatbg.component';
+import { BlockuserGuard } from 'src/app/coreModule/auth-service/block/blockuser.guard';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -34,29 +36,30 @@ const routes: Routes = [
     {path:'singletag/:id',component:SingletagComponent},
     {path:'tags',component:TagsComponent},
     {path:'readinglist',component:ReadinglistComponent},
-    {path:'dashboard',component:UserDashbordComponent,canActivate: [UserauthguardGuard]},
-    {path:'userpost',component:UserpostComponent,canActivate: [UserauthguardGuard]},
-    {path:'userlist',component:UserlistComponent,canActivate: [UserauthguardGuard]},  
+    {path:'dashboard',component:UserDashbordComponent,canActivate: [UserauthguardGuard,BlockuserGuard]},
+    {path:'userpost',component:UserpostComponent,canActivate: [UserauthguardGuard,BlockuserGuard]},
+    {path:'userlist',component:UserlistComponent,canActivate: [UserauthguardGuard,BlockuserGuard]},  
     {path:'editlist/:id',component:EditlistComponent,resolve:{
-      data:ListResolver},canActivate: [UserauthguardGuard]},
+      data:ListResolver},canActivate: [UserauthguardGuard,BlockuserGuard]},
     ]},
     {path:'chat',component:ChatComponent,children:[
-      {path:'singlechat',component:SinglechatComponent},
-    ],canActivate: [UserauthguardGuard]},  
+      {path:'',component:DefaultchatbgComponent},      
+      {path:':id/:userid',component:SinglechatComponent},
+    ],canActivate: [UserauthguardGuard,BlockuserGuard]},  
 
 
-  {path:'singlepost/:id',component:SinglepostComponent},
+  {path:'singlepost/:id',component:SinglepostComponent,canActivate:[BlockuserGuard]},
   {path:"newpost",component:NewpostComponent,
 resolve:{
   data:Dataresolver
-},canActivate: [UserauthguardGuard]},
+},canActivate: [UserauthguardGuard,BlockuserGuard]},
 
 {path:'forgotpass',component:ForgotpasswordComponent},
 {path:'resetpass/:id',component:ResetpassComponent},  
 {path:'listing',component:ListingComponent},
 {path:'new-list',component:NewListComponent,resolve:{
   data:ListResolver
-},canActivate: [UserauthguardGuard]},
+},canActivate: [UserauthguardGuard,BlockuserGuard]},
 
 ];
 

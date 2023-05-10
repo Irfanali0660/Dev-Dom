@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { signupinterface } from '../../interface/signup';
 import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
@@ -24,6 +24,9 @@ constructor(private store:Store<appstateinterface>,private userservice: UsersSer
       this.userData=data
       console.log(data,'dataa');
     })
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.store.dispatch(auth.getuser())
   }
   user!:string | boolean
   logout(){

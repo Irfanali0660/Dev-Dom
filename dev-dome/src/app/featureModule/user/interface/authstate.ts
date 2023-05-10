@@ -18,4 +18,6 @@ export interface authstate{
     list:addlistinterface[]
     readlist:any
     editlist:any
+    users:signupinterface[]
+    chat:any
 }

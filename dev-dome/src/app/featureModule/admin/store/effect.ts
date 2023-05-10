@@ -108,7 +108,7 @@ this.action.pipe(ofType(adminAction.addlist),mergeMap((action)=>{
             icon: 'error',
             timerProgressBar:false,
             timer: 5000,
-            title: 'This name already added to list'
+            title: 'This name already exist'
           })
             return adminAction.error()
         }

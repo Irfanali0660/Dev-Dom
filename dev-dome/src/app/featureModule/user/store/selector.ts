@@ -31,3 +31,8 @@ export const getreadlist=createSelector(selectFeature,(state)=>state.readlist)
 
 export const editlist=createSelector(selectFeature,(state)=>state.editlist)
 
+export const getuserlist=createSelector(selectFeature,(state)=>state.users)
+
+export const chatmessage=createSelector(selectFeature,(state)=>state.chat)
+
+
