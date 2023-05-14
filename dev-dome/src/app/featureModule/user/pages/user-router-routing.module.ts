@@ -59,7 +59,7 @@ resolve:{
 {path:'listing',component:ListingComponent},
 {path:'new-list',component:NewListComponent,resolve:{
   data:ListResolver
-},canActivate: [UserauthguardGuard,BlockuserGuard]},
+},canActivate: [UserauthguardGuard]},
 
 ];
 

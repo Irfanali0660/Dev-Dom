@@ -20,7 +20,14 @@ export class ApiInterceptorService {
           }
         });
       }
-    }else{
+    }
+    else if (request.headers.get('skip')) {
+      request = request.clone({
+        headers: request.headers.delete('skip'),
+      });
+      return next.handle(request);
+    }
+      else{
       if(localStorage.getItem('token')){
         request = request.clone({
           setHeaders: {

@@ -31,7 +31,10 @@ import { ChatComponent } from './chat/chat.component';
 import { SinglechatComponent } from './singlechat/singlechat.component';
 import { DefaultchatbgComponent } from './defaultchatbg/defaultchatbg.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
-import { UserPipe } from '../../admin/pipes/user.pipe';
+import { ChatUserPipe } from '../pipes/chat-user.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+// import { GoogleMapsModule } from '@angular/google-maps'
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -62,7 +65,7 @@ const config: SocketIoConfig = {
     ChatComponent,
     SinglechatComponent,
     DefaultchatbgComponent,
-    UserPipe
+    ChatUserPipe
   ],
   imports: [
     FormsModule,
@@ -75,7 +78,10 @@ const config: SocketIoConfig = {
     TagInputModule,
     SocketIoModule.forRoot(config),
     FontAwesomeModule,
-    PickerModule
+    PickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    
   ],
   providers:[Dataresolver]
 })

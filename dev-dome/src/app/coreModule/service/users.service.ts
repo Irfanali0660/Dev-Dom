@@ -99,8 +99,8 @@ export class UsersService {
   getlistcategory():Observable<any>{
     return this.http.get(`${this.localhost}/users/getlistcate`,this.httpOptions)
   }
-  addnewlist(formData:addlistinterface,tags:Array<string>):Observable<any>{
-    return this.http.post(`${this.localhost}/users/addnewlist`,{formData,tags},this.httpOptions)
+  addnewlist(formData:addlistinterface,tags:Array<string>,location:any):Observable<any>{
+    return this.http.post(`${this.localhost}/users/addnewlist`,{formData,tags,location},this.httpOptions)
   }
   getlist():Observable<any>{
     return this.http.get(`${this.localhost}/users/getlist`,this.httpOptions)

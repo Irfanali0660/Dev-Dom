@@ -70,7 +70,7 @@ export const addlikesuccess=createAction('addlikesuccess')
 export const getlistcategory=createAction('getlistcategory')
 export const getlistcategorysuccess=createAction('getlistcategorysuccess',props<({listcategory:listinterface[]})>())
 ;
-export const addnewlist=createAction('addnewlist',props<({formdata:Partial<addlistinterface>,tag:Array<string>})>())
+export const addnewlist=createAction('addnewlist',props<({formdata:Partial<addlistinterface>,tag:Array<string>,location:any})>())
 export const addnewlistsucces=createAction('addnewlistsuccess')
 
 export const getlist=createAction('getlist')

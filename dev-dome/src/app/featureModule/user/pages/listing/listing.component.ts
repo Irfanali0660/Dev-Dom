@@ -18,6 +18,7 @@ export class ListingComponent {
   listcategory?:listinterface[]
   menutoggle=false
   listSearch:string=''
+  model!: boolean;
   constructor(private store:Store<appstateinterface>,){
     this.getlist()
     this.store.pipe(select(getlist)).subscribe((list)=>{
@@ -61,6 +62,12 @@ export class ListingComponent {
     
     this.menutoggle=!this.menutoggle
     console.log(this.menutoggle);
+  }
+
+  location(li:addlistinterface){
+    this.model=!this.model
+    this.menutoggle=!this.menutoggle
+    console.log(li);
     
   }
 }

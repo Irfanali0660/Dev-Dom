@@ -265,7 +265,7 @@ this.actoins$.pipe(ofType(Action.getlistcategory),mergeMap(()=>{
 
 addnewlist=createEffect(()=>
 this.actoins$.pipe(ofType(Action.addnewlist),mergeMap((action)=>{
-    return this.userservice.addnewlist(action.formdata,action.tag).pipe(
+    return this.userservice.addnewlist(action.formdata,action.tag,action.location).pipe(
         map(()=>{
             this._snackbar.open('List added successfully', 'close', {
                 horizontalPosition: this.horizontalPosition,

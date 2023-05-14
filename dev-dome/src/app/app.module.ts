@@ -54,6 +54,7 @@ import { BackenderrorComponent } from './featureModule/error/500/backenderror/ba
     UserPipe,
     ErrorComponent,
     BackenderrorComponent,
+
     
   ],
   imports: [
