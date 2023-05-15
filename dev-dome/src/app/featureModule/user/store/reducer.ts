@@ -18,7 +18,8 @@ export const initialState:authstate={
     readlist:[],
     editlist:null,
     users:[],
-    chat:null
+    chat:null,
+    postload:false
 }
 
 export const reducer=createReducer(initialState,
@@ -51,8 +52,8 @@ export const reducer=createReducer(initialState,
     on(action.getuser,(state)=>({...state,isLoading:true,error:null})),
     on(action.getusersuccess,(state,action)=>({...state,isLoading:false,error:null,signup:action.signup})),
 
-    on(action.getpostdetails,(state)=>({...state,isLoading:true,error:null})),
-    on(action.getpostdetailssuccess,(state,action)=>({...state,isLoading:false,error:null,postdetails:action.postdetails})),
+    on(action.getpostdetails,(state)=>({...state,isLoading:true,error:null,postload:true})),
+    on(action.getpostdetailssuccess,(state,action)=>({...state,isLoading:false,error:null,postload:false,postdetails:action.postdetails})),
 
     on(action.getsingletag,(state)=>({...state,isLoading:true,error:null})),
     on(action.getsingletagsuccess,(state,action)=>({...state,isLoading:false,error:null,singletag:action.tag})),

@@ -25,6 +25,7 @@ import { ChatComponent } from './chat/chat.component';
 import { SinglechatComponent } from './singlechat/singlechat.component';
 import { DefaultchatbgComponent } from './defaultchatbg/defaultchatbg.component';
 import { BlockuserGuard } from 'src/app/coreModule/auth-service/block/blockuser.guard';
+import { SinglelistingComponent } from './singlelisting/singlelisting.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -48,7 +49,7 @@ const routes: Routes = [
     ],canActivate: [UserauthguardGuard,BlockuserGuard]},  
 
 
-  {path:'singlepost/:id',component:SinglepostComponent,canActivate:[BlockuserGuard]},
+  {path:'singlepost/:id',component:SinglepostComponent},
   {path:"newpost",component:NewpostComponent,
 resolve:{
   data:Dataresolver
@@ -59,7 +60,8 @@ resolve:{
 {path:'listing',component:ListingComponent},
 {path:'new-list',component:NewListComponent,resolve:{
   data:ListResolver
-},canActivate: [UserauthguardGuard]},
+},canActivate: [UserauthguardGuard,BlockuserGuard]},
+{path:'listing/:id',component:SinglelistingComponent},
 
 ];
 

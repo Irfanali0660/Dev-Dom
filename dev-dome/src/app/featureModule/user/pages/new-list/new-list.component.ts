@@ -24,7 +24,7 @@ export class NewListComponent {
       console.log(this.listcategory);
   })
   }
-
+ 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: any[] = [];

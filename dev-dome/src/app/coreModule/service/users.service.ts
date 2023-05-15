@@ -120,6 +120,7 @@ export class UsersService {
   getreadlist():Observable<any>{
     return this.http.get(`${this.localhost}/users/getreadlist`,this.httpOptions)
   }
+
   removereadlist(id:string):Observable<any>{      
     return this.http.delete(`${this.localhost}/users/removereadlist/${id}`,this.httpOptions)
   }
@@ -167,5 +168,8 @@ export class UsersService {
   }
   blockStatus():Observable<any>{     
     return this.http.get(`${this.localhost}/users/blockStatus`,this.httpOptions)
+  }
+  singlelist(id:string):Observable<any>{
+    return this.http.get(`${this.localhost}/users/singlelist/${id}`,this.httpOptions)
   }
 }

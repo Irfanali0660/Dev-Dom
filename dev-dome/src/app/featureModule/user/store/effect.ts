@@ -114,7 +114,12 @@ export class authEffects {
 
    addpost=createEffect(()=>
    this.actoins$.pipe(ofType(Action.addpost),mergeMap((action)=>{
-    return this.userservice.addpost(action.post).pipe(map(()=>{
+    return this.userservice.addpost(action.post).pipe(map((data)=>{        
+       if(data.Error){
+        console.log(data.Error);
+        alert(data.Error)
+        return Action.error()
+       }else{
         this._snackbar.open('Post added', 'close', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
@@ -122,6 +127,7 @@ export class authEffects {
           })
         this.route.navigate(['/'])
         return Action.addpostsuccess()
+       }
     }))
    })))
 
@@ -194,12 +200,21 @@ this.actoins$.pipe(ofType(Action.forgotpass),
     mergeMap((action)=>{
         return this.userservice.forgotpass(action.email).pipe(
             map((data)=>{
-                this._snackbar.open(data.success, 'close', {
-                    horizontalPosition:'center' ,
-                    verticalPosition:'top' ,
-                    panelClass: ['my-snackbar']
-                })
-                return Action.forgotpasssuccess()
+                if(data.success){
+                    this._snackbar.open(data.success, 'close', {
+                        horizontalPosition:'center' ,
+                        verticalPosition:'top' ,
+                        panelClass: ['my-snackbar']
+                    })
+                    return Action.forgotpasssuccess()
+                }else{
+                    this._snackbar.open(data.error, 'close', {
+                        horizontalPosition:'center' ,
+                        verticalPosition:'top' ,
+                        panelClass: ['my-snackbar']
+                    })
+                    return Action.error()
+                }
             })
         )
     })

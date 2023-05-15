@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed mt-1 top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
@@ -34,13 +34,13 @@
                     + Create new post
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href=""
                     class="flex justify-center items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-sky-100 text-center"
                     style="background-color: rgb(164, 255, 255);">
                     Upgrade
                 </a>
-            </li>
+            </li> -->
 
             <li>
                 <a routerLink="/"
@@ -324,7 +324,7 @@
                                     <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer,
                                         educator</p>
                                     <p class="text-base font-light text-gray-500 dark:text-gray-400"><time
-                                            pubdate></time>{{postdetailsData.date}}</p>
+                                            pubdate></time>{{getDateRelative(postdetailsData.date)}}</p>
                                 </div>
                             </div>
                         </address>

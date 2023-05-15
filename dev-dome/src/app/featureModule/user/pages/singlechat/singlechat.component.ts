@@ -7,7 +7,7 @@ import { ChatsocketService } from 'src/app/coreModule/service/chatsocket.service
 import * as action from '../../store/action'
 import { chatmessage, getuserlist, signupSelector } from '../../store/selector';
 import moment from 'moment';
-import { ThemeService } from "stream-chat-angular";
+// import { ThemeService } from "stream-chat-angular";
 import { Observable, Subject } from 'rxjs';
 
 @Component({
@@ -21,8 +21,9 @@ export class SinglechatComponent implements OnInit{
   id: any;
   chatmessage: any;
   userData: any;
+  isEmojiPickerVisible!: boolean;
 
-  constructor(private route: ActivatedRoute ,private socketchatService:ChatsocketService,private store:Store<appstateinterface>, themeService: ThemeService){
+  constructor(private route: ActivatedRoute ,private socketchatService:ChatsocketService,private store:Store<appstateinterface>){
     this.route.params.subscribe(params => {
       this.chat(params['id'])
       this.user(params['userid'])
@@ -39,7 +40,7 @@ export class SinglechatComponent implements OnInit{
       this.chatmessage=data
       console.log(data); 
      })
-     this.theme$ = themeService.theme$;
+    //  this.theme$ = themeService.theme$;
   }
   ngOnInit(): void {
     this.socketchatService.on('chat',(chat:any)=>{
@@ -76,7 +77,7 @@ export class SinglechatComponent implements OnInit{
     }
 
     isOpened = false;
-  theme$: Observable<string>;
+  // theme$: Observable<string>;
   @Input() emojiInput$: Subject<string> | undefined;
   @ViewChild("container") container: ElementRef<HTMLElement> | undefined;
 
@@ -106,4 +107,8 @@ export class SinglechatComponent implements OnInit{
       window.removeEventListener("click", this.eventHandler);
     }
   }
+  addEmoji(event:any) {
+    this.message_input += event.emoji.native;
+    this.isEmojiPickerVisible = false;
+ }  
 }

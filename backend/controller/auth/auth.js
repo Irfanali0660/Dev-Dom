@@ -290,24 +290,29 @@ module.exports = {
       console.log(req.body);
       let apiRes={}
      let user=await userModel.findOne({email:req.body.email})
-      var mailOptions = {
-        from: process.env.Email,
-        to: req.body.email,
-        subject: "Reset password instructions: ",
-        html:
-          `<p>hello ${req.body.email}</p>` +
-          '<br><p>Someone has requested a link to change your password. You can do this through the link below.</p>'+
-          `<a href='http://localhost:4200/resetpass/${user._id}'>Change my password</a>`+
-          "<br><p>If you didn't request this, please ignore this email <br>Your password won't change until you access the link above and create a new one.</p>",// html body
-      };
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-        apiRes.success = `Your password reset instructions have been sent into ${req.body.email}`;
-        console.log("REPLAY");
-        res.json(apiRes);
-      });
+      if(user){
+        var mailOptions = {
+          from: process.env.Email,
+          to: req.body.email,
+          subject: "Reset password instructions: ",
+          html:
+            `<p>hello ${req.body.email}</p>` +
+            '<br><p>Someone has requested a link to change your password. You can do this through the link below.</p>'+
+            `<a href='http://localhost:4200/resetpass/${user._id}'>Change my password</a>`+
+            "<br><p>If you didn't request this, please ignore this email <br>Your password won't change until you access the link above and create a new one.</p>",// html body
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          apiRes.success = `Your password reset instructions have been sent into ${req.body.email}`;
+          console.log("REPLAY");
+          res.json(apiRes);
+        });
+      }else{
+        apiRes.success = `No account register with this mail ${req.body.email}`;
+        res.json(apiRes)
+      }
     } catch (error) {
       console.log(error);
       next(error)

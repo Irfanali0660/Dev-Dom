@@ -1,12 +1,13 @@
 import { Component,OnInit } from '@angular/core';
 import { Store,select } from '@ngrx/store';
 import * as action from '../../store/action'
-import { getpostdetailsselector, tagdetailsselector } from '../../store/selector';
+import { getpostdetailsselector, isLoadingSelector, postLoading, tagdetailsselector } from '../../store/selector';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
 import moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit{
   id!:string
   model= false;
   popoveruser=false
+  postload$: Observable<Boolean>;
   ngOnInit(): void {
     this.tags()
     this.post()
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit{
     this.tagdetailsData=data;
    })
    
-   
+   this.postload$=this.store.pipe(select(postLoading))
    this.store.pipe(select(getpostdetailsselector)).subscribe((data)=>{
      this.postdetails=data;
      console.log(this.postdetails);

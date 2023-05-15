@@ -33,6 +33,13 @@ const listSchema =new mongoose.Schema({
     date:{
         type:Date,
     },
+    longitude:{
+        type:Number
+    },
+    latitude:{
+        type:Number
+    },
 })
 
 module.exports = listModel = mongoose.model('listdata',listSchema);
+

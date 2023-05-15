@@ -31,6 +31,7 @@ replay_input:string=''
   commentid!: string;
   commenttoggle=false;
   constructor(private store:Store<appstateinterface>,private route: ActivatedRoute,private renderer: Renderer2, private el: ElementRef,private socketService: SocketService ,public replaysocket:ReplaysocketService,private service:UsersService,private router: Router){
+
     this.store.pipe(select(singlepostdetails)).subscribe((data)=>{
       this.postdetailsData=data
       console.log(this.postdetailsData,'singlepost');
@@ -62,7 +63,6 @@ replay_input:string=''
       this.commentData=data
       console.log(data,'comment');
     })
-
   }
   
   ngAfterViewInit(){

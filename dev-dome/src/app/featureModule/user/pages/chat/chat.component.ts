@@ -6,7 +6,7 @@ import { getuserlist } from '../../store/selector';
 import { userinterface } from '../../interface/user';
 import { UsersService } from 'src/app/coreModule/service/users.service';
 import { Router } from '@angular/router';
-
+import { NgxHttpLoaderService, NgxLoader }from 'ngx-http-loader';
 
 @Component({
   selector: 'app-chat',
@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 export class ChatComponent {
   users!: userinterface[]
   userName:string=''
-
-  constructor(private store:Store<appstateinterface>,private service:UsersService,private route:Router){
+  public loader = NgxLoader;
+  constructor(private store:Store<appstateinterface>,private service:UsersService,private route:Router,private loaderservice: NgxHttpLoaderService){
 
   this.userslist()
   this.store.pipe(select(getuserlist)).subscribe((users)=>{

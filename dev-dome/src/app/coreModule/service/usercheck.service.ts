@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import { signupinterface } from 'src/app/featureModule/user/interface/signup';
 import { signupSelector } from 'src/app/featureModule/user/store/selector';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,10 @@ export class UsercheckService {
     }
   }
     blockuser(){
-    if(this.signup.status==false){
-      return true
-    }else{
+    if(this.signup.status==true){
       return false
+    }else{
+      return true
     }
   }
 }

@@ -6,3 +6,7 @@ app-singlechat{
     width: 100% !important;
 }
 
+.emoji-mart{
+    position: absolute;
+    bottom: 70px;
+}

@@ -45,6 +45,7 @@ export class NewpostComponent implements AfterViewInit, OnInit {
     this.store.pipe(select(tagselector)).subscribe((tag)=>{
       this.alltags=tag;
      })
+     this.getuser()
   }
   
   ngAfterViewInit(): void {
@@ -80,6 +81,9 @@ for (let i = 0; i < elements.length; i++) {
   }
   gettag(){
     this.store.dispatch(post.gettag())
+  }
+  getuser(){
+    this.store.dispatch(post.getuser())
   }
 
 

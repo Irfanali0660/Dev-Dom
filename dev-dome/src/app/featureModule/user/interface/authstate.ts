@@ -20,4 +20,5 @@ export interface authstate{
     editlist:any
     users:signupinterface[]
     chat:any
+    postload:Boolean;
 }

@@ -5,7 +5,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const material=[
@@ -15,6 +15,7 @@ const material=[
   MatSelectModule,
   MatAutocompleteModule,
   MatIconModule,
+  MatProgressBarModule
 ]
 
 @NgModule({

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit ,OnDestroy{
   user: any
   gAuthSubsciption!:Subscription;
 constructor(private store:Store<appstateinterface>, private service:UsersService,private _snackbar: MatSnackBar,private authService: SocialAuthService){
-
+  
  this.isLoading$=this.store.pipe(select(isLoadingSelector))
  
  this.store.pipe(select(errorSelector)).subscribe((err)=>{

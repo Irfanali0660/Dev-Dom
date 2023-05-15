@@ -6,6 +6,7 @@ export const selectFeature=(state:appstateinterface)=>state.authentication
 export const isLoadingSelector=createSelector(selectFeature,(state)=>state.isLoading)
 export const loginSelector=createSelector(selectFeature,(state)=>state.isLogged)
 export const errorSelector=createSelector(selectFeature,(state)=>state.error)
+export const postLoading=createSelector(selectFeature,(state)=>state.postload)
 
 export const signupSelector=createSelector(selectFeature,(state)=>state.signup)
 

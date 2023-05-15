@@ -30,6 +30,8 @@ module.exports={
               expdate:req.body.formData.expdate,
               location:req.body.location.text,
               tag:req.body.tags,
+              longitude:req.body.location.center[0],
+              latitude:req.body.location.center[1],
               date:Date.now()
             })
 //             const NodeGeocoder = require('node-geocoder');
@@ -73,6 +75,15 @@ module.exports={
       try {
         listModel.find().populate('userId').then((list)=>{  
           console.log(list);
+          res.json(list)
+        })
+      } catch (error) {
+        next(error)
+      }
+    },
+    singlelist:(req,res,next)=>{
+      try {
+        listModel.findOne({_id:req.params.id}).populate('userId').then((list)=>{
           res.json(list)
         })
       } catch (error) {

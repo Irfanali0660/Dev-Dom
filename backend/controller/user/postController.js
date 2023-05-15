@@ -10,7 +10,8 @@ module.exports={
   // add new post
 
     addpost:async(req,res,next)=>{
-        try { 
+      try { 
+        console.log(req.uploadError);
           console.log(req.body,"files");
           let tagArray = req.body.tag.split(',');
           const filenames = req.files.map((file) => file.filename);

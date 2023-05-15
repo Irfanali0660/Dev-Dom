@@ -3,7 +3,7 @@ var router = express.Router();
 const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword,blockStatus } = require('../controller/auth/auth');
 const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,removereadlist,deletecomment }= require('../controller/user/postController')
 const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
-const {getlistcate,addnewlist,getlist}=require('../controller/user/listController')
+const {getlistcate,addnewlist,getlist,singlelist}=require('../controller/user/listController')
 const { gettagpost,gettags }=require('../controller/user/tagcontroller')
 const { updatebio,userlist,deletelist,editlist,updateList,getuserpost,deletepost}=require('../controller/user/dashboardControl')
 const { getusers,chatroom ,chatmessage}=require('../controller/user/chatController')
@@ -18,12 +18,13 @@ const FILE_TYPE_MAP = {
     'image/jpg':'jpg'
 }
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function (req,file, cb) {
     const isValid = FILE_TYPE_MAP[file.mimetype]
     let uploadError = new Error('invalid image type')
-    console.log("HELLO");
     if(isValid){
       uploadError = null
+    }else{
+      return error='invalid file'
     }
     cb(uploadError, './public/images')
   },
@@ -76,6 +77,7 @@ router.get('/chatroom/:id',jwt.verify,chatroom)
 router.get('/chatmessage/:id',jwt.verify,chatmessage)
 router.get('/getuserpost',jwt.verify,getuserpost)
 router.get('/blockStatus',jwt.verify,blockStatus)
+router.get('/singlelist/:id',jwt.verify,singlelist)
 
 router.put('/updatebio',jwt.verify,updatebio)
 router.put('/updateList',jwt.verify,updateList)

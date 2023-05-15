@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { appstateinterface } from 'src/app/appSatate.interface';
 import * as action from '../../store/action'
@@ -6,6 +6,7 @@ import { getlist, getlistcategory } from '../../store/selector';
 import { addlistinterface } from '../../interface/addlist';
 import moment from 'moment';
 import { listinterface } from '../../interface/list';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,13 +14,13 @@ import { listinterface } from '../../interface/list';
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.css']
 })
-export class ListingComponent {
+export class ListingComponent{
   list!: addlistinterface[]
   listcategory?:listinterface[]
   menutoggle=false
   listSearch:string=''
   model!: boolean;
-  constructor(private store:Store<appstateinterface>,){
+  constructor(private store:Store<appstateinterface>,private route:Router){
     this.getlist()
     this.store.pipe(select(getlist)).subscribe((list)=>{
       this.list=list
@@ -30,6 +31,10 @@ export class ListingComponent {
       this.listcategory=listcategory
       console.log(this.listcategory);
   })
+  this.getuser()
+  }
+  getuser(){
+    this.store.dispatch(action.getuser())
   }
 
   getlist(){
@@ -57,17 +62,10 @@ export class ListingComponent {
        })
     }
   }
-  clickdrop(){
-    console.log("HELLO");
-    
-    this.menutoggle=!this.menutoggle
-    console.log(this.menutoggle);
-  }
+
 
   location(li:addlistinterface){
-    this.model=!this.model
-    this.menutoggle=!this.menutoggle
     console.log(li);
-    
+    this.route.navigate([`listing/${li._id}`])
   }
 }
