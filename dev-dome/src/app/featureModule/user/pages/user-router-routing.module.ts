@@ -26,6 +26,7 @@ import { SinglechatComponent } from './singlechat/singlechat.component';
 import { DefaultchatbgComponent } from './defaultchatbg/defaultchatbg.component';
 import { BlockuserGuard } from 'src/app/coreModule/auth-service/block/blockuser.guard';
 import { SinglelistingComponent } from './singlelisting/singlelisting.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -62,6 +63,7 @@ resolve:{
   data:ListResolver
 },canActivate: [UserauthguardGuard,BlockuserGuard]},
 {path:'listing/:id',component:SinglelistingComponent},
+{path:'changepass/:id',component:ChangepasswordComponent,canActivate:[UserauthguardGuard]}
 
 ];
 

@@ -448,6 +448,31 @@ this.actoins$.pipe(ofType(Action.getuserpost),mergeMap(()=>{
     }))
 }))
 )
+
+changepass=createEffect(()=>
+this.actoins$.pipe(ofType(Action.changepass),
+    mergeMap((action)=>{
+        return this.userservice.restpass(action.formData).pipe(
+            map((data)=>{
+                if(data.success){
+                    this._snackbar.open(data.success, 'close', {
+                        horizontalPosition:'center' ,
+                        verticalPosition:'top',
+                        duration:3000,
+                        panelClass: ['my-snackbar']
+                    })
+                    setTimeout(() => {
+                        this.route.navigate(['/dashboard'])
+                    }, 4000);
+                    return Action.changepasssuccess()
+                }else{
+                    return Action.error()
+                }
+            })
+        )
+    })
+)
+)
     constructor(private actoins$: Actions, private userservice: UsersService, private _snackbar: MatSnackBar, private route: Router,private store:Store<appstateinterface>) { }
 }
 

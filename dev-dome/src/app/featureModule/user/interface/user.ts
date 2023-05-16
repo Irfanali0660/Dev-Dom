@@ -13,4 +13,5 @@ export interface userinterface{
     location?:string | null
     birthday?:string | null
     work?:string | null
+    googleimage?:string|null,
 }

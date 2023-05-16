@@ -8,10 +8,8 @@ module.exports={
     addlist:async(req,res,next)=>{
         try {
             let check=listModel.findOne({listcategory:req.body.listcategory})
-            console.log(req.body);
             let list=new listModel({listcategory:req.body.listcategory,description:req.body.description})
             list.save().then((newdata)=>{
-                console.log(newdata);
                 res.json({success:"added succesfully"})
             }).catch((err)=>{
                 if (err.code === 11000) {
@@ -19,7 +17,6 @@ module.exports={
                 }
             })
         } catch (error) {
-            console.log(error)
             next(error)
         }
     },
@@ -40,19 +37,15 @@ module.exports={
     // list status list or unlist
 
     liststatus:async(req,res,next)=>{
-        console.log(req.body);
         if(req.body.listid){
             let liststatus=await listModel.findOne({_id:req.body.listid})
               if(liststatus){
-                console.log('status');
                   if(liststatus.status==true){
                       listModel.updateOne({_id:req.body.listid},{$set:{status:false}}).then((data)=>{
-                        console.log(data);
                           res.json()
                       })
                   }else{
                       listModel.updateOne({_id:req.body.listid},{$set:{status:true}}).then((data)=>{
-                        console.log(data);  
                         res.json()
                       })
                   }

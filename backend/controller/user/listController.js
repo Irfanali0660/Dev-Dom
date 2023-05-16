@@ -9,7 +9,6 @@ module.exports={
     getlistcate:(req,res,next)=>{
       try {
         listcategoryModel.aggregate([{$match:{status:false}}]).then((listcategory)=>{
-            console.log(listcategory);
             res.json(listcategory)
         })
       } catch (error) {
@@ -21,7 +20,6 @@ module.exports={
 
     addnewlist:async(req,res,next)=>{
         try {
-            console.log(req.body)
             let newlist=listModel({
               userId:res.locals.jwtUSER._id,
               title:req.body.formData.title,
@@ -34,37 +32,14 @@ module.exports={
               latitude:req.body.location.center[1],
               date:Date.now()
             })
-//             const NodeGeocoder = require('node-geocoder');
-
-// const options = {
-//   provider: 'google',
-//   // Optional depending on the providers
-//   apiKey: 'HFW0X0XCWk0Psn00M5KjKmfsSqpcl1yv', // for Mapquest, OpenCage, Google Premier
-//   formatter: null // 'gpx', 'string', ...
-// };
-
-// const geocoder = NodeGeocoder(options);
-
-// // Using callback
-// async function geocodeAddress() {
-//   try {
-//     const result = await geocoder.geocode('Kondotty');
-//     console.log(result);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// geocodeAddress();
 
 
+    // geocodeAddress();
             newlist.save().then(()=>{
               res.json()
             }).catch((error)=>{
-              console.log(error);
             })
         } catch (error) {
-          console.log(error);
             next(error)
         }
     },
@@ -74,7 +49,6 @@ module.exports={
     getlist:(req,res,next)=>{
       try {
         listModel.find().populate('userId').then((list)=>{  
-          console.log(list);
           res.json(list)
         })
       } catch (error) {

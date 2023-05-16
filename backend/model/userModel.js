@@ -19,6 +19,10 @@ const userSchema =new mongoose.Schema({
         type:String,
         default:null
     },
+    googleimage:{
+        type:String,
+        default:null
+    },
     phone:{
         type:Number,
         default:null

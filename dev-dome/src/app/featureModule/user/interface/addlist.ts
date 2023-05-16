@@ -1,4 +1,5 @@
 import { signupinterface } from "./signup"
+import { userinterface } from "./user"
 
 export interface addlistinterface {
     _id?:string | null
@@ -9,12 +10,5 @@ export interface addlistinterface {
     date?:string| null
     location?:string | null
     tag?:string[]
-    userId?:{
-        _id?:String
-         userName?:String | null ,
-         email?:String | null,
-         phonenumber?:Number | null |String,
-         image?:string | null
-         date?:Date | null
-    }
+    userId?:userinterface 
 }

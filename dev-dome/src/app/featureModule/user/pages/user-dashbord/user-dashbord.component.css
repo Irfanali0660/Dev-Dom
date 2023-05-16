@@ -10,3 +10,26 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
+
+.profile{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dpHover .dpHoverContent{
+    cursor: pointer;
+    display: none;
+}
+.dpHover:hover .dpHoverContent{
+    display: flex;
+}
+.dpHover img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.labeltag{
+    margin-left: 0 !important;
+}

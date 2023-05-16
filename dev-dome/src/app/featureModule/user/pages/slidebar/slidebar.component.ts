@@ -28,6 +28,7 @@ constructor(private store:Store<appstateinterface>,private userservice: UsersSer
       this.userData=data
       console.log(data,'dataa');
     })
+    this.getuser()
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.store.dispatch(auth.getuser())

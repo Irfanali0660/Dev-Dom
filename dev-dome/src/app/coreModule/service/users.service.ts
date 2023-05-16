@@ -59,7 +59,8 @@ export class UsersService {
     for (const key in data) {
       formData.append(key,data[key])
     }
-
+    console.log(formData);
+    
     
     return this.http.post(`${this.localhost}/users/addpost`,formData)
   }
@@ -171,5 +172,12 @@ export class UsersService {
   }
   singlelist(id:string):Observable<any>{
     return this.http.get(`${this.localhost}/users/singlelist/${id}`,this.httpOptions)
+  }
+  passwordcheck(formdata:resetpassinterface):Observable<any>{
+    return this.http.post(`${this.localhost}/users/passwordcheck`,{formdata},this.httpOptions)
+  }
+  updateproimg(formdata:any,id:String | undefined):Observable<any>{
+    console.log(formdata);
+    return this.http.post(`${this.localhost}/users/updateproimg/${id}`,formdata,)
   }
 }

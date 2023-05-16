@@ -23,9 +23,7 @@ export class ReplaysocketService {
   }
   
   connect(q:any,auth?:{token:string}) {
-    console.log(q,auth);
     this.options.options = {...this.options.options, query : q,auth};
-    console.log( this.options.options,'optionsssss');
     
     this.socket = new Socket(this.options);
     console.log('replayconnect!!');

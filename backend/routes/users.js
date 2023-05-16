@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword,blockStatus } = require('../controller/auth/auth');
+const { signup,login,otp,generateotp,sociallogin,socialsignup,forgotpass,resetpassword,blockStatus,passwordcheck } = require('../controller/auth/auth');
 const { addpost,gettag,singlepost,comments,addlike,addreadlist,getreadlist,removereadlist,deletecomment }= require('../controller/user/postController')
 const { gettagdetails,getuser,getpostdetails,getsingletag,report }=require('../controller/user/homeContorll')
 const {getlistcate,addnewlist,getlist,singlelist}=require('../controller/user/listController')
 const { gettagpost,gettags }=require('../controller/user/tagcontroller')
-const { updatebio,userlist,deletelist,editlist,updateList,getuserpost,deletepost}=require('../controller/user/dashboardControl')
+const { updatebio,userlist,deletelist,editlist,updateList,getuserpost,deletepost,updateproimg}=require('../controller/user/dashboardControl')
 const { getusers,chatroom ,chatmessage}=require('../controller/user/chatController')
 const jwt = require('../helpers/jwt');
 const multer=require('multer');
@@ -50,6 +50,7 @@ router.post('/comments',comments)
 router.post('/addnewlist',jwt.verify,addnewlist)
 router.post('/report',jwt.verify,report)
 router.post('/addreadlist',jwt.verify,addreadlist)
+router.post('/passwordcheck',jwt.verify,passwordcheck)
 
 router.get('/socialsignup/:id',socialsignup)
 router.get('/getsingletag/:id',getsingletag)
@@ -58,6 +59,7 @@ router.post('/resetpassword',resetpassword)
 
 router.put('/otp',jwt.verify,otp)
 router.put('/addlike',jwt.verify,addlike)
+router.post('/updateproimg/:id',uploadOptions.single('avatar'),updateproimg)
 
 router.get('/gettag',gettag)
 router.get('/gettagdetails',gettagdetails)

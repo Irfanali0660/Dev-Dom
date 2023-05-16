@@ -24,13 +24,10 @@ module.exports = {
 
   signup: async (req, res, next) => {
     try {
-      console.log(req.body);
       let apiRes = {};
       req.body.password = await bcrypt.hash(req.body.password, 10);
-      console.log(req.body.password);
       let email = await userModel.findOne({ email: req.body.email });
       if (!email) {
-        console.log("hello");
         let newuser = userModel({
           userName: req.body.username,
           email: req.body.email,
@@ -38,34 +35,12 @@ module.exports = {
           password: req.body.password,
         });
         newuser.save().then((data) => {
-          console.log(data);
           let token = jwt.sign({
             _id: data._id,
           });
-          console.log(token);
           apiRes.token = token;
           apiRes.success = "added successfully";
-          console.log("COMPLETED");
           res.json(apiRes);
-          // send mail with defined transport object
-          // var mailOptions = {
-          //   from: process.env.Email,
-          //   to: req.body.email,
-          //   subject: "Otp for registration is: ",
-          //   html:
-          //     "<h3>OTP for account verification is </h3>" +
-          //     "<h1 style='font-weight:bold;'>" +
-          //     otp +
-          //     "</h1>", // html body
-          // };
-          // transporter.sendMail(mailOptions, (error, info) => {
-          //   if (error) {
-          //     return console.log(error);
-          //   }
-          //   apiRes.success = "added successfully";
-          //   apiRes.data=data;
-          //   res.json(apiRes)
-          // });
         });
       } else {
         apiRes.failed = "This email already exist";
@@ -80,15 +55,8 @@ module.exports = {
 
   generateotp: async (req, res, next) => {
     try {
-      console.log("GENERATE");
-      console.log(otp);
-      console.log(res.locals.jwtUSER._id);
       let apiRes = {};
-      // let newuser=mongoose.Types.ObjectId('res.locals.jwtUSER._id')
-      // console.log(newuser);
       let user = await userModel.findOne({ _id: res.locals.jwtUSER._id });
-      console.log(user);
-      console.log("heek");
       var mailOptions = {
         from: process.env.Email,
         to: user.email,
@@ -104,7 +72,6 @@ module.exports = {
           return console.log(error);
         }
         apiRes.success = "otp generated";
-        console.log("REPLAY");
         res.json(apiRes);
       });
     } catch (error) {
@@ -117,20 +84,16 @@ module.exports = {
   otp: (req, res, next) => {
     try {
       let apiRes = {};
-      console.log(req.body);
       if (otp == req.body.data) {
-        console.log("success");
         userModel
           .updateOne(
             { _id: res.locals.jwtUSER._id },
             { $set: { verifyemail: true } }
           )
           .then((data) => {
-            console.log("JSHSH");
             let token = jwt.sign({
               _id: data._id,
             });
-            console.log(token);
             apiRes.token = token;
             apiRes.data = data;
             apiRes.success = "added successfully";
@@ -152,7 +115,6 @@ module.exports = {
       let apiRes = {};
       let user = await userModel.findOne({ email: req.body.email });
       if (user) {
-        console.log(user.status);
         if (user.status == true) {
           apiRes.failed = "this account admin blocked";
           return res.json(apiRes);
@@ -163,7 +125,6 @@ module.exports = {
             _id: user._id,
           });
           apiRes.token = token;
-          console.log(token);
           apiRes.success = "Login Successful!";
           apiRes.user = user;
           return res.json(apiRes);
@@ -184,8 +145,6 @@ module.exports = {
 
   sociallogin: async (req, res, next) => {
     try {
-      console.log("socialloginffff");
-      console.log(req.params.id);
       let apiRes = {};
       const client = new OAuth2Client(process.env.CLIENT_ID);
 
@@ -197,7 +156,6 @@ module.exports = {
       });
       const payload = ticket.getPayload();
       const userid = payload["sub"];
-      console.log(payload);
       const userdetails = {
         email: payload.email,
         name: payload.name,
@@ -206,8 +164,6 @@ module.exports = {
         // const domain = payload['hd'];
       };
       let user = await userModel.findOne({ email: userdetails.email });
-      console.log("USERSIGN");
-      console.log(user);
       if (user) {
         let token = jwt.sign({
           _id: user._id,
@@ -221,7 +177,6 @@ module.exports = {
         res.json(apiRes);
       }
     } catch (error) {
-      console.log(error);
       next(error);
     }
   },
@@ -230,8 +185,6 @@ module.exports = {
 
   socialsignup: async (req, res, next) => {
     try {
-      console.log("socialsignup");
-      console.log(req.params.id);
       let apiRes = {};
       const client = new OAuth2Client(process.env.CLIENT_ID);
 
@@ -243,39 +196,31 @@ module.exports = {
       });
       const payload = ticket.getPayload();
       const userid = payload["sub"];
-      console.log(payload);
      let usercheck=await userModel.findOne({email:payload.email})
-     console.log(usercheck);
      if(!usercheck){
       let user=userModel({
         userName:payload.name,
         email:payload.email,
         password:'nopass',
-        image:payload.picture,
+        googleimage:payload.picture,
         verifyemail:true
       })
       user.save().then((data)=>{
-        console.log(data);
         let token = jwt.sign({
           _id: data._id,
         });
-        console.log(token);
         apiRes.token = token;
         apiRes.data=data;
         apiRes.success = "added successfully";
-        console.log("COMPLETED");
         res.json(apiRes);
       })
      }else{
-      console.log("already exist")
       let token = jwt.sign({
         _id: usercheck._id,
       });
-      console.log(token);
       apiRes.token = token;
       apiRes.data=usercheck;
       apiRes.success = "signup successfully";
-      console.log("COMPLETED");
       res.json(apiRes);
      }
     } catch (error) {
@@ -287,7 +232,6 @@ module.exports = {
 
   forgotpass:async(req,res,next)=>{
     try {
-      console.log(req.body);
       let apiRes={}
      let user=await userModel.findOne({email:req.body.email})
       if(user){
@@ -303,10 +247,8 @@ module.exports = {
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            return console.log(error);
           }
           apiRes.success = `Your password reset instructions have been sent into ${req.body.email}`;
-          console.log("REPLAY");
           res.json(apiRes);
         });
       }else{
@@ -323,13 +265,10 @@ module.exports = {
 
   resetpassword:async(req,res,next)=>{
     try {
-      console.log(req.body);
       let apiRes={}
       let user=await userModel.findOne({_id:req.body.id})
-      console.log(user);
       if(user){
         req.body.password = await bcrypt.hash(req.body.password, 10);
-        console.log(req.body.password);
         userModel.updateOne({_id:req.body.id},{$set:{password:req.body.password}}).then(()=>{
           apiRes.success="Password updated"
           res.json(apiRes)
@@ -349,6 +288,21 @@ module.exports = {
       userModel.findOne({_id:res.locals.jwtUSER._id}).then((user)=>{
         res.json(user.status)
       })
+    } catch (error) {
+      next(error)
+    }
+  },
+  passwordcheck:async(req,res,next)=>{
+    try { 
+       let user=await userModel.findOne({_id:req.body.formdata.id})
+       if(user){
+        const isPass = await bcrypt.compare(req.body.formdata.checkpass, user.password);
+        if(isPass){
+          res.json({success:"Success"})
+        }else{
+          res.json({Error:"Invalid password"})
+        }
+       }
     } catch (error) {
       next(error)
     }

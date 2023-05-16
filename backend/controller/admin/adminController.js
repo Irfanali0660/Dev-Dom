@@ -16,9 +16,7 @@ module.exports={
                 let token = jwt.sign({
                     email:process.env.AD_EMAIL,
                 })
-                console.log("INSIDE admin");
                   apiRes.token = token;
-                  console.log(token);
                 apiRes.success="Success"
                 res.json(apiRes)
             }else{
@@ -35,9 +33,7 @@ module.exports={
 
     users:(req,res,next)=>{
         try {
-            console.log("HELLOOO");
             userModel.find().then((data)=>{
-                console.log(data);
                 res.json(data)
             })
         } catch (error) {
@@ -49,7 +45,6 @@ module.exports={
 
     status:async(req,res,next)=>{
         try {
-            console.log("STSTUSS");
             if(req.params.id){
                 let usercheck=await userModel.findOne({_id:req.params.id})
                   if(usercheck){
@@ -73,9 +68,7 @@ module.exports={
 
     addtag:(req,res,next)=>{
         try {
-            console.log(req.body);
             const filenames = req.files.map((file) => file.filename);
-            console.log(filenames);
             let tag=tagModel({
                 title:req.body.title,
                 description:req.body.description,
@@ -97,7 +90,6 @@ module.exports={
 
     edittag:(req,res,next)=>{
         try {
-            console.log(req.body);
             let apiRes={}
             let tag={
                 title:req.body.title,
@@ -121,7 +113,6 @@ module.exports={
     gettags:(req,res,next)=>{
         try {
             tagModel.find().then((data)=>{
-               console.log(data);
                res.json(data)
             })
         } catch (error) {
@@ -147,8 +138,6 @@ module.exports={
 
     tagdetails:(req,res,next)=>{
         try {
-            console.log("tagdetails");
-            console.log(req.params.id);
             tagModel.findOne({_id:req.params.id}).then((data)=>{
                 res.json({data}).status(200)
             })

@@ -25,18 +25,32 @@
  
     <!-- End of Navbar -->
 
-    <div class="container mx-auto my-5 p-5">
-        <div class="md:flex no-wrap md:-mx-2 ">
+    <div class="container mx-auto ">
+        <div class="md:flex no-wrap md:-mx-2 pb-4">
             <!-- Left Side -->
             <div class="w-full md:w-3/12 md:mx-2">
                 <!-- Profile Card -->
                 <div class="bg-white p-3 border-t-4 border-green-400">
-                    <div class="image overflow-hidden">
-                        <img class="h-auto w-full mx-auto"
-                            src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                            alt="">
+                    
+                    <div class="flex items-center space-x-4 mb-3">
+                        <!-- <img class="w-13 h-13 rounded-lg" [src]="userData.image" alt="">'http://localhost:4000/images/'+postdetailsData?.image -->
+                        <!-- <img class="rounded-lg w-16 h-16" [src]="userData.googleimage ? userData.googleimage:'http://localhost:4000/images/'+userData?.image " alt="User profile image"> -->
+
+                        <img *ngIf="userData.googleimage || userData.image else image" class="rounded-lg" [src]="userData.googleimage ? userData.googleimage : 'http://localhost:4000/images/'+userData?.image" style="width: 6rem; height: 6rem;">
+                        <ng-template #image>
+                            <img class="rounded-lg" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" alt="" style="width: 6rem; height: 6rem;">
+                        </ng-template>
+                        <label for="profileImg" class="labeltag position-absolute rounded-lg">
+                            <div class="rounded-pill  dpHoverContent justify-content-center align-items-center" style="width: 55px; height: 55px; --bs-bg-opacity: 0.5; margin-top: 20px; margin: 20px;" ></div>
+                        </label>       
+                        <input type="file" id="profileImg" name='image' (change)="uploadProfile($event)" class="d-none"> 
+                        <div class="font-medium ">
+                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{userData.userName}}</h1>
+                            <div class="text-sm text-gray-500 ">Joined in {{getdate(userData.joinedDate)}}</div>
+                        </div>
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{userData.userName}}</h1>
+
+                    
                     <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
                         consectetur adipisicing elit.
@@ -46,7 +60,7 @@
                         <li class="flex items-center py-3">
                             <span>Status</span>
                             <span class="ml-auto"><span
-                                    class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                                    class="bg-green-500 py-1 px-2 rounded text-white text-sm"><small>Active</small></span></span>
                         </li>
                         <li class="flex items-center py-3">
                             <span>Member since</span>
@@ -54,51 +68,15 @@
                         </li>
                     </ul>
                     <div class="flex justify-center flex-col ">
-                        <button routerLink="/userpost" type="button" class=" mt-2  py-2 px-4  text-sm font-medium text-gray-200 focus:outline-none bg-green-500 rounded-lg border border-gray-200 hover:bg-green-300 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 ">user post</button>             
-                        <button routerLink="/userlist" type="button" class="  mb-2 py-2 px-4  text-sm font-medium text-gray-200 focus:outline-none bg-green-500 rounded-lg border border-gray-200 hover:bg-green-300 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 ">user list</button>             
+                        <button routerLink="/userpost" type="button" class=" mt-2  py-2 px-4 text-sm font-medium text-gray-200 focus:outline-none bg-green-500 rounded-lg border border-gray-200 hover:bg-green-300 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 ">user post</button>             
+                        <button routerLink="/userlist" type="button" class="  py-2 px-4  text-sm font-medium text-gray-200 focus:outline-none bg-green-500 rounded-lg border border-gray-200 hover:bg-green-300 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 ">user list</button>             
+                        <button routerLink="/changepass/{{userData._id}}" type="button" class="  mb-2  py-2 px-4 text-sm font-medium text-gray-200 focus:outline-none bg-green-500 rounded-lg border border-gray-200 hover:bg-green-300 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 ">change password</button>             
                     </div>
                     </div>
                 <!-- End of profile card -->
                 <div class="my-4"></div>
                 <!-- Friends card -->
-                <!-- <div class="bg-white p-3 hover:shadow">
-                    <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                        <span class="text-green-500">
-                            <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </span>
-                        <span>Similar Profiles</span>
-                    </div>
-                    <div class="grid grid-cols-3">
-                        <div class="text-center my-2">
-                            <img class="h-16 w-16 rounded-full mx-auto"
-                                src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                alt="">
-                            <a href="#" class="text-main-color">Kojstantin</a>
-                        </div>
-                        <div class="text-center my-2">
-                            <img class="h-16 w-16 rounded-full mx-auto"
-                                src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
-                                alt="">
-                            <a href="#" class="text-main-color">James</a>
-                        </div>
-                        <div class="text-center my-2">
-                            <img class="h-16 w-16 rounded-full mx-auto"
-                                src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                                alt="">
-                            <a href="#" class="text-main-color">Natie</a>
-                        </div>
-                        <div class="text-center my-2">
-                            <img class="h-16 w-16 rounded-full mx-auto"
-                                src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
-                                alt="">
-                            <a href="#" class="text-main-color">Casey</a>
-                        </div>
-                    </div>
-                </div> -->
+                
                 <!-- End of friends card -->
             </div>
             <!-- Right Side -->
@@ -179,14 +157,6 @@
                                 <span class="tracking-wide">Experience</span>
                             </div>
                             <ul class="list-inside space-y-2">
-                                <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
-                                <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
                                 <li>
                                     <div class="text-teal-600">Owner at Her Company Inc.</div>
                                     <div class="text-gray-500 text-xs">March 2020 - Now</div>

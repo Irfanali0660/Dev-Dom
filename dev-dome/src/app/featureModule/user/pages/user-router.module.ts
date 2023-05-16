@@ -37,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SinglelistingComponent } from './singlelisting/singlelisting.component';
 // import { GoogleMapsModule } from '@angular/google-maps'
 import { NgxHttpLoaderModule } from 'ngx-http-loader';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 const config: SocketIoConfig = {
@@ -69,7 +70,8 @@ const config: SocketIoConfig = {
     SinglechatComponent,
     DefaultchatbgComponent,
     ChatUserPipe,
-    SinglelistingComponent
+    SinglelistingComponent,
+    ChangepasswordComponent
   ],
   imports: [
     FormsModule,

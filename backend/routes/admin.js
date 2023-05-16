@@ -23,7 +23,6 @@ const jwt = require('../helpers/jwt');
         destination: function (req, file, cb) {
           const isValid = FILE_TYPE_MAP[file.mimetype]
           let uploadError = new Error('invalid image type')
-          console.log("HELLO");
           if(isValid){
             uploadError = null
           }
@@ -33,7 +32,6 @@ const jwt = require('../helpers/jwt');
           const filename = file.originalname.split(' ').join('-')
           const extension = FILE_TYPE_MAP[file.mimetype]
           cb(null, `${filename.split('.')[0]}-${Date.now()}.${extension}`)
-          console.log("HELLO");
         }
       })
       const uploadOptions = multer({ storage:storage})

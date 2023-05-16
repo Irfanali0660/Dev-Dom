@@ -22,9 +22,7 @@ module.exports={
 
     getuser:(req,res,next)=>{
         try {
-            console.log('user+++++++++++++++++');
             userModel.findOne({_id:res.locals.jwtUSER._id}).then((data)=>{
-                console.log(data);
                 res.json(data)
             })
         } catch (error) {
@@ -37,7 +35,6 @@ module.exports={
     getpostdetails:(req,res,next)=>{
         try {
             postModel.find().populate('userId').populate('tag').sort({date:-1}).then((data)=>{
-                console.log(data);
                 res.json(data)
             })
         } catch (error) {
@@ -49,16 +46,13 @@ module.exports={
 
     getsingletag:(req,res,next)=>{
         try {
-            // console.log(req.params.id,"tagsss");
             let id= new mongoose.Types.ObjectId(req.params.id)
-            // console.log(id);
             tagModel.findOne({_id:id}).then((data)=>{
                 res.json(data).status(200)
             }).catch((error)=>{
                 console.log(error);
             })
         } catch (error) {
-            console.log(error);
             next(error)
         }
     },
@@ -67,8 +61,6 @@ module.exports={
 
     report:(req,res,next)=>{
         try {
-            console.log(req.body);
-            console.log(res.locals.jwtUSER._id);
             let report=new reportModel({
                 postId:req.body.id,
                 issue:req.body.formData.reportissue,

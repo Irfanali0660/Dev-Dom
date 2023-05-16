@@ -14,7 +14,6 @@ export class BlockuserGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       // var isBlocked = this.authservice.blockuser();
       var isBlocked=this.authservice.blockuser()
-      console.log(isBlocked);
       if (!isBlocked) {
         Swal.fire({
           toast: true,

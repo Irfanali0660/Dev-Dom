@@ -19,7 +19,6 @@ export class AddtagsComponent implements OnInit{
     if(this.files.length==0 && event.addedFiles.length==1){
       this.files.push(...event.addedFiles);
     }else{
-      console.log("no required");
       this.message="Only one image required"
     }
   }

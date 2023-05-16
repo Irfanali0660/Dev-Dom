@@ -19,9 +19,7 @@ module.exports={
 
     deletepost:(req,res,next)=>{
         try {
-            console.log(req.params.id);
             reportModel.findOne({_id:req.params.id}).then(async (data)=>{
-               console.log(data.postId,'postid');
             await  postModel.deleteOne({_id:data.postId})
             reportModel.deleteOne({_id:req.params.id}).then(()=>{
                 res.json()

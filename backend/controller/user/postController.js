@@ -11,24 +11,19 @@ module.exports={
 
     addpost:async(req,res,next)=>{
       try { 
-        console.log(req.uploadError);
-          console.log(req.body,"files");
           let tagArray = req.body.tag.split(',');
           const filenames = req.files.map((file) => file.filename);
-          console.log(filenames,"newfile");
             for (let i = 0; i < tagArray.length; i++) {
               let data= await tagModel.findOne({title:tagArray[i]})
               tagArray[i]=data?.id
             }
            
-          console.log(tagArray,'array');
           let newpost=postModel({
             userId:res.locals.jwtUSER._id,
             post:req.body.editor,
             image:filenames[0],
             tag:tagArray
           })
-          // console.log(newpost);
           newpost.save().then(()=>{
             res.json("success").status(200)
           })
@@ -57,9 +52,7 @@ module.exports={
 
     singlepost:(req,res,next)=>{
       try {
-        // console.log(req.params.id);
         postModel.findOne({_id:req.params.id}).populate('userId').populate('tag').then((data)=>{
-          // console.log(data);
           res.json(data)
         })
       } catch (error) {
@@ -73,8 +66,6 @@ module.exports={
     comments:(req,res,next)=>{
       try {
         commentModel.find({postId:req.body.id}).sort({'date':-1}).populate('userId').populate('replay.replayuserId').then((data)=>{
-          console.log(data,'comments');
-          // data.comment.filter((a)=>{return })
           res.json(data)
         })
       } catch (error) {
@@ -86,14 +77,12 @@ module.exports={
 
     addlike:(req,res,next)=>{
       try {
-        console.log(req.body);
-        console.log(req.body.value==true);
+
       if(req.body.value){
         postModel.updateOne({_id:req.body.id},{$addToSet:{likes:res.locals.jwtUSER._id}}).then((data)=>{
           res.json()
         })
       }else{
-        console.log(typeof res.locals.jwtUSER._id);
         postModel.updateOne({_id:req.body.id},{$pull:{likes:res.locals.jwtUSER._id}}).then((data)=>{
           res.json()
         })
@@ -104,8 +93,7 @@ module.exports={
     },
     addreadlist:async(req,res,next)=>{
       try {
-        console.log(req.body.id);
-        console.log(res.locals.jwtUSER._id);
+
         let post=await postModel.findOne({_id:req.body.id})
         let read=await readinglistModel.findOne({postId:req.body.id})
        if(!read){
@@ -126,13 +114,9 @@ module.exports={
     },
     getreadlist:(req,res,next)=>{
       try {
-        // readinglistModel.find({userId:res.locals.jwtUSER._id}).populate('postId').populate('postId.userId').then((data)=>{
-        //   console.log(data);
-        //   res.json(data)
-        // })
+    
         const user=new mongoose.Types.ObjectId(res.locals.jwtUSER._id)
         readinglistModel.aggregate([{$match:{userId:user}},{$lookup:{from:'postdatas',localField:'postId',foreignField:'_id',as:'post'}},{$lookup:{from:'userdatas',localField:'authId',foreignField:'_id',as:'auth'}}]).then((data)=>{
-          console.log(data);
           res.json(data)
         })
       } catch (error) {
@@ -150,7 +134,6 @@ module.exports={
     },
     deletecomment:(req,res,next)=>{
       try {
-        console.log(req.params.id);
         commentModel.deleteOne({_id:req.params.id}).then(()=>{
           res.json()
         })

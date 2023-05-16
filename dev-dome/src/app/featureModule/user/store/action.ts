@@ -109,3 +109,7 @@ export const chatmessegesuccess=createAction('chatmessegesuccess',props<({chat:a
 
 export const getuserpost=createAction('getuserpost')
 export const getuserpostsuccess=createAction('getuserpostsuccess',props<({postdetails:addpostinterface})>())
+
+
+export const changepass=createAction('changepass',props<({formData:resetpassinterface})>())
+export const changepasssuccess=createAction('changepasssuccess')
